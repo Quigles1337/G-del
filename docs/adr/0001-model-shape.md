@@ -88,3 +88,25 @@ interesting to defeat a defence at its strongest. SOURCES §5.
   instrument should be small enough that a defence can be proposed and
   answered in an afternoon. See ROADMAP for what a second round would
   need.
+
+## Addendum — after Movements E–G (2026-08-17)
+
+The shape survived three extensions without amendment to any decision
+above, which is the best evidence available that the original cut was
+right. Three scope notes, recorded rather than rewritten into history:
+
+- **Movement E** varies the *state* as well as `V` (movement-local
+  `StateR`). Decision 1's "the movements differ only in `V`" is hereby
+  read as scoped to A–D; E–G introduce movement-local state spaces with
+  zero blast radius on the core.
+- **Movement F** leaves the constitutional state entirely
+  (movement-local `Chain`/`World`) and finds decision 1's pattern
+  waiting one level up: world-validity is a predicate, and the fork is
+  expressible precisely because `V` is a parameter.
+- **Movement G** promotes the whole quadruple `(S, Mv, apply, V)` to a
+  first-class `Machine` — decision 1 taken to its fixed point. The
+  machine itself became the parameter.
+
+New contestable choices introduced by F and G have their own entries
+(LIMITATIONS §§11–12) rather than amendments here. Status: Accepted,
+unchanged.

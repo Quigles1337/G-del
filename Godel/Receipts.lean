@@ -40,6 +40,7 @@ import Godel.MovementD
 import Godel.Executable
 import Godel.MovementE
 import Godel.MovementF
+import Godel.MovementG
 
 namespace Godel
 
@@ -181,6 +182,19 @@ namespace Godel
 #guard_msgs in
 #print axioms selfentrenched_guards_no_content
 
+
+/-! Late receipts, restoring the 1:1 declaration↔receipt invariant
+    broken when Movements E and F landed: the two proof-internal
+    invariant lemmas, now guarded like everything else. -/
+
+/-- info: 'Godel.VE_preserves_gate' does not depend on any axioms -/
+#guard_msgs in
+#print axioms VE_preserves_gate
+
+/-- info: 'Godel.VRS_preserves' does not depend on any axioms -/
+#guard_msgs in
+#print axioms VRS_preserves
+
 /-! ### MOVEMENT F — the fork. Registered prediction, kernel-checked
     verdict: the steelman is real (immutability by inexpressibility,
     D's interior attack deleted), the fork goes through at 51 anyway,
@@ -234,5 +248,55 @@ namespace Godel
 /-- info: 'Godel.canonical_history_invalid' does not depend on any axioms -/
 #guard_msgs in
 #print axioms canonical_history_invalid
+
+/-! ### MOVEMENT G — the regress. Registered prediction, kernel-checked
+    verdict: the schema is total (no hypotheses on the machine), the
+    ascent is faithful and conservative, the trilemma is
+    level-invariant, and the regress corollaries are applications, not
+    arguments. Self-recognition is not refuted; it is inexpressible. -/
+
+/-- info: 'Godel.mreach_to_reach' does not depend on any axioms -/
+#guard_msgs in
+#print axioms mreach_to_reach
+
+/-- info: 'Godel.interior_faithful' does not depend on any axioms -/
+#guard_msgs in
+#print axioms interior_faithful
+
+/-- info: 'Godel.interior_governed' does not depend on any axioms -/
+#guard_msgs in
+#print axioms interior_governed
+
+/-- info: 'Godel.repoint_reaches_everything' does not depend on any axioms -/
+#guard_msgs in
+#print axioms repoint_reaches_everything
+
+/-- info: 'Godel.deposed_intact' does not depend on any axioms -/
+#guard_msgs in
+#print axioms deposed_intact
+
+/-- info: 'Godel.guarded_repoint_blocked' does not depend on any axioms -/
+#guard_msgs in
+#print axioms guarded_repoint_blocked
+
+/-- info: 'Godel.guarded_holds' does not depend on any axioms -/
+#guard_msgs in
+#print axioms guarded_holds
+
+/-- info: 'Godel.the_regress' does not depend on any axioms -/
+#guard_msgs in
+#print axioms the_regress
+
+/-- info: 'Godel.guard_regress' does not depend on any axioms -/
+#guard_msgs in
+#print axioms guard_regress
+
+/-- info: 'Godel.eternity_holds_upstairs' does not depend on any axioms -/
+#guard_msgs in
+#print axioms eternity_holds_upstairs
+
+/-- info: 'Godel.eternity_meta_defeated' does not depend on any axioms -/
+#guard_msgs in
+#print axioms eternity_meta_defeated
 
 end Godel

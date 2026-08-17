@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # The standalone single-file edition and the modular library under
-# Godel/ hold the same six movements. This checks their THEOREM NAMES
+# Godel/ hold the same seven movements. This checks their THEOREM NAMES
 # agree, so the pasteable copy cannot quietly lose a result.
 #
 # It does NOT check the proofs are identical — see docs/LIMITATIONS.md §9.
@@ -12,7 +12,8 @@ cd "$(dirname "$0")/.."
 names() { grep -hoE '^theorem [A-Za-z_][A-Za-z0-9_'"'"']*' "$@" | awk '{print $2}' | sort; }
 
 lib=$(names Godel/MovementA.lean Godel/MovementB.lean Godel/MovementC.lean \
-            Godel/MovementD.lean Godel/MovementE.lean Godel/MovementF.lean)
+            Godel/MovementD.lean Godel/MovementE.lean Godel/MovementF.lean \
+            Godel/MovementG.lean)
 alone=$(names standalone/Godel.lean)
 
 if [ "$lib" != "$alone" ]; then
