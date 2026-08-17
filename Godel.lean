@@ -10,4 +10,6 @@ import Godel.MovementB
 import Godel.MovementC
 import Godel.MovementD
 import Godel.Executable
+import Godel.MovementE
+import Godel.MovementF
 import Godel.Receipts
