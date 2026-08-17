@@ -1,0 +1,181 @@
+# Sources
+
+Citations for the history, the law, and the logic. Where this repository
+is repeating a well-attested fact it says so plainly; where it is
+repeating a *story*, or taking a side in a live doctrinal dispute, it
+says that too. Confidence markers are deliberate — a formalization that
+launders uncertainty in its prose has cheated at exactly the point it
+claims rigour.
+
+## 1. The hearing
+
+Gödel's naturalization hearing took place on **5 December 1947** in
+Trenton, New Jersey, before Judge Phillip Forman. Albert Einstein and
+Oskar Morgenstern accompanied him as witnesses. In preparing, Gödel
+became convinced he had found a way in which the United States could
+legally become a dictatorship, and he began to raise it at the hearing;
+Forman steered the conversation away and the citizenship was granted.
+
+- **Oskar Morgenstern**, memorandum "History of the Naturalization of
+  Kurt Gödel", written **September 1971**, held in Morgenstern's papers
+  at the Institute for Advanced Study. This is the primary source for the
+  drive to Trenton and the exchange in the courtroom.
+- **John W. Dawson, Jr.**, *Logical Dilemmas: The Life and Work of Kurt
+  Gödel* (A K Peters, 1997). The standard biography; covers the hearing.
+- **Jeffrey Kegler**, "The Gödel Document" (2010) — a short account of
+  locating and transcribing the Morgenstern memorandum.
+
+**What is NOT attested:** the argument itself. Gödel never wrote it down,
+and Morgenstern did not record its content. Everything past "there was an
+argument" is reconstruction, including everything in this repository.
+
+## 2. The reconstruction premise
+
+- **Peter Suber**, *The Paradox of Self-Amendment: A Study of Logic, Law,
+  Omnipotence, and Change* (Peter Lang, 1990). The source of this
+  repository's framing: treat the rule of change as an object-level
+  provision and ask what follows. Suber makes the case at book length
+  that self-amendment is coherent but not innocent. Freely available from
+  the author online.
+- **Alf Ross**, "On Self-Reference and a Puzzle in Constitutional Law",
+  *Mind* 78 (1969). Argues that a self-amending amendment clause is
+  paradoxical. Suber's book is in large part a reply.
+- **F. E. Guerra-Pujol**, "Gödel's Loophole", *Capital University Law
+  Review* 41 (2013). The best-known scholarly attempt to reconstruct what
+  Gödel might have had in mind. Its candidate turns on Article V.
+
+*Confidence:* Suber and Ross are certain. The Guerra-Pujol citation is
+given from memory and the volume/year should be checked before it is
+relied on in print.
+
+## 3. Article V, and why Movement B is not hypothetical
+
+Article V of the U.S. Constitution contains two substantive
+entrenchments. One — protecting the slave trade until 1808 — expired by
+its own terms. The other is live:
+
+> ...no State, without its Consent, shall be deprived of its equal
+> Suffrage in the Senate.
+
+This clause protects equal state suffrage. **It does not protect
+itself.** Article V is an ordinary article, amendable by the ordinary
+Article V process. That is precisely the configuration of **Movement B**:
+a guard that guards the provisions but not the guard. The two-step —
+amend Article V to delete the proviso, then amend the Senate — is exactly
+`entrenchment_bypassed`.
+
+Whether this two-step is *lawful* is contested among constitutional
+scholars; whether it is *formally derivable* in a system that models
+Article V as an object-level provision is not contested, and is the
+theorem in this repository. Movement B does not settle the legal question
+and does not try to. See [LIMITATIONS.md](LIMITATIONS.md).
+
+## 4. Weimar: the loophole with a body count
+
+- **Weimar Constitution (1919), Article 76** — permitted constitutional
+  amendment by a two-thirds majority of the Reichstag, with **no
+  substantive limits whatever**. Movement A's regime `VA` is Article 76.
+- **Article 48** — emergency decree powers of the Reichspräsident.
+- **Ermächtigungsgesetz ("Enabling Act"), 23 March 1933** — passed as a
+  constitutional amendment *under Article 76*, transferring legislative
+  power to the cabinet, including power to deviate from the constitution.
+
+This is the loophole shape as history rather than as toy: a procedurally
+valid amendment that changed not a substantive right but **who may
+change things**, and thereby repriced everything downstream. It is the
+reason `loophole_decree` is in the file.
+
+*Confidence:* high on Art. 76, Art. 48, and the Enabling Act's date and
+mechanism.
+
+## 5. Grundgesetz Art. 79(3) — and a nuance the toy flattens
+
+The German Basic Law (1949) was written by people who had just watched
+Article 76 be used as designed. Art. 79(3), the *Ewigkeitsklausel*
+("eternity clause"), declares inadmissible any amendment affecting the
+division of the Federation into Länder, the Länder's participation in
+legislation, or **the principles laid down in Articles 1 and 20** (human
+dignity; the democratic, federal, social state governed by the rule of
+law).
+
+**The nuance:** Art. 79(3) does not, in its text, name itself. Movement C
+models a clause that explicitly protects itself (`selfAttack`), which is
+*stronger than the German text as written*. The dominant German doctrine
+reaches the same place by a different route — repealing 79(3) would
+itself "affect" the principles it protects, so the repeal is inadmissible
+— and the Federal Constitutional Court has treated the clause as beyond
+the amending power. But that is **doctrine supplying self-entrenchment
+that the text does not literally state**, which is itself a small
+instance of Movement D: the protection depends on how the recognizing
+institution reads it.
+
+So: Movement C is faithful to Art. 79(3) *as understood*, not to
+Art. 79(3) *as written*. This repository takes the doctrinal reading
+because it is the stronger opponent — it is more interesting to defeat a
+defence at its best. Flagged here rather than buried.
+
+- **Yaniv Roznai**, *Unconstitutional Constitutional Amendments: The
+  Limits of Amendment Powers* (Oxford University Press, 2017). The
+  standard modern treatment of eternity clauses and substantive limits on
+  amendment, comparative in scope.
+
+## 6. The recognizer, and why it cannot be entrenched
+
+Movement D's claim is jurisprudential before it is formal: the predicate
+that decides what counts as valid law is applied by institutions, and
+those institutions are not themselves creatures of the text.
+
+- **H. L. A. Hart**, *The Concept of Law* (Oxford, 1961). The **rule of
+  recognition** is a *social practice* among officials, not a legal norm
+  validated by a higher legal norm. It therefore cannot be entrenched by
+  law — there is no law above it to do the entrenching. This is the
+  direct jurisprudential warrant for making `strictInterp` a state
+  variable that no clause governs.
+- **Hans Kelsen**, *Pure Theory of Law* — the *Grundnorm*, reached by the
+  same regress from a different direction.
+- **Carl Schmitt**, *Verfassungslehre* (1928) — *pouvoir constituant*
+  versus *pouvoir constitué*. The distinction is the doctrinal engine of
+  "a new constitution is not an amendment to the old," which is the move
+  Movement D models. Cited because it is the relevant theory, not because
+  the repository endorses its author or its politics.
+
+## 7. Modern recognizer capture
+
+Three often-cited episodes. They are **not** the same shape, and the
+comment in the original source file lumped them together too quickly.
+Corrected here:
+
+- **Hungary, 2010–2013.** A two-thirds parliamentary majority enacted a
+  new Fundamental Law (2011, in force 2012); the Fourth Amendment (2013)
+  annulled the Constitutional Court's pre-2012 case law and narrowed its
+  power to review amendments for substance. This is the closest fit to
+  `setInterp false`: the recognizing institution's capacity to read the
+  text as binding was reduced *by valid procedure*.
+- **Venezuela, 2017.** A Constituent National Assembly was convened and
+  claimed powers superior to the sitting legislature. This is the
+  *pouvoir constituant* gambit — not an amendment at all, which is
+  exactly why Movement D models capture as ungoverned by the amendment
+  rule.
+- **Honduras, 2009.** Cuts the **other way**, and is included as a
+  counter-example rather than an example. Honduras's constitution
+  contains unamendable ("pétreos") articles; the removal of President
+  Zelaya was justified by invoking them against him. An eternity clause
+  can be the instrument of a seizure as easily as its target. The toy
+  cannot represent this at all — it has no actors, so it cannot model a
+  clause being *wielded*. See [LIMITATIONS.md](LIMITATIONS.md).
+
+*Confidence:* the broad facts are well attested; the characterisations
+are contested in each case, and the legal literature disagrees about all
+three. Nothing in the Lean development depends on them.
+
+## 8. The logic
+
+- **Kurt Gödel**, "Über formal unentscheidbare Sätze der Principia
+  Mathematica und verwandter Systeme I" (1931). The second incompleteness
+  theorem is the rhyme the repository is claiming, and the claim is only
+  a rhyme: `eternity_holds` is a consistency certificate for system C
+  proved in a strictly stronger metasystem (Lean), and system C's own
+  resources — Movement D — cannot keep the certificate's hypotheses true.
+  **No formal reduction of Gödel II to the constitutional case is claimed
+  or attempted.** See [LIMITATIONS.md](LIMITATIONS.md) §"The rhyme is a
+  rhyme".

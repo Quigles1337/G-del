@@ -1,0 +1,73 @@
+name: verify
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  kernel-check:
+    name: kernel-check (pinned toolchain)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -sSfL https://github.com/leanprover/elan/releases/latest/download/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Show pinned toolchain
+        run: |
+          cat lean-toolchain
+          lean --version
+
+      # `lake build` also enforces Godel/Receipts.lean: every #guard_msgs
+      # there is an axiom-ledger assertion. A proof that starts depending
+      # on a new axiom — sorryAx included — turns this step red.
+      - name: Build library, executable, and axiom ledger
+        run: lake build
+
+      - name: Run the certified checker
+        run: lake exe godel
+
+      - name: Check the standalone single-file edition
+        run: lean standalone/Godel.lean
+
+      - name: Standalone/library parity
+        run: bash scripts/check-parity.sh
+
+      - name: Sorry sweep
+        run: |
+          if grep -rn 'sorry' --include='*.lean' . | grep -v 'sorryAx' | grep -v '^\./\.lake/'; then
+            echo "FAIL: 'sorry' found in Lean sources"
+            exit 1
+          fi
+          echo "ok"
+
+  drift-watch:
+    name: drift-watch (informational, allowed to fail)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -sSfL https://github.com/leanprover/elan/releases/latest/download/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      # This job is a canary, not a gate. The sources compile on newer
+      # toolchains, but the AXIOM LEDGER does not survive them: on Lean
+      # 4.33.0, `entrenchment_bypassed` and `interpretation_attack`
+      # acquire `propext`. Red here means the drift is still real, or has
+      # changed shape. See docs/adr/0002-toolchain-pin.md.
+      - name: Build against current stable
+        run: |
+          elan toolchain install stable
+          elan override set stable
+          lean --version
+          lake build

@@ -1,0 +1,6 @@
+# Normalize to LF in the repository. Lean sources and the POSIX verify
+# scripts must not reach Linux CI with CRLF line endings.
+* text=auto eol=lf
+
+# Windows-native script keeps CRLF in the working tree.
+*.ps1 text eol=crlf

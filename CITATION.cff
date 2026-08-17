@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you reference this formalization, please cite it as below."
+title: "Gödel's Loophole, kernel-checked"
+abstract: >-
+  A toy constitutional state machine in core Lean 4, after the argument
+  Kurt Gödel reportedly began at his 1947 U.S. citizenship hearing and
+  never wrote down. Models a constitution as a formal system whose rule
+  of change is itself an object-level provision, and proves in four
+  movements that legal reachability of dictatorship is a theorem: the
+  amendment rule does not entrench itself (A); an entrenchment clause
+  that does not protect itself is a two-step no-op (B); a self-entrenched
+  eternity clause is formally sound (C); and endogenizing the validity
+  predicate defeats it while leaving the clause in the text (D). No
+  mathlib, no sorry, zero axioms. No formal reduction of Gödel's second
+  incompleteness theorem to the constitutional case is claimed.
+authors:
+  - name: "Quigles1337"
+repository-code: "https://github.com/Quigles1337/G-del"
+license: MIT
+version: "0.1.0"
+date-released: "2026-08-16"
+keywords:
+  - Lean 4
+  - formal verification
+  - constitutional law
+  - self-amendment
+  - entrenchment
+  - eternity clause
+  - Gödel

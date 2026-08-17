@@ -1,0 +1,10 @@
+name = "godel"
+version = "0.1.0"
+defaultTargets = ["Godel", "godel"]
+
+[[lean_lib]]
+name = "Godel"
+
+[[lean_exe]]
+name = "godel"
+root = "Main"
