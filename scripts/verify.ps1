@@ -30,7 +30,8 @@ function Get-TheoremNames { param($Paths)
   ($Paths | ForEach-Object { Select-String -Path $_ -Pattern "^theorem\s+([A-Za-z_][A-Za-z0-9_']*)" |
      ForEach-Object { $_.Matches[0].Groups[1].Value } }) | Sort-Object
 }
-$lib   = Get-TheoremNames @('Godel/MovementA.lean','Godel/MovementB.lean','Godel/MovementC.lean','Godel/MovementD.lean')
+$lib   = Get-TheoremNames @('Godel/MovementA.lean','Godel/MovementB.lean','Godel/MovementC.lean',
+                           'Godel/MovementD.lean','Godel/MovementE.lean','Godel/MovementF.lean')
 $alone = Get-TheoremNames @('standalone/Godel.lean')
 if (Compare-Object $lib $alone) {
   Compare-Object $lib $alone | Format-Table | Out-String | Write-Host

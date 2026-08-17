@@ -38,6 +38,8 @@ import Godel.MovementB
 import Godel.MovementC
 import Godel.MovementD
 import Godel.Executable
+import Godel.MovementE
+import Godel.MovementF
 
 namespace Godel
 
@@ -146,5 +148,91 @@ namespace Godel
 /-- info: 'Godel.eternity_holds' does not depend on any axioms -/
 #guard_msgs in
 #print axioms eternity_holds
+
+
+/-! ### MOVEMENT E — the ratchet, both models. Registered prediction,
+    kernel-checked verdict: regime holds, clause falls, repair is C. -/
+
+/-- info: 'Godel.regime_blocks_repricing' does not depend on any axioms -/
+#guard_msgs in
+#print axioms regime_blocks_repricing
+
+/-- info: 'Godel.regime_gate_holds' does not depend on any axioms -/
+#guard_msgs in
+#print axioms regime_gate_holds
+
+/-- info: 'Godel.regime_guards_nothing_else' does not depend on any axioms -/
+#guard_msgs in
+#print axioms regime_guards_nothing_else
+
+/-- info: 'Godel.clause_blocks_repricing_while_present' does not depend on any axioms -/
+#guard_msgs in
+#print axioms clause_blocks_repricing_while_present
+
+/-- info: 'Godel.clause_ratchet_bypassed' does not depend on any axioms -/
+#guard_msgs in
+#print axioms clause_ratchet_bypassed
+
+/-- info: 'Godel.selfentrenched_gate_holds' does not depend on any axioms -/
+#guard_msgs in
+#print axioms selfentrenched_gate_holds
+
+/-- info: 'Godel.selfentrenched_guards_no_content' does not depend on any axioms -/
+#guard_msgs in
+#print axioms selfentrenched_guards_no_content
+
+/-! ### MOVEMENT F — the fork. Registered prediction, kernel-checked
+    verdict: the steelman is real (immutability by inexpressibility,
+    D's interior attack deleted), the fork goes through at 51 anyway,
+    repair and coup are the same constructor, and the canonical
+    post-fork history is code-invalid. -/
+
+/-- info: 'Godel.contract_inexpressible' does not depend on any axioms -/
+#guard_msgs in
+#print axioms contract_inexpressible
+
+/-- info: 'Godel.code_is_law' does not depend on any axioms -/
+#guard_msgs in
+#print axioms code_is_law
+
+/-- info: 'Godel.exploit_valid' does not depend on any axioms -/
+#guard_msgs in
+#print axioms exploit_valid
+
+/-- info: 'Godel.drained_step' does not depend on any axioms -/
+#guard_msgs in
+#print axioms drained_step
+
+/-- info: 'Godel.no_onchain_repair' does not depend on any axioms -/
+#guard_msgs in
+#print axioms no_onchain_repair
+
+/-- info: 'Godel.promise_holds_without_fork' does not depend on any axioms -/
+#guard_msgs in
+#print axioms promise_holds_without_fork
+
+/-- info: 'Godel.fork_always_open' does not depend on any axioms -/
+#guard_msgs in
+#print axioms fork_always_open
+
+/-- info: 'Godel.the_dao_fork' does not depend on any axioms -/
+#guard_msgs in
+#print axioms the_dao_fork
+
+/-- info: 'Godel.the_coup_fork' does not depend on any axioms -/
+#guard_msgs in
+#print axioms the_coup_fork
+
+/-- info: 'Godel.code_still_there' does not depend on any axioms -/
+#guard_msgs in
+#print axioms code_still_there
+
+/-- info: 'Godel.theft_still_valid_there' does not depend on any axioms -/
+#guard_msgs in
+#print axioms theft_still_valid_there
+
+/-- info: 'Godel.canonical_history_invalid' does not depend on any axioms -/
+#guard_msgs in
+#print axioms canonical_history_invalid
 
 end Godel

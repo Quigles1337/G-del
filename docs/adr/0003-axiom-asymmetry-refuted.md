@@ -91,3 +91,46 @@ The experiment is reproducible by reverting the diff above.
 The withdrawn reading is more memorable than the correct one and would
 have survived indefinitely in a README. Recording the refutation with its
 diff is the only thing that stops it coming back.
+
+## Addendum — the inscription, corrected (Movements E and F)
+
+- **Status:** Accepted
+- **Date:** 2026-08-17
+
+Movements E and F add nineteen theorems to the ledger and every one of
+them is axiom-free. Those are nineteen more data points for the decision
+above, and they are the right kind: E and F are not variations on A–D but
+new arenas — a *procedural* defence and an *executable* one — with their
+own state types, their own regimes, and in F's case no strength parameter
+at all. If the withdrawn reading had any life left in it, this is where
+it would have shown.
+
+They also make it possible to say what *is* true, which the withdrawal
+alone did not. The asymmetry the first draft noticed was never imaginary.
+It was misattributed. It is real as **logical form** and dead as **axiom
+cost**:
+
+- An attack is Σ — exhibit one trace and the witness *is* the proof.
+  `clause_ratchet_bypassed` is the list `[67, 67, 0]`; `the_dao_fork` is
+  `[0, 51]`. These are finite objects you can hand to someone.
+- A defence is Π — quantify over every trace of every length, which needs
+  an invariant and an induction. `regime_gate_holds` and
+  `selfentrenched_gate_holds` are exactly that, and so is
+  `canonical_history_invalid`, which is a defence-shaped statement about
+  an attacker's destination.
+
+The shapes genuinely differ, and they differ in a way that matters for
+what a proof *is*. What does not differ is the price. In a model this
+small and this decidable the induction is as constructive as the witness,
+and the kernel charges nothing for either.
+
+**The inscription, adopted:**
+
+> Attacks are data, defences are laws — and in a decidable toy, both are
+> free.
+
+The last clause is load-bearing and must travel with the other two.
+Without it the sentence is this ADR's withdrawn reading in better
+clothes. With it, it says the only thing the ledger supports: the Σ/Π
+distinction is about the *form* of the argument and not about its cost,
+and nothing about constitutions follows from the cost.
