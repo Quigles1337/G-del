@@ -92,13 +92,13 @@ this repository as evidence that Gödel's theorem applies to law.
 ## 8. The axiom ledger is toolchain-relative
 
 The uniform zero-axiom result holds on the pinned `v4.15.0`. On 4.33.0,
-identical source gives **13 of the 24 theorems** a `propext` dependency —
-exactly those touching `VB`, `VC` or `VD`. The cause was investigated and
-**not** isolated: minimal reproductions of the suspected shapes (`decide`
-over compound goals, over structure-projection updates, with false
-antecedents) do **not** exhibit the drift on either toolchain. See
-[ADR-0002](adr/0002-toolchain-pin.md). Treat the ledger as a regression
-tripwire, not as a deep fact.
+identical source gives **13 of the 24 theorems then in the development**
+a `propext` dependency — exactly those touching `VB`, `VC` or `VD`. The
+cause was investigated and **not** isolated: minimal reproductions of the
+suspected shapes (`decide` over compound goals, over structure-projection
+updates, with false antecedents) do **not** exhibit the drift on either
+toolchain. See [ADR-0002](adr/0002-toolchain-pin.md). Treat the ledger as
+a regression tripwire, not as a deep fact.
 
 Note also that `runTrace_sound`'s proof deliberately avoids
 `simp [Option.some.injEq]` in favour of `Option.some.inj`, because the

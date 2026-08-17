@@ -124,7 +124,7 @@ an axiom it did not lean on before — `sorryAx` included — the module
 fails to compile and CI goes red. The receipt is load-bearing: tamper
 with one expected line and the build breaks.
 
-All 24 theorems depend on **zero axioms**. See [THEOREMS.md](THEOREMS.md).
+All 43 theorems depend on **zero axioms**. See [THEOREMS.md](THEOREMS.md).
 
 ### A negative result we are keeping
 
@@ -151,7 +151,8 @@ would rather publish the dull true version than the pretty false one.
 `lean-toolchain` pins `leanprover/lean4:v4.15.0` exactly — never
 `stable`. The sources are kept portable and compile on newer toolchains,
 but the **ledger does not survive them**: on Lean 4.33.0, **13 of the 24
-theorems acquire `propext`** from identical source.
+theorems then in the development acquire `propext`** from identical
+source.
 
 The split is not scattered. Every theorem that drifts touches `VB`, `VC`
 or `VD`; every theorem that does not is confined to `VA`, is proved by

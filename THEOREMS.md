@@ -9,7 +9,14 @@ build fails.
 Verified on `leanprover/lean4:v4.15.0` (pinned; see
 [ADR-0002](docs/adr/0002-toolchain-pin.md)).
 
-**24 theorems. Zero axioms. Zero `sorry`.**
+**43 theorems. Zero axioms. Zero `sorry`.**
+
+The count is the number of entries in the ledger, and every entry below
+has one. Movement E additionally carries two proof-internal invariant
+lemmas — `VE_preserves_gate` and `VRS_preserves` — which are *not*
+separately receipted; both were checked axiom-free by hand on the pinned
+toolchain, but they are not guarded by `#guard_msgs` and so are not
+counted here.
 
 ## Movement A — the loophole (`Godel/MovementA.lean`)
 
@@ -58,6 +65,52 @@ no clause of the object text governs it.
 | `D_blocks_while_strict` | While the recognizer is faithful, D behaves exactly like C: strength 100 fails. | none |
 | `interpretation_attack` | **The result.** Trace `[0, 67]`: capture the interpreter, then adopt what the clause "no longer applies" to. | none |
 | `clause_still_there` | **The epitaph.** The eternity clause is present in the final state of the successful attack, by `rfl`. | none |
+
+## Movement E — the ratchet (`Godel/MovementE.lean`)
+
+Three regimes for one proposal — the amendment rule may be made harder,
+never easier. `VE` puts the monotonicity condition *inside* the validity
+predicate, where no amendment can reach it. `VR` writes it down honestly
+as an ordinary provision, a `ratchet` bit of the state. `VRS`
+self-entrenches that provision.
+
+| Theorem | Says | Axioms |
+|---|---|---|
+| `regime_blocks_repricing` | With the ratchet inside `V`, not even unanimity can lower the gate. | none |
+| `regime_gate_holds` | **The gate never falls.** Every state reachable under the regime ratchet still amends at supermajority. Movement A's repricing is dead. | none |
+| `regime_guards_nothing_else` | Price is not content: the gate stands at 67 forever, and tyranny walks through it at 67 — exactly Movement A's `direct`. | none |
+| `clause_blocks_repricing_while_present` | Written down as a provision, the clause works while it stands: unanimity cannot reprice. | none |
+| `clause_ratchet_bypassed` | **The result.** Trace `[67, 67, 0]`: repeal the ratchet clause — nothing guards it — then reprice to decree, then finish. Movement B one level up, as predicted. | none |
+| `selfentrenched_gate_holds` | **The repair holds** — by exactly Movement C's proof shape, which is the point: the ratchet's sound form is not a new kind of defence. | none |
+| `selfentrenched_guards_no_content` | Even repaired, the ratchet guards price only. Dictatorship remains one supermajority step away. | none |
+
+The distance between `regime_gate_holds` and `clause_ratchet_bypassed`
+is the distance between physics and law: freezing a level is a thing
+modellers can do and constitutions cannot.
+
+## Movement F — the fork (`Godel/MovementF.lean`)
+
+Regimes `Vcode` / `VW`: on-chain validity is the deployed code (no
+strength parameter — code doesn't count votes); world-level moves are
+on-chain steps plus the fork, licensed by nothing on any chain.
+
+| Theorem | Says | Axioms |
+|---|---|---|
+| `contract_inexpressible` | No transaction mentions the contract: immutability by absence of the verb. | none |
+| `code_is_law` | Along every valid history the code is the code — the steelman, true. | none |
+| `exploit_valid` | The drain breaks no rule; it is a rule. | none |
+| `drained_step` | No transaction, valid or not, refills anything. | none |
+| `no_onchain_repair` | Uncapturable also means uncorrectable. | none |
+| `promise_holds_without_fork` | Delete the fork and the promise holds at world level too. | none |
+| `fork_always_open` | Every world, every target, bare majority: 51 outranks ∞ across arenas. | none |
+| `the_dao_fork` | 2016: valid theft, invalid rescue, community keeps the rescue. | none |
+| `the_coup_fork` | Identical constructor, opposite morality; formally indistinguishable. | none |
+| `code_still_there` | The orphaned contract survives as a running program (`rfl`). | none |
+| `theft_still_valid_there` | The orphan is a perfectly lawful history. | none |
+| `canonical_history_invalid` | No valid on-chain path reaches the canonical world: recognition made an illegal state real. | none |
+
+Mechanizing the recognizer does not remove it. It relocates it to the
+fork choice, where the same move that rescues also usurps.
 
 ## The certified checker (`Godel/Executable.lean`)
 
