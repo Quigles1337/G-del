@@ -9,14 +9,13 @@ build fails.
 Verified on `leanprover/lean4:v4.15.0` (pinned; see
 [ADR-0002](docs/adr/0002-toolchain-pin.md)).
 
-**43 theorems. Zero axioms. Zero `sorry`.**
+**56 theorems. Zero axioms. Zero `sorry`.**
 
-The count is the number of entries in the ledger, and every entry below
-has one. Movement E additionally carries two proof-internal invariant
-lemmas — `VE_preserves_gate` and `VRS_preserves` — which are *not*
-separately receipted; both were checked axiom-free by hand on the pinned
-toolchain, but they are not guarded by `#guard_msgs` and so are not
-counted here.
+The count is the number of entries in the ledger, and every declaration
+in the library has one — the two Movement E invariant lemmas that
+briefly sat outside the ledger (`VE_preserves_gate`, `VRS_preserves`)
+are now receipted like everything else, restoring the exact 1:1
+declaration↔receipt invariant.
 
 ## Movement A — the loophole (`Godel/MovementA.lean`)
 
@@ -83,6 +82,8 @@ self-entrenches that provision.
 | `clause_ratchet_bypassed` | **The result.** Trace `[67, 67, 0]`: repeal the ratchet clause — nothing guards it — then reprice to decree, then finish. Movement B one level up, as predicted. | none |
 | `selfentrenched_gate_holds` | **The repair holds** — by exactly Movement C's proof shape, which is the point: the ratchet's sound form is not a new kind of defence. | none |
 | `selfentrenched_guards_no_content` | Even repaired, the ratchet guards price only. Dictatorship remains one supermajority step away. | none |
+| `VE_preserves_gate` | Invariant engine for E1: with the ratchet inside `V`, no valid step lowers the gate. | none |
+| `VRS_preserves` | Invariant engine for E3 — Movement C's proof shape, procedural payload. | none |
 
 The distance between `regime_gate_holds` and `clause_ratchet_bypassed`
 is the distance between physics and law: freezing a level is a thing
@@ -138,3 +139,27 @@ the uniformity is a fact about the toy, not about constitutions. An
 earlier draft read a moral into an *apparent* asymmetry between attacks
 and defences — see [ADR-0003](docs/adr/0003-axiom-asymmetry-refuted.md)
 for why that reading was withdrawn.
+
+
+## Movement G — the regress (`Godel/MovementG.lean`)
+
+One abstraction (`Machine`: any state space, move language, and
+validity law — every system in Movements A–F is one, and so is any
+proposed in their place) and one operator (`ascend M`: the machine's
+whole configuration becomes a field of the floor above, where interior
+moves obey `M`'s law verbatim and a `repoint` swaps the field at bare
+majority, reading nothing of `M`).
+
+| Theorem | Says | Axioms |
+|---|---|---|
+| `mreach_to_reach` | The abstraction agrees with Core's `Reach` on the constitution — nothing added, nothing hidden. | none |
+| `interior_faithful` | Every object-lawful history embeds upstairs: same strengths, orphan untouched. | none |
+| `interior_governed` | Repoint forbidden ⇒ upstairs has exactly the object machine's power. The lift is conservative. | none |
+| `repoint_reaches_everything` | THE SCHEMA: for every machine, no hypotheses, any configuration is one repoint from being in force, at 51. One constructor; consults no field of `M`. | none |
+| `deposed_intact` | The deposed configuration survives byte-identical in the orphan slot (`rfl`) — D and F's epitaph, uniform in `M`. | none |
+| `guarded_repoint_blocked` | Fork-legitimacy criteria are real guards: where `g` fails, no strength repoints. | none |
+| `guarded_holds` | …and can be sound, by exactly C's proof: illegitimacy invariant ⇒ the guarded world never repoints. The trilemma is level-invariant. | none |
+| `the_regress` | `ascend M` is a machine, so the schema applies to it — an application, not an argument. | none |
+| `guard_regress` | The guard `guarded_holds` just certified is furniture one floor up, swapped wholesale at 51. | none |
+| `eternity_holds_upstairs` | Movement C survives the ascent intact where the repoint is forbidden. | none |
+| `eternity_meta_defeated` | From any world over C's constitution, one repoint puts tyranny in force. `eternity_holds` stays true — about the orphan. | none |

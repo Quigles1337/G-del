@@ -12,7 +12,7 @@ become a dictatorship by entirely legal means. He began to make the
 argument in front of the judge. He was talked down. He never wrote it up.
 
 This repository is a **toy constitutional state machine** that makes the
-shape of that argument precise, in four movements, entirely in core
+shape of that argument precise, in seven movements, entirely in core
 Lean 4. No `mathlib`, no dependencies, no `sorry`, **zero axioms**.
 
 The premise is Peter Suber's (*The Paradox of Self-Amendment*, 1990):
@@ -38,14 +38,17 @@ lean standalone/Godel.lean
 Full local verification (build, run, standalone, `sorry` sweep):
 `scripts/verify.sh` (or `scripts/verify.ps1` on Windows).
 
-## The four movements
+## The seven movements
 
-| | The system | Dictatorship | The result |
+| | The system | The guarded thing | Flagship |
 |---|---|---|---|
-| **A** | Amendment rule is itself amendable | **reachable** | `loophole` |
-| **B** | Entrenchment clause, not self-entrenched | **reachable** | `entrenchment_bypassed` |
-| **C** | Self-entrenched eternity clause (Art. 79(3) shape) | **unreachable** | `eternity_holds` |
-| **D** | C, but the *interpreter* is a state variable | **reachable** | `interpretation_attack` |
+| **A** | Amendment rule is itself amendable | **repriced** — and the repeal with it | `loophole` |
+| **B** | Entrenchment clause, not self-entrenched | **falls in two** | `entrenchment_bypassed` |
+| **C** | Self-entrenched eternity clause (Art. 79(3) shape) | **holds, forever** | `eternity_holds` |
+| **D** | C, but the *interpreter* is a state variable | **outlived — survives as ink** | `interpretation_attack` |
+| **E** | The gate may only rise, written as a clause | **falls in three** | `clause_ratchet_bypassed` |
+| **F** | Code is law; the amendment verb does not exist | **outlived — survives as a running program** | `canonical_history_invalid` |
+| **G** | Any machine whatsoever, one level up | **swapped wholesale, always** | `repoint_reaches_everything` |
 
 **A — the loophole.** `majority_blocked` first proves the wall works as
 advertised: a 51-strength faction, given unlimited sessions, changes
@@ -97,6 +100,74 @@ Proof by reflexivity that the parchment survived its own irrelevance.
 The eternity clause is in the final state, verbatim, uninfringed, and
 load-bearing for nothing.
 
+**E — the ratchet.** The procedural hope: a rule that the amendment
+threshold may rise but never fall. Written into the validity regime
+itself (`VE`) it holds perfectly — and guards nothing else, because it
+lives where no amendment lives. Written honestly, as a `ratchet` bit of
+the state, it dies in three moves — `clause_ratchet_bypassed`, trace
+`[67, 67, 0]`: repeal the clause, reprice to decree, finish at strength
+zero. Movement B, one level up. Self-entrenched (`VRS`) it holds by
+exactly C's proof, which is the finding: procedure-space hides no new
+kind of defence, only Movement C with a procedural payload, Movement
+D's appetite included. The gap between the first act and the second is
+the gap the whole development keeps finding: **the modeller can freeze
+a level; the system cannot.**
+
+**F — the fork.** The executable recognizer, given its full due first:
+on-chain, `contract_inexpressible` — no transaction so much as
+*mentions* the contract. Movement D's capture move is not blocked in
+this language; it does not exist in it, and `code_is_law` is a theorem.
+It is the whole story only until someone forks. The 2016 trace replays
+as `the_dao_fork`, `[0, 51]`: the drain is **valid** (strength zero —
+the code does not count votes), on-chain repair is **impossible**
+(`no_onchain_repair` — the language has no `refund` verb either), and
+the rescue is a fork licensed by nothing on any chain. Then the
+epitaphs:
+
+```lean
+theorem code_still_there : afterFork.orphan.contract = genesis.contract := rfl
+theorem canonical_history_invalid : ¬ ReachC genesis bailout
+```
+
+Movement D's clause survived as ink. The orphaned contract survives as
+a **running program** — deployed, enforcing, satisfying every safety
+theorem above, for whoever is still listening. And no valid on-chain
+history reaches the canonical state: **the chain everyone uses is the
+one the code forbids.** Rescue-fork and coup-fork are the same
+constructor with different arguments; the kernel cannot tell them
+apart, and the layer that can is the layer performing them.
+
+**G — the regress.** The question the six were instances of. `Machine`
+abstracts the whole development — any state space, any move language,
+any validity law — and `ascend M` puts a machine's entire configuration
+into one field of the floor above, where interior moves obey `M`'s law
+verbatim and a `repoint` swaps the field at bare majority:
+
+```lean
+theorem repoint_reaches_everything (M : Machine) (w : LWorld M) (s' : M.S) :
+    MReach (ascend M) [51] w { inForce := s', orphan := w.inForce } :=
+  .step (.repoint s') (Nat.le_refl 51) .nil
+```
+
+Every machine, zero hypotheses, one constructor consulting no field of
+`M`. The triviality is load-bearing: it is "the guard was not
+consulted," formalized — a hard proof would have meant the guard put up
+a fight. The faithfulness pair (`interior_faithful`,
+`interior_governed`) certifies the ascent is conservative, so the floor
+above is no strawman; the guarded ascent (`ascendG`) shows
+fork-legitimacy criteria are real, can be **sound** by exactly C's
+argument (`guarded_holds`) — the trilemma is level-invariant — and are
+furniture one floor up (`guard_regress`, the schema applied to its own
+output). The closing pair is the development in two lines:
+`eternity_holds_upstairs` and `eternity_meta_defeated` — Movement C's
+certificate survives the ascent intact, and one repoint puts tyranny in
+force anyway. `eternity_holds` remains true forever. **It is a theorem
+about the orphan.** What the schema does not prove is that
+self-recognition is false; it proves it is **inexpressible**. The
+development is bounded at both ends by inexpressibility: at the bottom,
+the code cannot speak of its replacement; at the top, no law can speak
+of its own being in force.
+
 ## The exploit is a program
 
 `Godel/Executable.lean` does the same work mechanically. Every validity
@@ -124,7 +195,7 @@ an axiom it did not lean on before — `sorryAx` included — the module
 fails to compile and CI goes red. The receipt is load-bearing: tamper
 with one expected line and the build breaks.
 
-All 43 theorems depend on **zero axioms**. See [THEOREMS.md](THEOREMS.md).
+All 56 theorems depend on **zero axioms**. See [THEOREMS.md](THEOREMS.md).
 
 ### A negative result we are keeping
 
@@ -154,13 +225,20 @@ but the **ledger does not survive them**: on Lean 4.33.0, **13 of the 24
 theorems then in the development acquire `propext`** from identical
 source.
 
-The split is not scattered. Every theorem that drifts touches `VB`, `VC`
-or `VD`; every theorem that does not is confined to `VA`, is proved by
-`rfl`, or is generic in the regime. The one structural difference is that
-`VA` is a plain disjunction while the other three each contain an
-implication (`s.eternity = true → ...`). That is a clean characterization
-and *not* an explanation — minimal reproductions of exactly that shape do
-not drift on either toolchain. It is recorded as an open question.
+The split is not scattered — every drifting theorem touches `VB`, `VC`,
+`VD`, or (15 of 43 at the Movements E–F snapshot) Movement E's `VRS` —
+but the tidy structural story did not survive contact with the probe.
+ADR-0002's addendum locates the drift in **elaboration**, not the core
+library: 37 core constants are byte-identical across the two
+toolchains, while identical source reaches `propext`-backed lemmas only
+on the newer one. And the implication-shape characterization is
+**falsified by Movement E's own regimes** — `VR` has exactly the
+suspected shape and does not drift; `VRS` differs from it by one
+conjunct and does. A narrower predicate fitting all current points is
+recorded, flagged as fitted rather than verified. Still open — now
+sharper. Movement F, for what it is worth, does not drift at all: the
+movement about being at the mercy of one's recognizer is the one both
+recognizers agree on completely.
 
 CI runs a non-blocking `drift-watch` job against current stable as a
 canary, and it paid for itself on the first run by catching a
@@ -171,7 +249,15 @@ There is a joke here that the repository did not plan. `#print axioms` is
 this development's own validity predicate, and it is applied by an
 institution the file cannot bind — the elaborator. Freeze the object
 system and the exploit moves one level up. That is Movement D, and it
-turned up in our own build logs. It is a rhyme, not a theorem.
+turned up in our own build logs.
+
+Movement G makes the joke exact without making it a claim. The ledger is
+a guard in world state; the elaborator is the recognizer that applies
+it; and the toolchain pin is a fork-legitimacy criterion, enforced by
+convention outside every file it protects. `guard_regress` is the
+general shape of what a version bump does to us. That is an instance of
+the schema, not evidence for it — but it is the one instance we did not
+choose, and it arrived by itself.
 
 ## What is proven, and what is not
 
@@ -190,7 +276,21 @@ bottom out inside the law. What ultimately holds the invariant is the
 thing this repository cannot formalize: the interpretive community's
 disposition to keep reading the clause as binding.
 
-This is a **toy**. It is four booleans and a scalar. It does not model
+Movements E–G finish the sentence. The two asymmetries the middle
+movements leave standing — the modeller can freeze a level and the
+system cannot (E); the system can be recognized and cannot recognize
+itself (F) — are one asymmetry seen twice, and Movement G states it as
+a schema over every machine at once, its own outputs included. One
+floor above the schema sits this repository: `ascend` is the modeller's
+pen, necessarily, and its licence comes from the reader agreeing that
+this is what recognition is like. The kernel certifies the theorems;
+the community certifies the kernel; the community is not a machine in
+any file. **The tower exits the mathematics through the reader.** It
+always did.
+
+This is a **toy**. Its constitution is four booleans and a scalar, and
+its final movement quantifies over every machine you could put in
+their place. It still does not model
 federalism, ratification, courts as agents, time, or who holds the pen.
 Its honest boundaries are enumerated in
 [docs/LIMITATIONS.md](docs/LIMITATIONS.md), including the places where a
@@ -201,16 +301,16 @@ reader could mistake a modelling choice for a result.
 | Path | What it is |
 |---|---|
 | `Godel/Core.lean` | The object system: states, amendments, `Reach` |
-| `Godel/MovementA–D.lean` | The four regimes and their theorems |
+| `Godel/MovementA–G.lean` | The seven movements and their theorems |
 | `Godel/Executable.lean` | Decidable checker + soundness bridge |
 | `Godel/Receipts.lean` | The axiom ledger, enforced by `#guard_msgs` |
 | `Main.lean` | `lake exe godel` |
 | `standalone/Godel.lean` | Single-file edition; `lean standalone/Godel.lean` |
 | `THEOREMS.md` | Every theorem, glossed, with its axiom cost |
-| `docs/ARGUMENT.md` | Long-form reading of the four movements |
+| `docs/ARGUMENT.md` | Long-form reading of the seven movements |
 | `docs/SOURCES.md` | Where the history and the law come from |
 | `docs/LIMITATIONS.md` | What the model does not model |
-| `docs/ROADMAP.md` | Round 3: on-chain governance |
+| `docs/ROADMAP.md` | Closed through Movement G; what remains |
 | `docs/adr/` | Decisions, with the evidence behind them |
 
 ## Sources
