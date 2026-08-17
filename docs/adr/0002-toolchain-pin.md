@@ -132,3 +132,98 @@ implication cost `propext` on 4.33.0, when isolated reproductions of that
 exact shape do not? The characterization is airtight and the mechanism is
 unknown. A good first issue: it needs patience with `set_option pp.all`
 and bisection over toolchains, not deep knowledge.
+
+## Addendum — the drift is in elaboration, not upstream (probe, 2026-08-17)
+
+Run when Movements E and F landed, to answer the open question above in
+at least one direction. Method: a scratch file (not committed) running
+`#print axioms` on the core lemmas these proofs actually invoke, executed
+under both toolchains via `elan run` and diffed; then the library itself
+rebuilt under 4.33.0; then a transitive dependency walk over the proof
+terms. Both toolchains as reported by `lean --version`: 4.15.0
+(`11651562caae`) and 4.33.0 (`d8b18978322d`).
+
+### 1. The core lemmas do not differ
+
+`of_decide_eq_true`, `decide_eq_true`, `decide_eq_true_eq`,
+`of_decide_eq_false`, `eq_true`, the `And` and `Or` introduction and
+elimination rules (`And.intro/left/right/elim/rec`,
+`Or.inl/inr/elim/rec`), `Bool.noConfusion`, `Bool.noConfusionType`,
+`Bool.decEq`, `Nat.le_trans`, `Nat.decLe`, `Nat.decEq`, `Nat.le`,
+`List.mem_cons_self`, `List.Mem.head`, `List.Mem.tail`,
+`Option.noConfusion`, `Option.noConfusionType`, `Option.some.inj`,
+`Option.some.injEq`, `absurd`, `Eq.mpr/symm/trans/subst`, `id`,
+`instDecidableAnd/Or/Not` — 37 constants, including every lemma named in
+the breakages above and in [ADR-0003](0003-axiom-asymmetry-refuted.md).
+
+**The two outputs are byte-identical.** Three of the 37 carry `propext`
+on *both* versions (`decide_eq_true_eq`, `eq_true`, `Option.some.injEq`);
+the other 34 are axiom-free on both. Nothing moved.
+
+The derived instances the drifting proofs go through are identical too:
+`instDecidableEqAmend`, `instDecidableEqState`, `instDecidableEqRule`,
+`instDecidableEqBool`, `instDecidableNot` are axiom-free on both.
+
+### 2. The ledger, remeasured on the larger development
+
+The library was rebuilt from the committed source under 4.33.0, with
+`Godel/Receipts.lean` excluded (its `#guard_msgs` are what the drift
+breaks). Everything else — Movements A–F, the checker — compiles clean,
+so the portability fixes still hold with E and F in.
+
+**15 of the 43 ledger entries acquire `propext` on 4.33.0.** The original
+13 reproduce exactly, name for name. The two new ones are Movement E's
+`selfentrenched_gate_holds` and `selfentrenched_guards_no_content`.
+Movement F does not drift at all: all 12 entries stay axiom-free.
+
+### 3. Where the `propext` enters
+
+A transitive walk over each theorem's proof term, collecting every
+constant that cites `propext` directly:
+
+| Theorem | 4.15.0 | 4.33.0 |
+|---|---|---|
+| `B_blocks_direct` | none (162 constants reached) | `eq_true`, `eq_false`, `and_self` (467) |
+| `C_refuses_direct` | none (269) | `eq_true`, `eq_false`, `and_self` (515) |
+| `selfentrenched_gate_holds` | none (166) | `eq_true`, `eq_false`, `and_self` (422) |
+| `clause_ratchet_bypassed` | none (156) | none (173) |
+
+`eq_true`, `eq_false` and `and_self` all exist on both toolchains and all
+depend on `propext` on both. They are not new and they did not change.
+The 4.33.0 elaborator simply routes through them, from identical syntax,
+where 4.15.0 does not — and drags in roughly three times the dependency
+closure doing it.
+
+### 4. Verdict
+
+**The drift is in elaboration, not upstream.** The core lemmas are
+identical on both toolchains; the elaborator emits different terms from
+the same source, and those terms reach `propext` through three ordinary
+`Prop`/`Bool` simp lemmas that were always classical. This narrows the
+open question from "where does `propext` come from?" — answered: `eq_true`,
+`eq_false`, `and_self` — to "what changed in `decide`'s elaboration
+between 4.15.0 and 4.33.0 such that it now normalizes through them?",
+which this probe did not determine and did not try to fix.
+
+### 5. A correction the probe forced
+
+The structural explanation offered above — that the drift follows *an
+implication with a `Bool` equation as antecedent* — **does not survive
+Movement E.** Regime `VR` has exactly that shape
+(`s.ratchet = true → ∀ r, ...`) and does **not** drift. Regime `VRS`
+differs from `VR` only by adding `ratchetAttack a = false ∧` to the
+consequent, and it **does** drift.
+
+Across all 43 entries the predicate that currently fits every data point
+is narrower: a theorem drifts when its regime's guard contains a
+**`Bool`-valued equation on an attack predicate applied to the
+amendment** — `coreAttack a = false` (`VB`, `VC`, `VD`),
+`selfAttack a = false` (`VC`, `VD`), `ratchetAttack a = false` (`VRS`).
+`VA`, `VE` and `VR` contain no such equation and none of their theorems
+drift.
+
+That is a better-fitting characterization, not a verified rule: it is
+fitted to 43 points and has not been tested against a regime built to
+falsify it. The lesson of ADR-0003 applies to this paragraph too.
+
+The decision above is unchanged. The pin stands.
