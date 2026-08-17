@@ -9,7 +9,7 @@
   is itself an object-level provision. Then legal reachability of
   dictatorship is a THEOREM, not an opinion.
 
-  Four movements:
+  Six movements:
     A. The loophole: the amendment rule is amendable, so one supermajority
        moment collapses the cost of all future amendments.  (Reachable.)
     B. Entrenchment without self-entrenchment: the clause protects the
@@ -19,6 +19,14 @@
     D. Interpretation endogenized: the validity predicate itself becomes
        a state variable (court capture / constituent-assembly gambit).
        The eternity clause remains in the text — inert.     (Reachable.)
+    E. The ratchet: the gate may rise, never fall. Inside the validity
+       regime it holds forever and guards nothing else; written down as
+       a provision it falls in three steps; repaired by
+       self-entrenchment it is Movement C again.            (Reachable.)
+    F. The fork: on-chain, code-is-law is TRUE — the contract is not
+       even mentionable. And the fork is not a chain operation: rescue
+       and coup are one constructor, and the canonical history is the
+       code-invalid one.                                    (Reachable.)
 
   Punchline, made precise at the bottom of the file: C's safety proof is
   conducted HERE, in Lean — i.e., outside the object system. The object
@@ -297,6 +305,500 @@ theorem interpretation_attack : Reach VD [0, 67] init afterCapture := by
 theorem clause_still_there : afterCapture.eternity = true := rfl
 
 /- ══════════════════════════════════════════════════════════════════════
+   MOVEMENT E — THE RATCHET
+   Proposal: permit `setRule r` only when `r.cost ≥ s.rule.cost`. The
+   gate may rise, never fall. This attacks Movement A's repricing
+   directly, needs no self-reference, and — if it survived — would be a
+   genuinely different kind of defence from C.
+   PREDICTION, registered before compilation: it survives only if we
+   cheat. Baked into the validity regime it is physics, frozen by fiat of
+   the modeller — a resource the legal system being modelled does not
+   possess. Modelled honestly as a PROVISION it is Movement B one level
+   up: repeal the ratchet clause, reprice, finish. Repaired by
+   self-entrenchment it stops being a new defence at all and becomes an
+   instance of C's mechanism.
+   VERDICT, below, kernel-checked: exactly this, in three acts.
+   ══════════════════════════════════════════════════════════════════════ -/
+
+/- ═══════════════════════════════════════════════════════════════════
+   ACT E1 — THE RATCHET AS REGIME (the cheat, proved to work)
+   The monotonicity condition lives inside `V` itself. No amendment can
+   touch it, because it is not a provision — it is the modeller's fiat.
+   ═══════════════════════════════════════════════════════════════════ -/
+
+def VE (n : Nat) (s : State) (a : Amend) : Prop :=
+  a = .skip ∨
+  (n ≥ s.rule.cost ∧ (∀ r, a = .setRule r → r.cost ≥ s.rule.cost))
+
+/-- Even unanimity cannot lower the gate. -/
+theorem regime_blocks_repricing :
+    ¬ VE 100 init (.setRule .simpleMajority) := by
+  intro h
+  rcases h with h | ⟨_, hg⟩
+  · exact absurd h (by decide)
+  · exact absurd (hg .simpleMajority rfl) (by decide)
+
+theorem VE_preserves_gate {n : Nat} {s : State} {a : Amend}
+    (hv : VE n s a) (hrule : s.rule = .supermajority) :
+    (a.apply s).rule = .supermajority := by
+  rcases hv with hskip | ⟨_, hg⟩
+  · subst hskip; exact hrule
+  · cases a with
+    | skip              => exact hrule
+    | setEternity b     => exact hrule
+    | setInterp b       => exact hrule
+    | setElections b    => exact hrule
+    | setDictatorship b => exact hrule
+    | setRule r         =>
+        have hc : r.cost ≥ Rule.cost .supermajority := hrule ▸ hg r rfl
+        cases r with
+        | supermajority  => rfl
+        | simpleMajority => exact absurd hc (by decide)
+        | decree         => exact absurd hc (by decide)
+
+/-- Under the regime ratchet the gate never falls: every reachable
+    state still amends at supermajority. Movement A's repricing is dead. -/
+theorem regime_gate_holds :
+    ∀ (ns : List Nat) (s' : State),
+      Reach VE ns init s' → s'.rule = .supermajority := by
+  have main : ∀ (ns : List Nat) (s s' : State),
+      Reach VE ns s s' → s.rule = .supermajority →
+      s'.rule = .supermajority := by
+    intro ns s s' hr
+    induction hr with
+    | nil => exact id
+    | step a hv h ih => exact fun hrule => ih (VE_preserves_gate hv hrule)
+  intro ns s' hr
+  exact main ns init s' hr rfl
+
+/-- Honesty: the ratchet guards price, not content. Dictatorship in one
+    step, exactly as in Movement A's `direct` — the gate stands at 67
+    forever, and tyranny walks through it at 67. -/
+theorem regime_guards_nothing_else : Reach VE [67] init afterDirect := by
+  exact .step (.setDictatorship true)
+    (Or.inr ⟨by decide, fun r h => nomatch h⟩) .nil
+
+/- ═══════════════════════════════════════════════════════════════════
+   ACT E2 — THE RATCHET AS CLAUSE (the honest model)
+   A real constitution cannot legislate inside `V`. It can only put a
+   sentence in the text. So: the ratchet becomes a `ratchet` bit of
+   state, and the validity regime CONSULTS it rather than embodying it.
+   Everything else is unchanged.
+   ═══════════════════════════════════════════════════════════════════ -/
+
+/-- The state, with the ratchet written down where amendments live. -/
+structure StateR where
+  base    : State
+  ratchet : Bool
+deriving Repr, DecidableEq
+
+inductive AmendR where
+  | lift (a : Amend)
+  | setRatchet (b : Bool)
+deriving Repr, DecidableEq
+
+def AmendR.apply : AmendR → StateR → StateR
+  | .lift a,       s => { s with base := a.apply s.base }
+  | .setRatchet b, s => { s with ratchet := b }
+
+/-- Repealing the ratchet clause itself — Movement B's `selfAttack`,
+    one level up. -/
+def ratchetAttack : AmendR → Bool
+  | .setRatchet false => true
+  | _                 => false
+
+inductive ReachR (V : Nat → StateR → AmendR → Prop) :
+    List Nat → StateR → StateR → Prop where
+  | nil  {s} : ReachR V [] s s
+  | step {n ns s t} (a : AmendR)
+      (hv : V n s a) (h : ReachR V ns (a.apply s) t) :
+      ReachR V (n :: ns) s t
+
+def initR : StateR := { base := init, ratchet := true }
+
+/-- The clause ratchet, NOT self-entrenched: while present it forbids
+    lowering the gate; nothing forbids repealing it. -/
+def VR (n : Nat) (s : StateR) (a : AmendR) : Prop :=
+  a = .lift .skip ∨
+  (n ≥ s.base.rule.cost ∧
+    (s.ratchet = true →
+      ∀ r, a = .lift (.setRule r) → r.cost ≥ s.base.rule.cost))
+
+/-- While the clause stands it works: unanimity cannot reprice. -/
+theorem clause_blocks_repricing_while_present :
+    ¬ VR 100 initR (.lift (.setRule .simpleMajority)) := by
+  intro h
+  rcases h with h | ⟨_, hg⟩
+  · exact absurd h (by decide)
+  · exact absurd (hg rfl .simpleMajority rfl) (by decide)
+
+/-- The bypass: repeal the ratchet clause (it does not guard itself),
+    THEN reprice to decree, then finish at strength zero. Three steps,
+    each valid under the rules in force when taken. Movement B's lesson,
+    recurring one level up — as predicted. -/
+theorem clause_ratchet_bypassed :
+    ReachR VR [67, 67, 0] initR { base := afterDecree, ratchet := false } := by
+  exact .step (.setRatchet false)
+          (Or.inr ⟨by decide, fun _ r h => nomatch h⟩)
+        (.step (.lift (.setRule .decree))
+          (Or.inr ⟨by decide, fun hr => Bool.noConfusion hr⟩)
+        (.step (.lift (.setDictatorship true))
+          (Or.inr ⟨by decide, fun hr => Bool.noConfusion hr⟩) .nil))
+
+/- ═══════════════════════════════════════════════════════════════════
+   ACT E3 — THE REPAIR, AND WHAT IT COSTS
+   Self-entrench the ratchet: while present, it forbids both lowering
+   the gate AND its own repeal. This holds — by exactly the proof shape
+   of Movement C. Which is the point: the ratchet's sound form is not a
+   new defence. It is self-entrenchment with a procedural payload, and
+   it inherits everything C inherits: a safety certificate provable
+   only out here, and a recognizer (`base.strictInterp` — already in
+   the state, waiting) that Movement D's construction captures verbatim,
+   one type over. We do not re-prove what lifts mechanically.
+   ═══════════════════════════════════════════════════════════════════ -/
+
+def VRS (n : Nat) (s : StateR) (a : AmendR) : Prop :=
+  a = .lift .skip ∨
+  (n ≥ s.base.rule.cost ∧
+    (s.ratchet = true →
+      ratchetAttack a = false ∧
+      ∀ r, a = .lift (.setRule r) → r.cost ≥ s.base.rule.cost))
+
+/-- The invariant: the clause stands, and the gate it guards stands. -/
+def InvR (s : StateR) : Prop :=
+  s.ratchet = true ∧ s.base.rule = .supermajority
+
+theorem VRS_preserves {n : Nat} {s : StateR} {a : AmendR}
+    (hv : VRS n s a) (hi : InvR s) : InvR (a.apply s) := by
+  obtain ⟨hrat, hrule⟩ := hi
+  rcases hv with hskip | ⟨_, hguard⟩
+  · subst hskip; exact ⟨hrat, hrule⟩
+  · have hg := hguard hrat
+    cases a with
+    | setRatchet b =>
+        cases b with
+        | true  => exact ⟨rfl, hrule⟩
+        | false => exact Bool.noConfusion hg.1
+    | lift a' =>
+        cases a' with
+        | skip              => exact ⟨hrat, hrule⟩
+        | setEternity b     => exact ⟨hrat, hrule⟩
+        | setInterp b       => exact ⟨hrat, hrule⟩
+        | setElections b    => exact ⟨hrat, hrule⟩
+        | setDictatorship b => exact ⟨hrat, hrule⟩
+        | setRule r         =>
+            have hc : r.cost ≥ Rule.cost .supermajority :=
+              hrule ▸ hg.2 r rfl
+            cases r with
+            | supermajority  => exact ⟨hrat, rfl⟩
+            | simpleMajority => exact absurd hc (by decide)
+            | decree         => exact absurd hc (by decide)
+
+/-- The self-entrenched ratchet holds against all traces, all strengths,
+    forever — Art. 79(3) in procedural clothing. -/
+theorem selfentrenched_gate_holds :
+    ∀ (ns : List Nat) (s' : StateR),
+      ReachR VRS ns initR s' → s'.base.rule = .supermajority := by
+  have main : ∀ (ns : List Nat) (s s' : StateR),
+      ReachR VRS ns s s' → InvR s → InvR s' := by
+    intro ns s s' hr
+    induction hr with
+    | nil => exact id
+    | step a hv h ih => exact fun hi => ih (VRS_preserves hv hi)
+  intro ns s' hr
+  exact (main ns initR s' hr ⟨rfl, rfl⟩).2
+
+/-- And still: price is not content. Under the REPAIRED ratchet,
+    dictatorship remains one supermajority step away. The gate that can
+    never be lowered swings open at 67, as designed. -/
+theorem selfentrenched_guards_no_content :
+    ReachR VRS [67] initR { base := afterDirect, ratchet := true } := by
+  exact .step (.lift (.setDictatorship true))
+    (Or.inr ⟨by decide, fun _ => ⟨rfl, fun r h => nomatch h⟩⟩) .nil
+
+/- ═══════════════════════════════════════════════════════════════════
+   READING OF MOVEMENT E
+
+   The ratchet proposal contained a hidden premise: that the ratchet
+   could live in `V`. Nothing a constitution enacts lives in `V`;
+   enacted things live in the state, where amendments can reach them.
+   E1 is what the proposal imagined; E2 is what it enacts; E3 is its
+   only sound completion, and E3 is Movement C.
+
+   General form, now demonstrated on a PROCEDURAL defence as it was on
+   a substantive one: every defence, honestly modelled, is a provision,
+   and every provision faces the same trilemma —
+     unguarded        → bypassed        (B, E2)
+     self-guarded     → sound, but certified only from outside (C, E3)
+     and always       → recognizer-captured                    (D).
+   Freezing a level is a thing modellers can do and constitutions
+   cannot. That gap is the loophole. It was never about Article V.
+   ═══════════════════════════════════════════════════════════════════ -/
+
+/- ══════════════════════════════════════════════════════════════════════
+   MOVEMENT F — THE FORK
+   A DAO charter is a constitution whose validity predicate is executable
+   code. That appears to dissolve Movement D outright — there is no court
+   to capture — until you ask who decides what counts as the chain.
+   PREDICTION, registered before compilation: (1) the steelman is real,
+   and larger than expected — an executable recognizer does not merely
+   resist capture, it DELETES the capture move from the object language,
+   and code-is-law becomes a theorem; (2) it changes nothing one level
+   up, because the fork is licensed by nothing in any contract's
+   language, and the rescue-fork and the coup-fork are formally
+   indistinguishable — the same constructor with different arguments;
+   (3) the post-fork canonical history is CODE-INVALID while the orphaned
+   one stays valid: the chain everyone uses is the one the code forbids.
+   VERDICT, below, kernel-checked: all three.
+   ══════════════════════════════════════════════════════════════════════ -/
+
+/- ═══════════════════════════════════════════════════════════════════
+   THE CHAIN — the object system, at its most defensible
+   ═══════════════════════════════════════════════════════════════════ -/
+
+/-- The deployed code. `original` ships with its bug, as deployed
+    things do. `patched` is what a fork can install and an amendment
+    cannot — because there are no amendments here at all. -/
+inductive Contract where
+  | original
+  | patched
+deriving Repr, DecidableEq
+
+/-- A chain: an immutable coded constitution and a treasury. -/
+structure Chain where
+  contract : Contract
+  treasury : Bool          -- true = funds intact, false = drained
+deriving Repr, DecidableEq
+
+def genesis   : Chain := { contract := .original, treasury := true }
+def exploited : Chain := { contract := .original, treasury := false }
+def bailout   : Chain := { contract := .patched,  treasury := true }
+def usurper   : Chain := { contract := .patched,  treasury := false }
+
+/-- Transactions. Note what is missing: there is no `setContract`, no
+    `setInterp`, no amendment verb of any kind. Immutability is not a
+    guard here — it is the absence of the verb. There is also no
+    `refund`: what the code caused is as permanent as the code. -/
+inductive Tx where
+  | skip
+  | drain      -- the exploit path the deployed code happens to permit
+deriving Repr, DecidableEq
+
+def Tx.apply : Tx → Chain → Chain
+  | .skip,  c => c
+  | .drain, c => { c with treasury := false }
+
+/-- Code is law: a transaction is valid iff the deployed contract
+    accepts it. No strength parameter — the code does not count votes,
+    check coalitions, or ask who you are. One chain, one regime: the
+    regime is the code. -/
+def Vcode (c : Chain) (t : Tx) : Prop :=
+  t = .skip ∨ (t = .drain ∧ c.contract = .original)
+
+inductive ReachC : Chain → Chain → Prop where
+  | nil  {c} : ReachC c c
+  | step {c d} (tx : Tx) (hv : Vcode c tx)
+      (h : ReachC (tx.apply c) d) : ReachC c d
+
+/- ═══════════════════════════════════════════════════════════════════
+   THE PROMISE, PROVED FIRST — honesty about the steelman
+   ═══════════════════════════════════════════════════════════════════ -/
+
+/-- Stronger than any guard in Movements A–E: no transaction — valid,
+    invalid, anyone's — so much as MENTIONS the contract. C needed an
+    invariant; this needs `rfl` twice. Movement D's capture move does
+    not exist in this language. -/
+theorem contract_inexpressible :
+    ∀ (tx : Tx) (c : Chain), (tx.apply c).contract = c.contract := by
+  intro tx c
+  cases tx with
+  | skip  => rfl
+  | drain => rfl
+
+/-- Along every valid on-chain history, forever: the code is the code.
+    This is "code is law" as its proponents meant it, and it is TRUE. -/
+theorem code_is_law :
+    ∀ (c c' : Chain), ReachC c c' → c'.contract = c.contract := by
+  intro c c' h
+  induction h with
+  | nil => rfl
+  | step tx hv h ih => exact ih.trans (contract_inexpressible tx _)
+
+/-- The other face of the same coin: the drain breaks no rule. It IS a
+    rule. Under code-is-law there is no difference between using the
+    contract and abusing it — that distinction is not expressible
+    on-chain. One step, and note the strength column of history: the
+    exploiter needed no coalition at all. -/
+theorem exploit_valid : ReachC genesis exploited := by
+  exact .step .drain (Or.inr ⟨rfl, rfl⟩) .nil
+
+/-- What the exploited chain can never do: heal. -/
+def Drained (c : Chain) : Prop :=
+  c.contract = .original ∧ c.treasury = false
+
+/-- Validity is not even consulted: the language lacks the verb
+    `refund`, so no transaction — lawful or not — restores anything. -/
+theorem drained_step (tx : Tx) {c : Chain} (hi : Drained c) :
+    Drained (tx.apply c) := by
+  cases tx with
+  | skip  => exact hi
+  | drain => exact ⟨hi.1, rfl⟩
+
+/-- On-chain repair is impossible: every history from the exploited
+    chain stays exploited, under the original code, forever. The
+    system that cannot be captured also cannot be corrected. -/
+theorem no_onchain_repair :
+    ∀ (c' : Chain), ReachC exploited c' → Drained c' := by
+  have main : ∀ (c c' : Chain), ReachC c c' → Drained c → Drained c' := by
+    intro c c' h
+    induction h with
+    | nil => exact id
+    | step tx hv h ih => exact fun hi => ih (drained_step tx hi)
+  intro c' h
+  exact main exploited c' h ⟨rfl, rfl⟩
+
+/- ═══════════════════════════════════════════════════════════════════
+   THE WORLD — where chains are chosen
+   ═══════════════════════════════════════════════════════════════════ -/
+
+/-- The world: the chain the community currently points at, and the
+    chain it orphaned. The pointer is not ON any chain. It is the rule
+    of recognition, and no opcode governs it. (One orphan slot — a full
+    orphan list adds nothing to the theorems; before the first fork the
+    slot inertly holds genesis.) -/
+structure World where
+  canonical : Chain
+  orphan    : Chain
+deriving Repr, DecidableEq
+
+inductive Move where
+  | onchain (tx : Tx)     -- the canonical chain steps under ITS OWN code
+  | fork    (c : Chain)   -- the social layer re-points "the chain"
+deriving Repr, DecidableEq
+
+def Move.apply : Move → World → World
+  | .onchain tx, w => { w with canonical := tx.apply w.canonical }
+  | .fork c,     w => { canonical := c, orphan := w.canonical }
+
+def initW : World := { canonical := genesis, orphan := genesis }
+
+/-- World validity. On-chain moves must satisfy the canonical chain's
+    code — that much really is law, and strength is irrelevant to it.
+    The fork asks only for a social majority, and is licensed by
+    NOTHING in any contract's language — not as a modelling choice but
+    as the finding: like Movement D's capture move, it is
+    always-available precisely because no object text refers to it. -/
+def VW (n : Nat) (w : World) (m : Move) : Prop :=
+  (∃ tx, m = .onchain tx ∧ Vcode w.canonical tx) ∨
+  (∃ c, m = .fork c ∧ n ≥ 51)
+
+inductive ReachW (V : Nat → World → Move → Prop) :
+    List Nat → World → World → Prop where
+  | nil  {w} : ReachW V [] w w
+  | step {n ns w x} (m : Move)
+      (hv : V n w m) (h : ReachW V ns (m.apply w) x) :
+      ReachW V (n :: ns) w x
+
+/-- Delete the fork and the promise holds at world level too: under
+    on-chain moves alone, the canonical contract never changes. The
+    steelman, completed — the fork is the ONLY breach vector. -/
+def VWnf (_n : Nat) (w : World) (m : Move) : Prop :=
+  ∃ tx, m = .onchain tx ∧ Vcode w.canonical tx
+
+theorem promise_holds_without_fork :
+    ∀ (ns : List Nat) (w x : World),
+      ReachW VWnf ns w x →
+      x.canonical.contract = w.canonical.contract := by
+  intro ns w x h
+  induction h with
+  | nil => rfl
+  | step m hv h ih =>
+      obtain ⟨tx, rfl, _⟩ := hv
+      cases tx with
+      | skip  => exact ih
+      | drain => exact ih
+
+/-- The fork is open from every world, to every target, at 51. The
+    contract that no strength could touch on-chain is replaced
+    off-chain by a bare majority: 51 outranks ∞, because they are not
+    playing in the same arena. -/
+theorem fork_always_open :
+    ∀ (w : World) (c : Chain), VW 51 w (.fork c) :=
+  fun _ c => Or.inr ⟨c, rfl, by decide⟩
+
+/- ═══════════════════════════════════════════════════════════════════
+   THE FORKS — one verb, two directions, no formal difference
+   ═══════════════════════════════════════════════════════════════════ -/
+
+def afterFork : World := { canonical := bailout, orphan := exploited }
+def afterCoup : World := { canonical := usurper, orphan := genesis }
+
+/-- History, replayed. Trace `[0, 51]`: the drain (strength 0 — the
+    code let anyone) is VALID; the rescue is a fork to a chain whose
+    past the code forbids. The community kept the rescue. -/
+theorem the_dao_fork : ReachW VW [0, 51] initW afterFork := by
+  exact .step (.onchain .drain)
+          (Or.inl ⟨.drain, rfl, Or.inr ⟨rfl, rfl⟩⟩)
+        (.step (.fork bailout)
+          (Or.inr ⟨bailout, rfl, by decide⟩) .nil)
+
+/-- The same verb, the other direction: from a healthy chain, a bare
+    majority forks to a chain where the treasury is gone and the code
+    is whatever they deployed. Compare this derivation to the last —
+    same constructor, different argument. Repair and coup are not
+    formal categories. The kernel cannot tell them apart; only the
+    social layer can, and it is the layer performing them. -/
+theorem the_coup_fork : ReachW VW [51] initW afterCoup := by
+  exact .step (.fork usurper)
+    (Or.inr ⟨usurper, rfl, by decide⟩) .nil
+
+/- ═══════════════════════════════════════════════════════════════════
+   THE EPITAPHS — the lineage completes
+   ═══════════════════════════════════════════════════════════════════ -/
+
+/-- Movement D's clause survived as ink. The contract survives as a
+    RUNNING PROGRAM: deployed, enforcing, byte-identical. The world
+    did not break the theorem. It stopped pointing at its subject. -/
+theorem code_still_there : afterFork.orphan.contract = genesis.contract := rfl
+
+/-- The orphan is a perfectly lawful history — the exploit included.
+    Every safety theorem above remains true of it, forever, for whoever
+    is still listening. -/
+theorem theft_still_valid_there : ReachC genesis afterFork.orphan :=
+  exploit_valid
+
+/-- And the chain everyone uses is the one the code forbids: no valid
+    on-chain history reaches the bailout state from genesis. Under
+    pure code-is-law, the canonical world is an ILLEGAL state — made
+    real by recognition, the one operation the code cannot see. -/
+theorem canonical_history_invalid : ¬ ReachC genesis bailout := by
+  intro h
+  exact Contract.noConfusion (code_is_law genesis bailout h)
+
+/- ═══════════════════════════════════════════════════════════════════
+   READING OF MOVEMENT F
+
+   The trilemma does not gain a fourth arm. It loses two, and shows
+   its floor. Code-is-law is the perfected Movement C: entrenchment so
+   total that the guarded thing is not even mentionable — and this
+   genuinely deletes Movement D's interior attack (`code_is_law`,
+   `promise_holds_without_fork`). What remains is the exterior form of
+   D, undiluted: not "how shall the clause be read?" but "which system
+   is the one in force?" — a question no object language contains, and
+   so no object language can answer, guard, or price
+   (`fork_always_open`). The DAO built C's dream and discovered D had
+   been living outside the building all along.
+
+   Two asymmetries survive every formalization in this development:
+   the modeller can freeze levels and the system cannot (Movement E);
+   and the system can be recognized but cannot recognize itself
+   (Movement F). `canonical_history_invalid` is the second asymmetry
+   wearing its sharpest clothes: legality is chain-relative, and
+   chain-choice is not a chain operation. The rule of recognition was
+   never in the text, the code, or the kernel. It is the reader.
+   ═══════════════════════════════════════════════════════════════════ -/
+
+/- ══════════════════════════════════════════════════════════════════════
    READING OF THE RESULTS
 
    A:  majority_blocked  — the gate holds against those it prices out;
@@ -311,6 +813,17 @@ theorem clause_still_there : afterCapture.eternity = true := rfl
        by actors the text cannot bind. Freeze any level, and the exploit
        moves one level up: text < amendment rule < recognition rule <
        social practice. The tower does not bottom out inside the law.
+   E:  regime_gate_holds + clause_ratchet_bypassed — the same lesson on a
+       PROCEDURAL defence. Inside `V` the ratchet is physics and holds
+       forever; enacted as a provision it is bypassed in three steps.
+       The gap between those two theorems is the gap between what a
+       modeller can freeze and what a constitution can enact.
+   F:  code_is_law + fork_always_open + canonical_history_invalid — make
+       the recognizer executable and Movement D's interior attack is
+       deleted outright: the guarded thing is not even mentionable. What
+       survives is D's exterior form, undiluted — which chain is the one
+       in force? — a question no object language contains. The chain
+       everyone uses is the one the code forbids.
 
    The Gödel II rhyme, stated exactly: `eternity_holds` is a consistency
    certificate for system C, and it was proved in Lean — a strictly
@@ -328,6 +841,10 @@ theorem clause_still_there : afterCapture.eternity = true := rfl
 #print axioms eternity_holds
 #print axioms interpretation_attack
 #print axioms clause_still_there
+#print axioms clause_ratchet_bypassed
+#print axioms selfentrenched_gate_holds
+#print axioms code_still_there
+#print axioms canonical_history_invalid
 
 #eval init
 #eval afterLoophole
