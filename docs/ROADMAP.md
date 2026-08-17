@@ -93,9 +93,11 @@ Ordered by how much each would change the results.
 
 ## Open questions
 
-- **ADR-0002's unresolved drift.** Why do `entrenchment_bypassed`,
-  `interpretation_attack` and `eternity_holds` acquire `propext` on Lean
-  4.33.0 when minimal reproductions of their shape do not? Good first
+- **ADR-0002's unresolved drift.** On Lean 4.33.0, 13 of 24 theorems
+  acquire `propext` — precisely those touching a validity regime that
+  contains an implication (`VB`, `VC`, `VD`), and none of those confined
+  to `VA`. The characterization is airtight; the mechanism is unknown,
+  and minimal reproductions of that exact shape do not drift. Good first
   issue: it needs patience with `set_option pp.all` and bisection over
   toolchains, not deep knowledge.
 - **Is Movement B's two-step derivable in a model faithful to Article V's

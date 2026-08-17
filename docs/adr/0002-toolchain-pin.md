@@ -10,8 +10,9 @@ is exactly what it depends on" — the axiom ledger in
 `Godel/Receipts.lean`. That ledger is only meaningful if the thing
 producing it is fixed.
 
-Two independent breakages were observed while setting the repository up,
-both by direct experiment on Lean 4.15.0 and 4.33.0.
+Three independent breakages were observed, all by direct experiment on
+Lean 4.15.0 and 4.33.0 — the third of them caught by CI rather than by
+inspection.
 
 ### Breakage 1 — `List.mem_cons_self` changed arity
 
@@ -31,33 +32,70 @@ constructors directly — `List.Mem.head` and `List.Mem.tail` — instead of
 the named lemmas. Constructors are stable across both toolchains, and the
 sources now compile on 4.15.0 and 4.33.0 alike.
 
-### Breakage 2 — the axiom ledger does not survive the version bump
+### Breakage 2 — `Option.noConfusion` loses its motive
+
+Found by the `drift-watch` canary on its first CI run, which is the
+justification for having it. `Godel/Executable.lean` used
+`exact Option.noConfusion h` to discharge `h : none = some t`. On 4.33+
+the elaborator cannot infer the motive when the goal is a `Prop`:
+
+```
+Application type mismatch: the argument h has type Eq.{1} none (some t)
+but is expected to have type Eq.{?u.32 + 2} ?m.121 ?m.123
+```
+
+**Fixed forward, portably:** `nomatch h`. Compiles on both toolchains and
+does not change the axiom profile on either.
+
+### Breakage 3 — the axiom ledger does not survive the version bump
 
 This one cannot be fixed forward, and it is the reason for the pin. From
-**identical** source, after the portable fix:
+**identical** source, after the two portability fixes above, 13 of the 24
+theorems acquire `propext` on 4.33.0:
 
-| Theorem | 4.15.0 | 4.33.0 |
+| | axiom-free on 4.33.0 | acquires `propext` on 4.33.0 |
 |---|---|---|
-| `entrenchment_bypassed` | none | `[propext]` |
-| `interpretation_attack` | none | `[propext]` |
-| `eternity_holds` | none | `[propext]` |
-| everything else | none | none |
+| | `direct`, `loophole`, `loophole_decree`, `loophole_runs`, `loophole_certified`, `majority_blocked`, `runTrace_sound`, `direct_leaves_gate`, `loophole_lowers_gate`, `decree_removes_gate`, `clause_still_there` | `B_blocks_direct`, `entrenchment_bypassed`, `bypass_runs`, `bypass_certified`, `VC_preserves`, `eternity_holds`, `C_refuses_direct`, `C_refuses_selfrepeal`, `D_blocks_while_strict`, `interpretation_attack`, `capture_runs`, `capture_certified`, `D_refuses_direct_while_strict` |
 
 The uniform zero-axiom result — the thing THEOREMS.md and the README
 claim — holds **only on the pinned toolchain**.
 
-**The cause was investigated and not isolated.** Minimal reproductions of
-each suspected shape were built and run on both toolchains, and none
-exhibited the drift:
+#### The drift is exactly characterized, and still unexplained
 
-- `decide` on a bare `Nat` comparison, on a `Bool` equation, on a
-  conjunction, on an implication, and on a conjunction-with-implication;
+The split is not scattered. It falls on a single line, with no
+exceptions in either direction:
+
+> **Every theorem that drifts touches `VB`, `VC`, or `VD`. Every theorem
+> that does not drift is confined to `VA`, is proved by `rfl`, or is
+> generic in the regime.**
+
+And the one structural difference between the regimes is that `VA` is a
+plain disjunction —
+
+```lean
+def VA (n : Nat) (s : State) (a : Amend) : Prop :=
+  a = .skip ∨ n ≥ s.rule.cost
+```
+
+— while `VB`, `VC` and `VD` each contain an **implication with a `Bool`
+equation as antecedent** (`s.eternity = true → ...`). Deciding or
+destructing such a regime is what costs `propext` on 4.33.0 and does not
+on 4.15.0.
+
+That is a clean empirical characterization. It is **not** an explanation,
+and the mechanism was not isolated. Minimal reproductions of the very
+shape the characterization points at were built and run on both
+toolchains, and **none** drifted:
+
+- `decide` on a bare `Nat` comparison, a `Bool` equation, a conjunction,
+  an implication, and a conjunction-with-implication;
 - `decide` on a projection of a structure-update (`{ base with a := false }`);
 - an implication with a false antecedent over such a projection.
 
 All returned "does not depend on any axioms" on both versions. So the
-drift is real, reproducible in situ, and not explained by the obvious
-candidates. It is recorded as an open question rather than guessed at.
+drift needs something about how the `Decidable` instance for these
+implications is synthesized *in context* that the isolated cases do not
+reproduce. Recorded as an open question rather than guessed at.
 
 ## Decision
 
@@ -70,8 +108,10 @@ candidates. It is recorded as an open question rather than guessed at.
    current stable. It is a canary, not a gate: red there means the drift
    is still present or has changed shape, and is a prompt to look, not to
    block a merge.
-4. Sources are kept portable anyway (breakage 1's fix), so that raising
-   the pin later is an ADR decision rather than a rewrite.
+4. Sources are kept portable anyway (the fixes to breakages 1 and 2), so
+   that raising the pin later is an ADR decision rather than a rewrite,
+   and so that `drift-watch` reports the *ledger* rather than being
+   swamped by compile errors.
 
 ## Consequences
 
@@ -87,5 +127,8 @@ candidates. It is recorded as an open question rather than guessed at.
 
 ## Open question
 
-Why do those three theorems acquire `propext` on 4.33.0 when isolated
-reproductions of their shape do not? Unresolved. A good first issue.
+Why does deciding or destructing a validity regime that contains an
+implication cost `propext` on 4.33.0, when isolated reproductions of that
+exact shape do not? The characterization is airtight and the mechanism is
+unknown. A good first issue: it needs patience with `set_option pp.all`
+and bisection over toolchains, not deep knowledge.

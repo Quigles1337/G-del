@@ -73,7 +73,10 @@ theorem runTrace_sound {V : Nat → State → Amend → Prop}
       simp only [runTrace] at h
       split at h
       · next hv => exact .step a hv (ih _ _ h)
-      · next => exact Option.noConfusion h
+      -- `nomatch` rather than `Option.noConfusion h`: the latter cannot
+      -- infer its motive on Lean 4.33+ when the goal is a `Prop`, and
+      -- portability across toolchains is a requirement (ADR-0002).
+      · next => nomatch h
 
 /-! ### The three headline traces, run rather than argued. -/
 

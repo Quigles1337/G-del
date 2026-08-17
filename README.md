@@ -149,13 +149,22 @@ would rather publish the dull true version than the pretty false one.
 ## Why the toolchain is pinned
 
 `lean-toolchain` pins `leanprover/lean4:v4.15.0` exactly — never
-`stable`. The sources compile on newer toolchains, but the **ledger does
-not survive them**: on Lean 4.33.0, `entrenchment_bypassed`,
-`interpretation_attack`, and `eternity_holds` each acquire `propext` from
-identical source. (4.33.0 also renamed `List.mem_cons_self`'s arguments
-to implicit; the proofs here use the `List.Mem` constructors instead, so
-they are portable across both.) CI runs a non-blocking `drift-watch` job
-against current stable as a canary. Details: [ADR-0002](docs/adr/0002-toolchain-pin.md).
+`stable`. The sources are kept portable and compile on newer toolchains,
+but the **ledger does not survive them**: on Lean 4.33.0, **13 of the 24
+theorems acquire `propext`** from identical source.
+
+The split is not scattered. Every theorem that drifts touches `VB`, `VC`
+or `VD`; every theorem that does not is confined to `VA`, is proved by
+`rfl`, or is generic in the regime. The one structural difference is that
+`VA` is a plain disjunction while the other three each contain an
+implication (`s.eternity = true → ...`). That is a clean characterization
+and *not* an explanation — minimal reproductions of exactly that shape do
+not drift on either toolchain. It is recorded as an open question.
+
+CI runs a non-blocking `drift-watch` job against current stable as a
+canary, and it paid for itself on the first run by catching a
+portability break (`Option.noConfusion` cannot infer its motive on 4.33+;
+the proof now uses `nomatch`). Details: [ADR-0002](docs/adr/0002-toolchain-pin.md).
 
 There is a joke here that the repository did not plan. `#print axioms` is
 this development's own validity predicate, and it is applied by an
