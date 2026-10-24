@@ -5,6 +5,7 @@
 [![axioms](https://img.shields.io/badge/axioms-zero-brightgreen)](Godel/Receipts.lean)
 [![sorry](https://img.shields.io/badge/sorry-none-brightgreen)](scripts/verify.sh)
 [![license](https://img.shields.io/badge/license-PolyForm%20Noncommercial%201.0.0-blue)](LICENSE)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23629067-blue)](https://doi.org/10.5281/zenodo.23629067)
 
 At his U.S. citizenship hearing on 5 December 1947, Kurt Gödel told
 Einstein and Oskar Morgenstern — on the drive to Trenton — that he had
@@ -382,9 +383,10 @@ Cite the release, not the branch. [CITATION.cff](CITATION.cff) carries
 the metadata, and GitHub's "Cite this repository" button reads it:
 
 > Zalewski, A. D. (2026). *Gödel's Loophole, kernel-checked* (Version
-> 1.0.0) [Computer software]. https://github.com/Quigles1337/G-del
+> 1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.23629067
 
-A DOI will be added here once the release is archived.
+The DOI, 10.5281/zenodo.23629067, identifies the 1.0.0 release as
+archived on Zenodo. The source is at https://github.com/Quigles1337/G-del.
 
 ## License
 

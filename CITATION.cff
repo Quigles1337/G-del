@@ -30,6 +30,7 @@ authors:
 repository-code: "https://github.com/Quigles1337/G-del"
 license: PolyForm-Noncommercial-1.0.0
 version: "1.0.0"
+doi: 10.5281/zenodo.23629067
 date-released: "2026-10-24"
 keywords:
   - Lean 4
