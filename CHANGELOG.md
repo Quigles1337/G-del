@@ -120,3 +120,12 @@ ledger is still 56 theorems, zero axioms, zero `sorry`.
   including a receipt listed twice.
 - It is step 6 of `scripts/verify.sh`, mirrored in `scripts/verify.ps1`,
   and a step of CI's gating `kernel-check` job.
+
+### Erratum, recorded after release (2026-10-24)
+
+- Under *Provenance, and what "registered" means*, the first bullet says
+  commit trailers "are consistent from 1.0.0 on". Three merge commits
+  lack the trailer: 86d6713, 20b0bd3 and 6f99fa6, the merges of pull
+  requests #3–#5, created with GitHub's default message. The README's
+  Provenance section states this. The bullet is left as released; the
+  `CHANGELOG.md` in the 1.0.0 archive predates this erratum.
