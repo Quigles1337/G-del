@@ -24,10 +24,12 @@ Forman steered the conversation away and the citizenship was granted.
   Morgenstern Thomas collection related to Kurt Gödel, Shelby White and
   Leon Levy Archives Center, Institute for Advanced Study, Princeton, NJ:
   <https://hdl.handle.net/20.500.12111/2333>. This is the primary source
-  for the drive to Trenton and the exchange in the courtroom. It was
-  dictated from memory, and gives the year of the hearing but not the
-  day. A transcription is at
-  <https://mathshistory.st-andrews.ac.uk/Extras/Godel_naturalisation/>.
+  for the drive to Trenton and the exchange in the courtroom. Its
+  opening lines say it was dictated from memory, without notes, and it
+  gives a year but not the day: "It was in 1946 that Gödel was to
+  become an American citizen." A transcription is at
+  <https://mathshistory.st-andrews.ac.uk/Extras/Godel_naturalisation/>;
+  it prints that year as 1947.
 - **John W. Dawson, Jr.**, *Logical Dilemmas: The Life and Work of Kurt
   Gödel* (A K Peters, 1997). The standard biography; covers the hearing,
   and is the source of the date 5 December 1947.
@@ -38,10 +40,17 @@ Forman steered the conversation away and the citizenship was granted.
   find on 21 January 2009, in "The loophole in the U.S. Constitution:
   recent developments",
   <https://blog.plover.com/law/Godel-dictatorship-3.html>.
+- **Richard J. Lipton and Kenneth W. Regan**, "Judging A Book By Its
+  Coverage", *Gödel's Lost Letter and P=NP*, 6 December 2013,
+  <https://rjlipton.com/2013/12/06/judging-a-book-by-its-coverage/> —
+  quotes the memorandum, and notes that the only year it gives is 1946.
 
-*Dates:* the memorandum itself says only "1947", and the Institute's own
-records disagree — its catalogue record calls the hearing a "1946
-interview", its finding aid places it in 1947; the day is Dawson's.
+*Dates:* the memorandum's only year, in the Institute's scan of it, is
+1946. The Institute's catalogue record ("1946 interview") and Lipton
+and Regan match it; the St Andrews transcription and the Institute's
+finding aid give 1947 instead. The date 5 December 1947 is Dawson's,
+and Morgenstern's opening lines themselves leave the memorandum's dates
+to be checked later.
 
 **What is NOT attested:** the argument itself. Gödel never wrote it down,
 and Morgenstern did not record its content. Everything past "there was an
