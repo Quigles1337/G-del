@@ -17,6 +17,13 @@ briefly sat outside the ledger (`VE_preserves_gate`, `VRS_preserves`)
 are now receipted like everything else, restoring the exact 1:1
 declaration↔receipt invariant.
 
+Since 1.0.0 that invariant is enforced, not just observed.
+[`scripts/check-receipts.sh`](scripts/check-receipts.sh) — step 6 of
+`scripts/verify.sh`, mirrored in `scripts/verify.ps1`, and a step of
+CI's gating job — fails if a theorem declared in `Godel/*.lean` has no
+receipt, if a receipt names no declared theorem, or if a receipt is
+listed twice.
+
 ## Movement A — the loophole (`Godel/MovementA.lean`)
 
 Regime `VA`: anything a sufficiently strong coalition adopts is valid.

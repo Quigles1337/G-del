@@ -1,4 +1,10 @@
 /-
+Required Notice: Copyright 2026 Alexander David Zalewski (https://github.com/Quigles1337/G-del)
+SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+Licensed under the PolyForm Noncommercial License 1.0.0:
+https://polyformproject.org/licenses/noncommercial/1.0.0
+-/
+/-
   MOVEMENT F — THE FORK
 
   Proposal (docs/ROADMAP.md): a DAO charter is a constitution where `V`
@@ -8,7 +14,11 @@
   still goes through with `code_still_there … := rfl` intact. "A
   negative there would be more interesting than a positive."
 
-  PREDICTION, registered before compilation:
+  PREDICTION, written before the first compile per the development log
+  (docs/notes/landing-movements-ef.md), but committed with the proofs
+  in eef2d47. The timestamped record is the ROADMAP's Round 3 target in
+  the initial commit, ec9272c, which states the expected outcome in
+  outline; the three clauses below are committed only with the proofs.
 
   1. The steelman is real, and larger than the roadmap implied. An
      executable recognizer does not merely guard against Movement D's

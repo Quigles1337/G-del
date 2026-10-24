@@ -1,4 +1,10 @@
 /-
+Required Notice: Copyright 2026 Alexander David Zalewski (https://github.com/Quigles1337/G-del)
+SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+Licensed under the PolyForm Noncommercial License 1.0.0:
+https://polyformproject.org/licenses/noncommercial/1.0.0
+-/
+/-
   MOVEMENT G — THE REGRESS
 
   Proposal (docs/ROADMAP.md): any constraint *on* the fork is itself
@@ -7,14 +13,20 @@
   clean no-self-recognition schema — one theorem over ALL machines,
   not another instance.
 
-  META-PREDICTION, registered in conversation before this file existed:
+  META-PREDICTION, stated in conversation before this file existed. The
+  repository holds no record of that conversation, so this claim cannot
+  be checked from it:
   "provable but only barely non-trivial — the theorem will be real, and
   the work will be entirely in finding a statement of 'guard' general
   enough that the bypass isn't baked into the definition. If wrong, it
   will be because the schema collapses into 'you can't constrain what
   you didn't model.'"
 
-  PREDICTION, registered before compilation, four clauses:
+  PREDICTION, written before the first compile per the development log
+  (docs/notes/landing-movement-g.md), but committed with the proofs in
+  5c10708. The timestamped record is the ROADMAP target and its
+  suspicion, committed in c983f2d before this file existed. Four
+  clauses:
 
   1. THE SCHEMA IS TOTAL. Abstract the whole development into a type of
      machines — any state space, any move language, any validity law —

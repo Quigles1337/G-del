@@ -1,4 +1,10 @@
 /-
+Required Notice: Copyright 2026 Alexander David Zalewski (https://github.com/Quigles1337/G-del)
+SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+Licensed under the PolyForm Noncommercial License 1.0.0:
+https://polyformproject.org/licenses/noncommercial/1.0.0
+-/
+/-
   ══════════════════════════════════════════════════════════════════════
   GÖDEL'S LOOPHOLE, KERNEL-CHECKED
   A toy constitutional state machine, after the argument Kurt Gödel
@@ -9,7 +15,7 @@
   is itself an object-level provision. Then legal reachability of
   dictatorship is a THEOREM, not an opinion.
 
-  Six movements:
+  Seven movements:
     A. The loophole: the amendment rule is amendable, so one supermajority
        moment collapses the cost of all future amendments.  (Reachable.)
     B. Entrenchment without self-entrenchment: the clause protects the
@@ -27,6 +33,9 @@
        even mentionable. And the fork is not a chain operation: rescue
        and coup are one constructor, and the canonical history is the
        code-invalid one.                                    (Reachable.)
+    G. The regress: any machine whatsoever, lifted one floor up, where
+       every configuration is one repoint from being in force at bare
+       majority — for every machine, with no hypotheses.    (Reachable.)
 
   Punchline, made precise at the bottom of the file: C's safety proof is
   conducted HERE, in Lean — i.e., outside the object system. The object
@@ -310,8 +319,13 @@ theorem clause_still_there : afterCapture.eternity = true := rfl
    gate may rise, never fall. This attacks Movement A's repricing
    directly, needs no self-reference, and — if it survived — would be a
    genuinely different kind of defence from C.
-   PREDICTION, registered before compilation: it survives only if we
-   cheat. Baked into the validity regime it is physics, frozen by fiat of
+   PREDICTION, written before the first compile per the development log
+   (docs/notes/landing-movements-ef.md), but committed with the proofs
+   in eef2d47, so no commit timestamps it. The timestamped record is the
+   ROADMAP's ratchet entry in the initial commit, ec9272c — the target
+   and its three questions, not this answer. The prediction: it
+   survives only if we cheat. Baked into the validity regime it is
+   physics, frozen by fiat of
    the modeller — a resource the legal system being modelled does not
    possess. Modelled honestly as a PROVISION it is Movement B one level
    up: repeal the ratchet clause, reprice, finish. Repaired by
@@ -540,7 +554,11 @@ theorem selfentrenched_guards_no_content :
    A DAO charter is a constitution whose validity predicate is executable
    code. That appears to dissolve Movement D outright — there is no court
    to capture — until you ask who decides what counts as the chain.
-   PREDICTION, registered before compilation: (1) the steelman is real,
+   PREDICTION, written before the first compile per the development log
+   (docs/notes/landing-movements-ef.md), but committed with the proofs
+   in eef2d47; the timestamped record is the ROADMAP's Round 3 target in
+   ec9272c, which states the outcome in outline. The prediction: (1) the
+   steelman is real,
    and larger than expected — an executable recognizer does not merely
    resist capture, it DELETES the capture move from the object language,
    and code-is-law becomes a theorem; (2) it changes nothing one level
@@ -860,14 +878,20 @@ theorem canonical_history_invalid : ¬ ReachC genesis bailout := by
   clean no-self-recognition schema — one theorem over ALL machines,
   not another instance.
 
-  META-PREDICTION, registered in conversation before this file existed:
+  META-PREDICTION, stated in conversation before this file existed. The
+  repository holds no record of that conversation, so this claim cannot
+  be checked from it:
   "provable but only barely non-trivial — the theorem will be real, and
   the work will be entirely in finding a statement of 'guard' general
   enough that the bypass isn't baked into the definition. If wrong, it
   will be because the schema collapses into 'you can't constrain what
   you didn't model.'"
 
-  PREDICTION, registered before compilation, four clauses:
+  PREDICTION, written before the first compile per the development log
+  (docs/notes/landing-movement-g.md), but committed with the proofs in
+  5c10708. The timestamped record is the ROADMAP target and its
+  suspicion, committed in c983f2d before this file existed. Four
+  clauses:
 
   1. THE SCHEMA IS TOTAL. Abstract the whole development into a type of
      machines — any state space, any move language, any validity law —

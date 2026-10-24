@@ -1,3 +1,9 @@
+> Development log, dated 2026-08-17. Development was AI-assisted (see
+> [README, Provenance](../../README.md#provenance)). References to patch
+> files, paste-ready rows, and hand-off decisions describe the workflow
+> at the time; those patches were applied and are not part of this
+> repository.
+
 # Movements E + F — landing notes (supersedes the E-only kit)
 
 Built and verified in a clean clone at the pinned toolchain
@@ -11,8 +17,10 @@ docstring per movement → build fails → restored),
 
 ## Movement E — the ratchet (7 theorems)
 
-Prediction registered in the file header before compiling; verdict:
-regime-ratchet holds (`regime_gate_holds`) and guards nothing else;
+Prediction written in the file header before the first compile, and
+committed with the proofs in `eef2d47`; the timestamped record is the
+ROADMAP's ratchet entry in `ec9272c`, which posed the target and its
+questions, not the answer. Verdict: regime-ratchet holds (`regime_gate_holds`) and guards nothing else;
 clause-ratchet bypassed in `[67, 67, 0]` (`clause_ratchet_bypassed`);
 self-entrenched repair holds by exactly C's proof shape
 (`selfentrenched_gate_holds`). "Not a new kind of defence" is now the
@@ -20,7 +28,10 @@ theorem. The E1/E2 gap is the physics/law gap.
 
 ## Movement F — the fork (12 theorems)
 
-Prediction registered before compiling; verdict, all three clauses:
+Prediction written in the file header before the first compile, and
+committed with the proofs in `eef2d47`; the timestamped prediction is
+the ROADMAP's Round 3 target in `ec9272c`, which states the outcome in
+outline. Verdict, all three clauses:
 
 | Claim | Theorem |
 |---|---|

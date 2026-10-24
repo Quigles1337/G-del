@@ -4,6 +4,7 @@
 [![Lean](https://img.shields.io/badge/Lean-4.15.0-blue)](lean-toolchain)
 [![axioms](https://img.shields.io/badge/axioms-zero-brightgreen)](Godel/Receipts.lean)
 [![sorry](https://img.shields.io/badge/sorry-none-brightgreen)](scripts/verify.sh)
+[![license](https://img.shields.io/badge/license-PolyForm%20Noncommercial%201.0.0-blue)](LICENSE)
 
 At his U.S. citizenship hearing on 5 December 1947, Kurt Gödel told
 Einstein and Oskar Morgenstern — on the drive to Trenton — that he had
@@ -26,7 +27,7 @@ becomes a reachability question — with a yes or no.
 ```bash
 git clone https://github.com/Quigles1337/G-del.git && cd G-del
 lake build       # kernel-checks everything AND enforces the axiom ledger
-lake exe godel   # runs the attacks through the certified checker
+lake exe godel   # runs Movements A–D through the certified checker
 ```
 
 Or check the single-file edition with no build system at all:
@@ -35,7 +36,8 @@ Or check the single-file edition with no build system at all:
 lean standalone/Godel.lean
 ```
 
-Full local verification (build, run, standalone, `sorry` sweep):
+Full local verification (build, run, standalone, `sorry` sweep, parity,
+one receipt per theorem):
 `scripts/verify.sh` (or `scripts/verify.ps1` on Windows).
 
 ## The seven movements
@@ -170,9 +172,9 @@ of its own being in force.
 
 ## The exploit is a program
 
-`Godel/Executable.lean` does the same work mechanically. Every validity
-regime is shown decidable, `runTrace` walks a trace refusing the first
-illegal step, and:
+For Movements A–D, `Godel/Executable.lean` does the same work
+mechanically. Each of their validity regimes is shown decidable,
+`runTrace` walks a trace refusing the first illegal step, and:
 
 ```lean
 theorem runTrace_sound {V} [∀ n s a, Decidable (V n s a)] :
@@ -181,11 +183,18 @@ theorem runTrace_sound {V} [∀ n s a, Decidable (V n s a)] :
 ```
 
 If the checker accepts, a legal derivation **exists** — so acceptance is
-a certificate, not a claim about one. `lake exe godel` therefore does not
-narrate the attack, it executes it, and each `ADOPT` corresponds to a
-theorem the kernel has already checked. Movement C's run is the one worth
-watching: the checker *refuses* both doors at strength 100, and then
-Movement D walks through the same door it just refused.
+a certificate, not a claim about one. `lake exe godel` runs those
+movements through `runTrace` itself: every state it prints is
+`runTrace V init` applied to a prefix of the trace, on exactly the traces
+of `loophole_runs`, `bypass_runs`, `C_refuses_direct`,
+`C_refuses_selfrepeal` and `capture_runs`. The printout is compiled
+output, not a proof; the certificates are those theorems, and the run
+shows what they are about. Movement C gets two runs, one per door, and
+they are the ones worth watching: the checker *refuses* the frontal
+assault at strength 100, then refuses the repeal of the clause itself at
+strength 100 — and then Movement D, having captured the recognizer,
+walks through the frontal door at 67. Movements E–G have no checker;
+their results are the theorems in [THEOREMS.md](THEOREMS.md).
 
 ## The axiom ledger
 
@@ -220,7 +229,9 @@ would rather publish the dull true version than the pretty false one.
 ## Why the toolchain is pinned
 
 `lean-toolchain` pins `leanprover/lean4:v4.15.0` exactly — never
-`stable`. The sources are kept portable and compile on newer toolchains,
+`stable`. The sources are kept portable — Movements A–F and the checker
+compile on newer toolchains; **Movement G currently does not**, which
+[ADR-0002](docs/adr/0002-toolchain-pin.md) records as an open defect —
 but the **ledger does not survive them**: on Lean 4.33.0, **13 of the 24
 theorems then in the development acquire `propext`** from identical
 source.
@@ -307,6 +318,9 @@ reader could mistake a modelling choice for a result.
 | `Main.lean` | `lake exe godel` |
 | `standalone/Godel.lean` | Single-file edition; `lean standalone/Godel.lean` |
 | `THEOREMS.md` | Every theorem, glossed, with its axiom cost |
+| `scripts/` | `verify.sh` / `verify.ps1` (full verification), `check-parity.sh`, `check-receipts.sh` (one receipt per theorem) |
+| `CHANGELOG.md` | What changed in each release |
+| `CITATION.cff` | Citation metadata; see [How to cite](#how-to-cite) |
 | `docs/ARGUMENT.md` | Long-form reading of the seven movements |
 | `docs/SOURCES.md` | Where the history and the law come from |
 | `docs/LIMITATIONS.md` | What the model does not model |
@@ -322,6 +336,66 @@ recognizer-capture cases are all cited in
 [docs/SOURCES.md](docs/SOURCES.md), with the places we are *not* certain
 marked as such.
 
+## Provenance
+
+Alexander David Zalewski is the project's creator and architect. He
+designed its formal development and verified its proofs in Lean 4.
+
+Development was AI-assisted (Claude, by Anthropic). The AI is not
+listed as an author in [CITATION.cff](CITATION.cff); commit trailers are
+how its involvement is disclosed. Before 1.0.0 that disclosure is
+inconsistent: the first three commits carry a `Co-Authored-By` trailer,
+and the commits that landed Movements E–G do not, although that work was
+AI-assisted too ([docs/notes/](docs/notes/) records how it was handed
+off). From 1.0.0 on, every commit made with AI assistance carries the
+trailer.
+
+None of this bears on whether the proofs are valid. Every theorem is
+checked by the Lean kernel, and every axiom claim is a build-breaking
+test, so the results stand or fall by the same check whoever wrote them
+— and anyone can run it. With [elan](https://github.com/leanprover/elan)
+installed (it fetches the toolchain pinned in `lean-toolchain` on first
+use):
+
+```bash
+git clone https://github.com/Quigles1337/G-del.git && cd G-del
+bash scripts/verify.sh          # on Windows: pwsh scripts/verify.ps1
+```
+
+That script kernel-checks every theorem on the pinned toolchain, fails
+if any proof's axiom dependencies differ from its receipt in
+`Godel/Receipts.lean` (`sorryAx` included), checks the single-file
+edition, sweeps the sources for `sorry`, checks that both editions
+declare the same theorem names, and checks that every theorem has
+exactly one receipt. The single-file edition also checks on
+its own, with no build system: `lean standalone/Godel.lean`.
+
+What the kernel does not check is whether each theorem says what its
+English gloss says. That part is the reader's: [THEOREMS.md](THEOREMS.md)
+glosses every theorem by name, beside the file that states it, and
+[docs/LIMITATIONS.md](docs/LIMITATIONS.md) lists where a modelling
+choice could be mistaken for a result.
+
+## How to cite
+
+Cite the release, not the branch. [CITATION.cff](CITATION.cff) carries
+the metadata, and GitHub's "Cite this repository" button reads it:
+
+> Zalewski, A. D. (2026). *Gödel's Loophole, kernel-checked* (Version
+> 1.0.0) [Computer software]. https://github.com/Quigles1337/G-del
+
+A DOI will be added here once the release is archived.
+
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Copyright 2026 Alexander David Zalewski.
+
+The whole repository — code and documentation — is licensed under the
+[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0)
+(SPDX `PolyForm-Noncommercial-1.0.0`); the full text is in
+[LICENSE](LICENSE).
+
+In plain terms: anyone may use, modify, and redistribute this work for
+research, teaching, and other noncommercial purposes. Commercial use is
+not permitted. This summary is a convenience, not a grant — the
+[LICENSE](LICENSE) text governs.

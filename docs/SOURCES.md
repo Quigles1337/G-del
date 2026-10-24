@@ -9,21 +9,39 @@ claims rigour.
 
 ## 1. The hearing
 
-Gödel's naturalization hearing took place on **5 December 1947** in
-Trenton, New Jersey, before Judge Phillip Forman. Albert Einstein and
+Gödel's naturalization hearing took place on **5 December 1947** — the
+date is Dawson's — in Trenton, New Jersey, before Judge Phillip Forman.
+Albert Einstein and
 Oskar Morgenstern accompanied him as witnesses. In preparing, Gödel
 became convinced he had found a way in which the United States could
 legally become a dictatorship, and he began to raise it at the hearing;
 Forman steered the conversation away and the citizenship was granted.
 
 - **Oskar Morgenstern**, memorandum "History of the Naturalization of
-  Kurt Gödel", written **September 1971**, held in Morgenstern's papers
-  at the Institute for Advanced Study. This is the primary source for the
-  drive to Trenton and the exchange in the courtroom.
+  Kurt Gödel", dated **13 September 1971**. The Institute for Advanced
+  Study's copy, given by Morgenstern's widow in 2005, is catalogued as
+  "Oskar Morgenstern's account of Kurt Gödel's naturalization", Dorothy
+  Morgenstern Thomas collection related to Kurt Gödel, Shelby White and
+  Leon Levy Archives Center, Institute for Advanced Study, Princeton, NJ:
+  <https://hdl.handle.net/20.500.12111/2333>. This is the primary source
+  for the drive to Trenton and the exchange in the courtroom. It was
+  dictated from memory, and gives the year of the hearing but not the
+  day. A transcription is at
+  <https://mathshistory.st-andrews.ac.uk/Extras/Godel_naturalisation/>.
 - **John W. Dawson, Jr.**, *Logical Dilemmas: The Life and Work of Kurt
-  Gödel* (A K Peters, 1997). The standard biography; covers the hearing.
-- **Jeffrey Kegler**, "The Gödel Document" (2010) — a short account of
-  locating and transcribing the Morgenstern memorandum.
+  Gödel* (A K Peters, 1997). The standard biography; covers the hearing,
+  and is the source of the date 5 December 1947.
+- **Jeffrey Kegler**, "Kurt Gödel: A Contradiction in the U.S.
+  Constitution?", <https://jeffreykegler.github.io/personal/morgenstern.html>
+  — the hearing's legend, and how the memorandum, long thought lost,
+  turned up at the Institute. Mark Dominus was already reporting Kegler's
+  find on 21 January 2009, in "The loophole in the U.S. Constitution:
+  recent developments",
+  <https://blog.plover.com/law/Godel-dictatorship-3.html>.
+
+*Dates:* the memorandum itself says only "1947", and the Institute's own
+records disagree — its catalogue record calls the hearing a "1946
+interview", its finding aid places it in 1947; the day is Dawson's.
 
 **What is NOT attested:** the argument itself. Gödel never wrote it down,
 and Morgenstern did not record its content. Everything past "there was an
@@ -40,13 +58,12 @@ argument" is reconstruction, including everything in this repository.
 - **Alf Ross**, "On Self-Reference and a Puzzle in Constitutional Law",
   *Mind* 78 (1969). Argues that a self-amending amendment clause is
   paradoxical. Suber's book is in large part a reply.
-- **F. E. Guerra-Pujol**, "Gödel's Loophole", *Capital University Law
-  Review* 41 (2013). The best-known scholarly attempt to reconstruct what
-  Gödel might have had in mind. Its candidate turns on Article V.
+- **F. E. Guerra-Pujol**, "Gödel's Loophole," *Capital University Law
+  Review* 41 (2013): 637–673. SSRN: <https://ssrn.com/abstract=2010183>.
+  The best-known scholarly attempt to reconstruct what Gödel might have
+  had in mind. Its candidate turns on Article V.
 
-*Confidence:* Suber and Ross are certain. The Guerra-Pujol citation is
-given from memory and the volume/year should be checked before it is
-relied on in print.
+*Confidence:* Suber and Ross are certain.
 
 ## 3. Article V, and why Movement B is not hypothetical
 

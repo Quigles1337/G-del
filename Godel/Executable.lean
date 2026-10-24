@@ -1,4 +1,10 @@
 /-
+Required Notice: Copyright 2026 Alexander David Zalewski (https://github.com/Quigles1337/G-del)
+SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+Licensed under the PolyForm Noncommercial License 1.0.0:
+https://polyformproject.org/licenses/noncommercial/1.0.0
+-/
+/-
   Godel.Executable — the exploit as a running program.
 
   Movements A–D prove reachability with hand-built derivations. This

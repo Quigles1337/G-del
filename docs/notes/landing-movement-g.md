@@ -1,3 +1,9 @@
+> Development log, dated 2026-08-17. Development was AI-assisted (see
+> [README, Provenance](../../README.md#provenance)). References to patch
+> files, paste-ready rows, and hand-off decisions describe the workflow
+> at the time; those patches were applied and are not part of this
+> repository.
+
 # Movement G + receipt restoration + prose wrap — landing notes
 
 Built and verified in a fresh clone of landed `main` (1422d94) on the
@@ -15,10 +21,13 @@ accordingly. Every declaration in the library has a receipt again.
 
 ## Movement G — the regress (11 theorems, all receipted)
 
-Prediction registered in the file header before compilation; verdict:
-four clauses for four, first compile clean, zero axioms. The
-meta-prediction ("provable but barely non-trivial; the work is in the
-statement, not the proof") resolves confirmed, with its conceded
+Prediction written in the file header before the first compile, and
+committed with the proofs in `5c10708`; the timestamped record is the
+ROADMAP target and its suspicion, committed in `c983f2d` before Movement
+G existed. Verdict: four clauses for four, first compile clean, zero
+axioms. The meta-prediction ("provable but barely non-trivial; the work
+is in the statement, not the proof") — stated in conversation, so not
+checkable from the repository — resolves confirmed, with its conceded
 wrinkle intact.
 
 - `Machine` abstracts the whole development — any state space, move

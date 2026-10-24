@@ -1,4 +1,10 @@
 /-
+Required Notice: Copyright 2026 Alexander David Zalewski (https://github.com/Quigles1337/G-del)
+SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+Licensed under the PolyForm Noncommercial License 1.0.0:
+https://polyformproject.org/licenses/noncommercial/1.0.0
+-/
+/-
   Godel.Receipts — the axiom ledger, enforced.
 
   `#print axioms` on its own only PRINTS a claim. Wrapped in
@@ -151,8 +157,9 @@ namespace Godel
 #print axioms eternity_holds
 
 
-/-! ### MOVEMENT E — the ratchet, both models. Registered prediction,
-    kernel-checked verdict: regime holds, clause falls, repair is C. -/
+/-! ### MOVEMENT E — the ratchet, both models. Prediction written
+    before the first compile (see Godel/MovementE.lean), kernel-checked
+    verdict: regime holds, clause falls, repair is C. -/
 
 /-- info: 'Godel.regime_blocks_repricing' does not depend on any axioms -/
 #guard_msgs in
@@ -195,8 +202,9 @@ namespace Godel
 #guard_msgs in
 #print axioms VRS_preserves
 
-/-! ### MOVEMENT F — the fork. Registered prediction, kernel-checked
-    verdict: the steelman is real (immutability by inexpressibility,
+/-! ### MOVEMENT F — the fork. Prediction written before the first
+    compile (see Godel/MovementF.lean), kernel-checked verdict: the
+    steelman is real (immutability by inexpressibility,
     D's interior attack deleted), the fork goes through at 51 anyway,
     repair and coup are the same constructor, and the canonical
     post-fork history is code-invalid. -/
@@ -249,8 +257,9 @@ namespace Godel
 #guard_msgs in
 #print axioms canonical_history_invalid
 
-/-! ### MOVEMENT G — the regress. Registered prediction, kernel-checked
-    verdict: the schema is total (no hypotheses on the machine), the
+/-! ### MOVEMENT G — the regress. Prediction written before the first
+    compile (see Godel/MovementG.lean), kernel-checked verdict: the
+    schema is total (no hypotheses on the machine), the
     ascent is faithful and conservative, the trilemma is
     level-invariant, and the regress corollaries are applications, not
     arguments. Self-recognition is not refuted; it is inexpressible. -/
