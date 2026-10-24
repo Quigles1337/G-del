@@ -36,7 +36,8 @@ Or check the single-file edition with no build system at all:
 lean standalone/Godel.lean
 ```
 
-Full local verification (build, run, standalone, `sorry` sweep):
+Full local verification (build, run, standalone, `sorry` sweep, parity,
+one receipt per theorem):
 `scripts/verify.sh` (or `scripts/verify.ps1` on Windows).
 
 ## The seven movements
@@ -317,6 +318,7 @@ reader could mistake a modelling choice for a result.
 | `Main.lean` | `lake exe godel` |
 | `standalone/Godel.lean` | Single-file edition; `lean standalone/Godel.lean` |
 | `THEOREMS.md` | Every theorem, glossed, with its axiom cost |
+| `scripts/` | `verify.sh` / `verify.ps1` (full verification), `check-parity.sh`, `check-receipts.sh` (one receipt per theorem) |
 | `CHANGELOG.md` | What changed in each release |
 | `CITATION.cff` | Citation metadata; see [How to cite](#how-to-cite) |
 | `docs/ARGUMENT.md` | Long-form reading of the seven movements |
@@ -363,8 +365,9 @@ bash scripts/verify.sh          # on Windows: pwsh scripts/verify.ps1
 That script kernel-checks every theorem on the pinned toolchain, fails
 if any proof's axiom dependencies differ from its receipt in
 `Godel/Receipts.lean` (`sorryAx` included), checks the single-file
-edition, sweeps the sources for `sorry`, and checks that both editions
-declare the same theorem names. The single-file edition also checks on
+edition, sweeps the sources for `sorry`, checks that both editions
+declare the same theorem names, and checks that every theorem has
+exactly one receipt. The single-file edition also checks on
 its own, with no build system: `lean standalone/Godel.lean`.
 
 What the kernel does not check is whether each theorem says what its

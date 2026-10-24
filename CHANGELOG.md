@@ -101,3 +101,15 @@ ledger is still 56 theorems, zero axioms, zero `sorry`.
 - Kegler: his page replaces "'The Gödel Document' (2010)", which could
   not be confirmed; Mark Dominus was reporting the find on 21 January
   2009.
+
+### One receipt per theorem, enforced
+
+- `THEOREMS.md` promised that every theorem has exactly one receipt,
+  but nothing checked it: a new theorem without a receipt would have
+  passed CI. New `scripts/check-receipts.sh` compares the theorem names
+  declared in `Godel/*.lean` (modifiers such as `private` included,
+  comments stripped first) with the names under `#print axioms` in
+  `Godel/Receipts.lean`, and fails with a diff on any difference,
+  including a receipt listed twice.
+- It is step 6 of `scripts/verify.sh`, mirrored in `scripts/verify.ps1`,
+  and a step of CI's gating `kernel-check` job.

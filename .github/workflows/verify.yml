@@ -39,6 +39,10 @@ jobs:
       - name: Standalone/library parity
         run: bash scripts/check-parity.sh
 
+      # THEOREMS.md promises one receipt per theorem; this enforces it.
+      - name: One receipt per theorem
+        run: bash scripts/check-receipts.sh
+
       - name: Sorry sweep
         run: |
           if grep -rn 'sorry' --include='*.lean' . | grep -v 'sorryAx' | grep -v '^\./\.lake/'; then
