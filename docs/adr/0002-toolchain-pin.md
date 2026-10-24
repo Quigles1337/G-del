@@ -253,10 +253,24 @@ error: Godel/MovementG.lean:238:12: Internal error in mkElimApp: Expected first 
 error: Lean exited with code 1
 ```
 
-Line numbers are as of `f0178b9`. The 1.0.0 license header adds six
-lines, so the same sites are now `Godel/MovementG.lean:102`, `:175` and
-`:244`, in `mreach_to_reach`, `interior_governed` and `guarded_holds`.
-Each is `induction h with` on the generic `MReach` family.
+The three sites are identified by the declaration each sits in: the
+`induction h with` on the generic `MReach` family in
+`mreach_to_reach`, `interior_governed` and `guarded_holds`. A line
+number is only meaningful at a commit — any edit to the file moves it —
+so each is pinned to the commit a CI run checked out:
+
+| Declaration | at `f0178b9` (run 32001234178) | at `6f97adf` (run 40138184430) |
+|---|---|---|
+| `mreach_to_reach` | [`MovementG.lean:96`](https://github.com/Quigles1337/G-del/blob/f0178b93f150104d7c7a09e5f6a9e9359c0b7fc2/Godel/MovementG.lean#L96) | [`MovementG.lean:108`](https://github.com/Quigles1337/G-del/blob/6f97adfff1ca6319afd86082c6eeeb88defa5514/Godel/MovementG.lean#L108) |
+| `interior_governed` | [`MovementG.lean:169`](https://github.com/Quigles1337/G-del/blob/f0178b93f150104d7c7a09e5f6a9e9359c0b7fc2/Godel/MovementG.lean#L169) | [`MovementG.lean:181`](https://github.com/Quigles1337/G-del/blob/6f97adfff1ca6319afd86082c6eeeb88defa5514/Godel/MovementG.lean#L181) |
+| `guarded_holds` | [`MovementG.lean:238`](https://github.com/Quigles1337/G-del/blob/f0178b93f150104d7c7a09e5f6a9e9359c0b7fc2/Godel/MovementG.lean#L238) | [`MovementG.lean:250`](https://github.com/Quigles1337/G-del/blob/6f97adfff1ca6319afd86082c6eeeb88defa5514/Godel/MovementG.lean#L250) |
+
+On current stable, in CI: run
+[40138184430](https://github.com/Quigles1337/G-del/actions/runs/40138184430),
+job `drift-watch`, on PR #3 at `6f97adf`, 2026-10-24T22:21:11Z, toolchain
+`Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)`.
+The same three errors, verbatim — metavariables included — at
+`MovementG.lean:108/181/250` at `6f97adf`, column 12 each.
 
 ### 2. Reproduced locally
 
@@ -266,7 +280,7 @@ On Windows, 2026-10-24, from the 1.0.0 working branch, with
 | Toolchain | `Godel.MovementG` | Movements A–F, `Godel.Executable` |
 |---|---|---|
 | 4.15.0 (pinned) | compiles; all eleven receipts at zero axioms | compile |
-| 4.33.0 (`d8b18978322d`) | the three errors above, verbatim, at 102/175/244 | compile clean |
+| 4.33.0 (`d8b18978322d`) | the three errors above, verbatim, at the same three sites | compile clean |
 | 4.35.0 (`eb6cafb7290e`, current stable) | the same three errors, verbatim | compile clean |
 
 `Godel/Receipts.lean` imports Movement G, so the ledger cannot be
@@ -279,7 +293,9 @@ Not much, and nothing is claimed. It is an *internal* elaborator error,
 not a type error in the source, which points at an upstream regression
 rather than at the proofs. One pattern fits all four `induction` sites
 on `MReach` in the file, and is flagged as fitted, not tested: the one
-that compiles (`interior_faithful`, line 157) inducts on `MReach M` for
+that compiles (`interior_faithful`,
+[`MovementG.lean:163` at `6f97adf`](https://github.com/Quigles1337/G-del/blob/6f97adfff1ca6319afd86082c6eeeb88defa5514/Godel/MovementG.lean#L163))
+inducts on `MReach M` for
 a variable machine `M`; the three that fail induct on `MReach` at a
 *defined* machine — `machineC`, `ascendNF M`, `ascendG M g` — so that
 its index type `M.S` is a projection of a non-variable term. A minimal
