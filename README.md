@@ -349,7 +349,10 @@ inconsistent: the first three commits carry a `Co-Authored-By` trailer,
 and the commits that landed Movements E–G do not, although that work was
 AI-assisted too ([docs/notes/](docs/notes/) records how it was handed
 off). From 1.0.0 on, every commit made with AI assistance carries the
-trailer.
+trailer, with three exceptions: the merge commits for pull requests #3–#5
+(86d6713, 20b0bd3, 6f99fa6), which were created with GitHub's default
+message. They add no content of their own, and every commit they merge
+carries the trailer.
 
 None of this bears on whether the proofs are valid. Every theorem is
 checked by the Lean kernel, and every axiom claim is a build-breaking
