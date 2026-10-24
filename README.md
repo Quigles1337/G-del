@@ -4,6 +4,7 @@
 [![Lean](https://img.shields.io/badge/Lean-4.15.0-blue)](lean-toolchain)
 [![axioms](https://img.shields.io/badge/axioms-zero-brightgreen)](Godel/Receipts.lean)
 [![sorry](https://img.shields.io/badge/sorry-none-brightgreen)](scripts/verify.sh)
+[![license](https://img.shields.io/badge/license-PolyForm%20Noncommercial%201.0.0-blue)](LICENSE)
 
 At his U.S. citizenship hearing on 5 December 1947, Kurt Gödel told
 Einstein and Oskar Morgenstern — on the drive to Trenton — that he had
@@ -324,4 +325,14 @@ marked as such.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Copyright 2026 Alexander David Zalewski.
+
+The whole repository — code and documentation — is licensed under the
+[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0)
+(SPDX `PolyForm-Noncommercial-1.0.0`); the full text is in
+[LICENSE](LICENSE).
+
+In plain terms: anyone may use, modify, and redistribute this work for
+research, teaching, and other noncommercial purposes. Commercial use is
+not permitted. This summary is a convenience, not a grant — the
+[LICENSE](LICENSE) text governs.

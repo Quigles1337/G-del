@@ -14,9 +14,12 @@ abstract: >-
   mathlib, no sorry, zero axioms. No formal reduction of Gödel's second
   incompleteness theorem to the constitutional case is claimed.
 authors:
-  - name: "Quigles1337"
+  - given-names: "Alexander David"
+    family-names: "Zalewski"
+    affiliation: "DARQ Labs"
+    orcid: "https://orcid.org/0009-0008-9019-7631"
 repository-code: "https://github.com/Quigles1337/G-del"
-license: MIT
+license: PolyForm-Noncommercial-1.0.0
 version: "0.1.0"
 date-released: "2026-08-16"
 keywords:
