@@ -48,6 +48,10 @@ ledger is still 56 theorems, zero axioms, zero `sorry`.
   `version = "1.0.0"`.
 - README: a "How to cite" section, and `CHANGELOG.md` and
   `CITATION.cff` in the repository map.
+- The release's Zenodo DOI,
+  [10.5281/zenodo.23629067](https://doi.org/10.5281/zenodo.23629067),
+  is `doi` in `CITATION.cff` and appears in the README's badge and
+  "How to cite".
 
 ### The drift canary, recorded honestly
 
