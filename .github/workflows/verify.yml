@@ -60,11 +60,16 @@ jobs:
           ./elan-init -y --default-toolchain none
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
 
-      # This job is a canary, not a gate. The sources compile on newer
-      # toolchains, but the AXIOM LEDGER does not survive them: on Lean
-      # 4.33.0, `entrenchment_bypassed` and `interpretation_attack`
-      # acquire `propext`. Red here means the drift is still real, or has
-      # changed shape. See docs/adr/0002-toolchain-pin.md.
+      # This job is a canary, not a gate. The AXIOM LEDGER does not
+      # survive newer toolchains: on Lean 4.33.0, from identical source,
+      # 13 of the 24 theorems in the development when first measured
+      # acquire `propext`, and 15 of the 43 at the Movements E–F
+      # snapshot. Since Movement G landed the job no longer reaches the
+      # ledger at all: Godel/MovementG.lean fails to COMPILE on 4.33.0
+      # and on 4.35.0 (an internal `mkElimApp` error at its three
+      # `induction` sites), so red here currently means that compile
+      # failure, not drift. ADR-0002's decision 4 is unmet until it is
+      # fixed. See docs/adr/0002-toolchain-pin.md and docs/ROADMAP.md.
       - name: Build against current stable
         run: |
           elan toolchain install stable

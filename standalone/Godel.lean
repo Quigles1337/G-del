@@ -15,7 +15,7 @@ https://polyformproject.org/licenses/noncommercial/1.0.0
   is itself an object-level provision. Then legal reachability of
   dictatorship is a THEOREM, not an opinion.
 
-  Six movements:
+  Seven movements:
     A. The loophole: the amendment rule is amendable, so one supermajority
        moment collapses the cost of all future amendments.  (Reachable.)
     B. Entrenchment without self-entrenchment: the clause protects the
@@ -33,6 +33,9 @@ https://polyformproject.org/licenses/noncommercial/1.0.0
        even mentionable. And the fork is not a chain operation: rescue
        and coup are one constructor, and the canonical history is the
        code-invalid one.                                    (Reachable.)
+    G. The regress: any machine whatsoever, lifted one floor up, where
+       every configuration is one repoint from being in force at bare
+       majority — for every machine, with no hypotheses.    (Reachable.)
 
   Punchline, made precise at the bottom of the file: C's safety proof is
   conducted HERE, in Lean — i.e., outside the object system. The object

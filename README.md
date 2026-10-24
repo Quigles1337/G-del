@@ -228,7 +228,9 @@ would rather publish the dull true version than the pretty false one.
 ## Why the toolchain is pinned
 
 `lean-toolchain` pins `leanprover/lean4:v4.15.0` exactly — never
-`stable`. The sources are kept portable and compile on newer toolchains,
+`stable`. The sources are kept portable — Movements A–F and the checker
+compile on newer toolchains; **Movement G currently does not**, which
+[ADR-0002](docs/adr/0002-toolchain-pin.md) records as an open defect —
 but the **ledger does not survive them**: on Lean 4.33.0, **13 of the 24
 theorems then in the development acquire `propext`** from identical
 source.
@@ -315,6 +317,8 @@ reader could mistake a modelling choice for a result.
 | `Main.lean` | `lake exe godel` |
 | `standalone/Godel.lean` | Single-file edition; `lean standalone/Godel.lean` |
 | `THEOREMS.md` | Every theorem, glossed, with its axiom cost |
+| `CHANGELOG.md` | What changed in each release |
+| `CITATION.cff` | Citation metadata; see [How to cite](#how-to-cite) |
 | `docs/ARGUMENT.md` | Long-form reading of the seven movements |
 | `docs/SOURCES.md` | Where the history and the law come from |
 | `docs/LIMITATIONS.md` | What the model does not model |
@@ -329,6 +333,16 @@ the Enabling Act, Hart's rule of recognition, and the modern
 recognizer-capture cases are all cited in
 [docs/SOURCES.md](docs/SOURCES.md), with the places we are *not* certain
 marked as such.
+
+## How to cite
+
+Cite the release, not the branch. [CITATION.cff](CITATION.cff) carries
+the metadata, and GitHub's "Cite this repository" button reads it:
+
+> Zalewski, A. D. (2026). *Gödel's Loophole, kernel-checked* (Version
+> 1.0.0) [Computer software]. https://github.com/Quigles1337/G-del
+
+A DOI will be added here once the release is archived.
 
 ## License
 

@@ -227,3 +227,70 @@ fitted to 43 points and has not been tested against a regime built to
 falsify it. The lesson of ADR-0003 applies to this paragraph too.
 
 The decision above is unchanged. The pin stands.
+
+## Addendum 2 — Movement G does not compile on newer toolchains (recorded 2026-10-24)
+
+**Decision 4 is currently unmet.** Since Movement G landed, `drift-watch`
+fails at compile and never reaches the ledger — the outcome decision 4
+was written to prevent. First seen on the CI run that landed Movement G;
+recorded here, late, at 1.0.0. The evidence is copied in full because
+Actions logs expire.
+
+### 1. In CI
+
+Run [32001234178](https://github.com/Quigles1337/G-del/actions/runs/32001234178),
+job `drift-watch`, on the push of `f0178b9` (the merge of PR #2) to
+`main`, 2026-08-17T06:20:15Z. Toolchain as reported by `lean --version`:
+`Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)`.
+
+```
+error: Godel/MovementG.lean:96:12: Internal error in mkElimApp: Expected first 4 arguments of motive in conclusion to be one of the targets:
+  ?m.18 ns s t h
+error: Godel/MovementG.lean:169:12: Internal error in mkElimApp: Expected first 4 arguments of motive in conclusion to be one of the targets:
+  ?m.20 ns w x h
+error: Godel/MovementG.lean:238:12: Internal error in mkElimApp: Expected first 4 arguments of motive in conclusion to be one of the targets:
+  ?m.22 ns w x h
+error: Lean exited with code 1
+```
+
+Line numbers are as of `f0178b9`. The 1.0.0 license header adds six
+lines, so the same sites are now `Godel/MovementG.lean:102`, `:175` and
+`:244`, in `mreach_to_reach`, `interior_governed` and `guarded_holds`.
+Each is `induction h with` on the generic `MReach` family.
+
+### 2. Reproduced locally
+
+On Windows, 2026-10-24, from the 1.0.0 working branch, with
+`lake +<toolchain> build` in a scratch worktree:
+
+| Toolchain | `Godel.MovementG` | Movements A–F, `Godel.Executable` |
+|---|---|---|
+| 4.15.0 (pinned) | compiles; all eleven receipts at zero axioms | compile |
+| 4.33.0 (`d8b18978322d`) | the three errors above, verbatim, at 102/175/244 | compile clean |
+| 4.35.0 (`eb6cafb7290e`, current stable) | the same three errors, verbatim | compile clean |
+
+`Godel/Receipts.lean` imports Movement G, so the ledger cannot be
+printed on either newer toolchain, and the 4.33.0 drift figures above
+(13 of 24, then 15 of 43) are the last measurements there are.
+
+### 3. What is known about the cause
+
+Not much, and nothing is claimed. It is an *internal* elaborator error,
+not a type error in the source, which points at an upstream regression
+rather than at the proofs. One pattern fits all four `induction` sites
+on `MReach` in the file, and is flagged as fitted, not tested: the one
+that compiles (`interior_faithful`, line 157) inducts on `MReach M` for
+a variable machine `M`; the three that fail induct on `MReach` at a
+*defined* machine — `machineC`, `ascendNF M`, `ascendG M g` — so that
+its index type `M.S` is a projection of a non-variable term. A minimal
+reproduction along that
+line is the next step, and worth reporting upstream if it holds.
+
+### 4. Decision
+
+No proof changes in 1.0.0; the pinned ledger is untouched. Restoring
+Movement G's portability is an open item in
+[docs/ROADMAP.md](../ROADMAP.md): after 1.0.0, in its own PR, with no
+theorem statement changed and the pinned-toolchain ledger still at zero
+axioms. Until then decision 4 stands as policy but not as fact, and the
+`drift-watch` comment in `.github/workflows/verify.yml` says so.

@@ -204,6 +204,17 @@ Ordered by how much each would change the results.
   it is the next move, and Movement F (which does not drift at all) is
   the obvious control. Good first issue: it needs patience with
   `set_option pp.all` and bisection over toolchains, not deep knowledge.
+- **Restore Movement G's portability on current stable.** Since
+  Movement G landed, `Godel/MovementG.lean` fails to compile on Lean
+  4.33.0 and on 4.35.0 — an internal `mkElimApp` error at its three
+  `induction` sites on `MReach` at a defined machine — so `drift-watch`
+  no longer reaches the ledger and ADR-0002's decision 4 is unmet. The
+  evidence is recorded inline in ADR-0002, addendum 2. Target, after
+  1.0.0 and in its own PR: Movement G compiles on current stable, no
+  theorem statement changes, and the pinned-toolchain ledger is still at
+  zero axioms. It may be an upstream Lean regression rather than a
+  defect in the source: worth minimizing, and reporting if the minimal
+  case reproduces.
 - **Is Movement B's two-step derivable in a model faithful to Article V's
   actual ratification requirements** (three-quarters of the states, two
   proposal routes)? The current model has no federal structure at all.

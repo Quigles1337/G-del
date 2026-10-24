@@ -1,18 +1,27 @@
 cff-version: 1.2.0
 message: "If you reference this formalization, please cite it as below."
 title: "Gödel's Loophole, kernel-checked"
+type: software
 abstract: >-
   A toy constitutional state machine in core Lean 4, after the argument
   Kurt Gödel reportedly began at his 1947 U.S. citizenship hearing and
   never wrote down. Models a constitution as a formal system whose rule
-  of change is itself an object-level provision, and proves in four
+  of change is itself an object-level provision, and proves in seven
   movements that legal reachability of dictatorship is a theorem: the
   amendment rule does not entrench itself (A); an entrenchment clause
   that does not protect itself is a two-step no-op (B); a self-entrenched
-  eternity clause is formally sound (C); and endogenizing the validity
-  predicate defeats it while leaving the clause in the text (D). No
-  mathlib, no sorry, zero axioms. No formal reduction of Gödel's second
-  incompleteness theorem to the constitutional case is claimed.
+  eternity clause is formally sound (C); endogenizing the validity
+  predicate defeats it while leaving the clause in the text (D); a
+  ratchet on the amendment threshold holds as the modeller's fiat but
+  guards nothing else, falls in three steps when written as a
+  provision, and self-entrenched holds by exactly C's proof, no new
+  kind of defence (E); on-chain, code-is-law is a
+  theorem, yet the fork goes through at bare majority and the canonical
+  post-fork history is code-invalid (F); and, as a schema over every
+  machine, any configuration is one repoint from being in force (G).
+  56 theorems, no mathlib, no sorry, zero axioms on the pinned
+  toolchain. No formal reduction of Gödel's second incompleteness
+  theorem to the constitutional case is claimed.
 authors:
   - given-names: "Alexander David"
     family-names: "Zalewski"
@@ -20,8 +29,8 @@ authors:
     orcid: "https://orcid.org/0009-0008-9019-7631"
 repository-code: "https://github.com/Quigles1337/G-del"
 license: PolyForm-Noncommercial-1.0.0
-version: "0.1.0"
-date-released: "2026-08-16"
+version: "1.0.0"
+date-released: "2026-10-24"
 keywords:
   - Lean 4
   - formal verification
