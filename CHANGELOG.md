@@ -85,3 +85,19 @@ ledger is still 56 theorems, zero axioms, zero `sorry`.
   repository cannot check it. Comment-only in `.lean` files.
 - ROADMAP: from 1.0.0 on, a new movement's prediction is committed on
   its own, before any proof.
+
+### Sources, checked
+
+- Guerra-Pujol: full citation, *Capital University Law Review* 41
+  (2013): 637–673, with its SSRN record; the "given from memory"
+  caveat is gone.
+- Morgenstern's memorandum: dated 13 September 1971; the Institute for
+  Advanced Study's copy is in the Dorothy Morgenstern Thomas collection
+  at the Shelby White and Leon Levy Archives Center (not "Morgenstern's
+  papers"), cited by its persistent handle.
+- The date 5 December 1947 is attributed to Dawson, with a note that
+  the memorandum gives only the year and that the Institute's catalogue
+  record (1946) and finding aid (1947) disagree.
+- Kegler: his page replaces "'The Gödel Document' (2010)", which could
+  not be confirmed; Mark Dominus was reporting the find on 21 January
+  2009.
