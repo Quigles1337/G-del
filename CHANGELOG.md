@@ -20,3 +20,19 @@ ledger is still 56 theorems, zero axioms, zero `sorry`.
   — `standalone/Godel.lean` above all — carries its terms with it.
 - `CITATION.cff` names the author (with ORCID) and the new license;
   `lakefile.toml` declares the license.
+
+### The executable says only what is true
+
+- `lake exe godel` used to re-implement the trace loop, and its banner
+  called each ACCEPT "a kernel-checked theorem, not a print" — while
+  printing ADOPT, from compiled code no kernel checks. `walk` in
+  `Main.lean` now asks `runTrace` itself for every prefix of the trace,
+  so each printed state is `runTrace V init (tr.take k)`, on exactly the
+  traces of `loophole_runs`, `bypass_runs`, `C_refuses_direct`,
+  `C_refuses_selfrepeal` and `capture_runs`. The banner and header say
+  so, and say that the printout is compiled output, not a proof.
+- Movement C now runs once per door. The old single run stopped at its
+  first refusal, so the second door was never shown.
+- The README's Quickstart and "The exploit is a program" are scoped to
+  Movements A–D, the only ones with a checker.
+- Movements A, B and D print byte-for-byte what they printed before.

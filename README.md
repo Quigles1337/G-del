@@ -27,7 +27,7 @@ becomes a reachability question — with a yes or no.
 ```bash
 git clone https://github.com/Quigles1337/G-del.git && cd G-del
 lake build       # kernel-checks everything AND enforces the axiom ledger
-lake exe godel   # runs the attacks through the certified checker
+lake exe godel   # runs Movements A–D through the certified checker
 ```
 
 Or check the single-file edition with no build system at all:
@@ -171,9 +171,9 @@ of its own being in force.
 
 ## The exploit is a program
 
-`Godel/Executable.lean` does the same work mechanically. Every validity
-regime is shown decidable, `runTrace` walks a trace refusing the first
-illegal step, and:
+For Movements A–D, `Godel/Executable.lean` does the same work
+mechanically. Each of their validity regimes is shown decidable,
+`runTrace` walks a trace refusing the first illegal step, and:
 
 ```lean
 theorem runTrace_sound {V} [∀ n s a, Decidable (V n s a)] :
@@ -182,11 +182,18 @@ theorem runTrace_sound {V} [∀ n s a, Decidable (V n s a)] :
 ```
 
 If the checker accepts, a legal derivation **exists** — so acceptance is
-a certificate, not a claim about one. `lake exe godel` therefore does not
-narrate the attack, it executes it, and each `ADOPT` corresponds to a
-theorem the kernel has already checked. Movement C's run is the one worth
-watching: the checker *refuses* both doors at strength 100, and then
-Movement D walks through the same door it just refused.
+a certificate, not a claim about one. `lake exe godel` runs those
+movements through `runTrace` itself: every state it prints is
+`runTrace V init` applied to a prefix of the trace, on exactly the traces
+of `loophole_runs`, `bypass_runs`, `C_refuses_direct`,
+`C_refuses_selfrepeal` and `capture_runs`. The printout is compiled
+output, not a proof; the certificates are those theorems, and the run
+shows what they are about. Movement C gets two runs, one per door, and
+they are the ones worth watching: the checker *refuses* the frontal
+assault at strength 100, then refuses the repeal of the clause itself at
+strength 100 — and then Movement D, having captured the recognizer,
+walks through the frontal door at 67. Movements E–G have no checker;
+their results are the theorems in [THEOREMS.md](THEOREMS.md).
 
 ## The axiom ledger
 
