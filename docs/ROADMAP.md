@@ -9,12 +9,19 @@ kinds: **defences not yet tried**, which are cheap edits to `V` plus an
 attempted invariant — and **realism**, which is a different and much
 larger project. The register of a resolved entry is kept as written,
 prediction and all, so the record shows what was expected before the
-kernel answered.
+kernel answered. The commits are the timestamps: the Round 3 target and
+the ratchet entry are in the initial commit, `ec9272c`, before
+Movements E and F landed in `eef2d47`; the Movement G target is in
+`c983f2d`, before Movement G landed in `5c10708`.
+
+From 1.0.0 on, a new movement's prediction is committed on its own,
+before any proof.
 
 ## Round 3 — on-chain governance, where `V` is executable — **resolved**
 
 > **Resolved by Movement F** — `Godel/MovementF.lean`, with the registered
-> target below hit as specified. Interpretive capture is not merely
+> target below (committed in `ec9272c`, before Movement F landed in
+> `eef2d47`) hit as specified. Interpretive capture is not merely
 > blocked but *inexpressible*: no transaction mentions the contract
 > (`contract_inexpressible`), so `code_is_law` holds along every valid
 > history and Movement D's interior attack is deleted rather than
@@ -35,7 +42,7 @@ kernel answered.
 > (world level); the `VE` named below is now Movement E's ratchet regime.
 > Full record: [notes/landing-movements-ef.md](notes/landing-movements-ef.md).
 
-The registered target, kept as written:
+The registered target, kept as written in the initial commit, `ec9272c`:
 
 The natural next target, and the one this repository was built toward.
 
@@ -87,6 +94,9 @@ and what is the cost of capturing them? That is a real audit, not a toy.
 
 ## Movement G — the fork-guard regress — **resolved**
 
+The target and its suspicion are kept as committed in `c983f2d`, before
+Movement G landed in `5c10708`; the resolution follows them.
+
 The natural successor to Movement F, and the item that would close the
 tower if anything can.
 
@@ -135,7 +145,11 @@ conservative: not a strawman. The development closes.
 ## Defences tested
 
 **The ratchet — resolved by Movement E**, and negatively, exactly as the
-prediction registered in `Godel/MovementE.lean` said it would be. Baked
+prediction in `Godel/MovementE.lean`'s header said it would be. That
+prediction was written before the first compile, per the development
+log, but committed with the proofs in `eef2d47`; what the initial
+commit, `ec9272c`, timestamps is this entry's target and its three
+questions, not the answer. Baked
 into the validity regime, the gate holds forever (`regime_gate_holds`)
 — and guards nothing else: dictatorship still arrives in one step at 67
 (`regime_guards_nothing_else`). Written down honestly as a provision, a

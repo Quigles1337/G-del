@@ -334,6 +334,45 @@ recognizer-capture cases are all cited in
 [docs/SOURCES.md](docs/SOURCES.md), with the places we are *not* certain
 marked as such.
 
+## Provenance
+
+Alexander David Zalewski is the project's creator and architect. He
+designed its formal development and verified its proofs in Lean 4.
+
+Development was AI-assisted (Claude, by Anthropic). The AI is not
+listed as an author in [CITATION.cff](CITATION.cff); commit trailers are
+how its involvement is disclosed. Before 1.0.0 that disclosure is
+inconsistent: the first three commits carry a `Co-Authored-By` trailer,
+and the commits that landed Movements E–G do not, although that work was
+AI-assisted too ([docs/notes/](docs/notes/) records how it was handed
+off). From 1.0.0 on, every commit made with AI assistance carries the
+trailer.
+
+None of this bears on whether the proofs are valid. Every theorem is
+checked by the Lean kernel, and every axiom claim is a build-breaking
+test, so the results stand or fall by the same check whoever wrote them
+— and anyone can run it. With [elan](https://github.com/leanprover/elan)
+installed (it fetches the toolchain pinned in `lean-toolchain` on first
+use):
+
+```bash
+git clone https://github.com/Quigles1337/G-del.git && cd G-del
+bash scripts/verify.sh          # on Windows: pwsh scripts/verify.ps1
+```
+
+That script kernel-checks every theorem on the pinned toolchain, fails
+if any proof's axiom dependencies differ from its receipt in
+`Godel/Receipts.lean` (`sorryAx` included), checks the single-file
+edition, sweeps the sources for `sorry`, and checks that both editions
+declare the same theorem names. The single-file edition also checks on
+its own, with no build system: `lean standalone/Godel.lean`.
+
+What the kernel does not check is whether each theorem says what its
+English gloss says. That part is the reader's: [THEOREMS.md](THEOREMS.md)
+glosses every theorem by name, beside the file that states it, and
+[docs/LIMITATIONS.md](docs/LIMITATIONS.md) lists where a modelling
+choice could be mistaken for a result.
+
 ## How to cite
 
 Cite the release, not the branch. [CITATION.cff](CITATION.cff) carries

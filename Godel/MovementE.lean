@@ -12,8 +12,13 @@ https://polyformproject.org/licenses/noncommercial/1.0.0
   Movement A's repricing directly, needs no self-reference, and — if it
   survived — would be a genuinely different kind of defence from C.
 
-  PREDICTION, registered before compilation: it survives only if we
-  cheat. Baked into the validity regime `V`, the ratchet is physics —
+  PREDICTION, written before the first compile per the development log
+  (docs/notes/landing-movements-ef.md), but committed with the proofs
+  in eef2d47, so no commit timestamps it. The timestamped record is
+  the ROADMAP's ratchet entry in the initial commit, ec9272c — the
+  target and its three questions, not this answer. The prediction: it
+  survives only if we cheat. Baked into the validity regime `V`, the
+  ratchet is physics —
   frozen by fiat of the modeller, a resource the legal system being
   modelled does not possess. Modelled honestly as a PROVISION — a
   `ratchet` bit in the state — it is Movement B one level up: repeal

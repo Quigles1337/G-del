@@ -61,3 +61,27 @@ ledger is still 56 theorems, zero axioms, zero `sorry`.
   evidence inline (addendum 2) and states that its decision 4 is unmet;
   the README's pin section says so too; and the ROADMAP has the repair
   as an open item. No proof changed — the pinned ledger is unaffected.
+
+### Provenance, and what "registered" means
+
+- README: a Provenance section — the author's role; that development
+  was AI-assisted (Claude, by Anthropic), that the AI is not listed as
+  an author, and that commit trailers disclosing it were inconsistent
+  before 1.0.0 and are consistent from 1.0.0 on; why the validity of
+  the proofs does not depend on authorship; and the commands to check
+  them independently.
+- `docs/notes/`: each development log now opens with its date and a
+  note that its patch files and hand-off decisions describe the
+  workflow at the time.
+- Preregistration claims say only what the history shows. The ROADMAP
+  targets are cited by commit (`ec9272c` for Round 3 and the ratchet,
+  `c983f2d` for Movement G), all committed before the movements they
+  target. The in-file "registered before compilation" headers landed in
+  the same commits as their proofs, so they now read "written before
+  the first compile, per the development log", with the ROADMAP commit
+  as the timestamped record; for the ratchet that record is the target
+  and its questions, not the predicted answer. Movement G's
+  meta-prediction is stated in conversation and says plainly that the
+  repository cannot check it. Comment-only in `.lean` files.
+- ROADMAP: from 1.0.0 on, a new movement's prediction is committed on
+  its own, before any proof.
