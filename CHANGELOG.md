@@ -95,12 +95,15 @@ ledger is still 56 theorems, zero axioms, zero `sorry`.
   Advanced Study's copy is in the Dorothy Morgenstern Thomas collection
   at the Shelby White and Leon Levy Archives Center (not "Morgenstern's
   papers"), cited by its persistent handle.
-- The date 5 December 1947 is attributed to Dawson, with a note that
-  the memorandum gives only the year and that the Institute's catalogue
-  record (1946) and finding aid (1947) disagree.
+- The date 5 December 1947 is attributed to Dawson. The memorandum
+  itself, read from the Institute's scan, gives a year but no day, and
+  the year is 1946 — matching the Institute's catalogue record and
+  Lipton and Regan (2013), not the St Andrews transcription or the
+  Institute's finding aid, which give 1947.
 - Kegler: his page replaces "'The Gödel Document' (2010)", which could
   not be confirmed; Mark Dominus was reporting the find on 21 January
-  2009.
+  2009. Lipton and Regan's 2013 post, which quotes the memorandum, is
+  added.
 
 ### One receipt per theorem, enforced
 
