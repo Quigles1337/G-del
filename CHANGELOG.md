@@ -100,6 +100,14 @@ comments stripped every `.lean` file is identical to 1.0.0.
 - The README subtitle "A Lean 4 study of self-amendment, entrenchment,
   and recognition", and sources for Judge Forman's name (Lipton and
   Regan) and its spelling (the Federal Judicial Center).
+- DOIs. This release is
+  [10.5281/zenodo.23648908](https://doi.org/10.5281/zenodo.23648908);
+  the concept DOI,
+  [10.5281/zenodo.23629066](https://doi.org/10.5281/zenodo.23629066),
+  covers all versions and resolves to the latest. `CITATION.cff` gives
+  the version DOI as `doi` and the concept DOI under `identifiers`; the
+  README's badge points at the concept DOI, and "How to cite" lists the
+  version DOIs of 1.0.0 and 1.0.1.
 
 ## 1.0.0 — 2026-10-24
 

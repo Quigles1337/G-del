@@ -7,7 +7,7 @@
 [![axioms](https://img.shields.io/badge/axioms-zero-brightgreen)](Godel/Receipts.lean)
 [![sorry](https://img.shields.io/badge/sorry-none-brightgreen)](scripts/verify.sh)
 [![license](https://img.shields.io/badge/license-PolyForm%20Noncommercial%201.0.0-blue)](LICENSE)
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23629067-blue)](https://doi.org/10.5281/zenodo.23629067)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23629066-blue)](https://doi.org/10.5281/zenodo.23629066)
 
 Months before his U.S. citizenship hearing — on 5 December 1947, by
 Dawson's dating — Kurt Gödel told Oskar Morgenstern that he had found
@@ -409,10 +409,19 @@ Cite the release, not the branch. [CITATION.cff](CITATION.cff) carries
 the metadata, and GitHub's "Cite this repository" button reads it:
 
 > Zalewski, A. D. (2026). *Gödel's Loophole, kernel-checked* (Version
-> 1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.23629067
+> 1.0.1) [Computer software]. https://doi.org/10.5281/zenodo.23648908
 
-The DOI, 10.5281/zenodo.23629067, identifies the 1.0.0 release as
-archived on Zenodo. The source is at https://github.com/Quigles1337/G-del.
+To cite the project as a whole, use the concept DOI,
+[10.5281/zenodo.23629066](https://doi.org/10.5281/zenodo.23629066): it
+covers all versions and resolves to the latest. To cite an exact
+version, use its version DOI, as archived on Zenodo:
+
+| Version | DOI |
+|---|---|
+| 1.0.1 | [10.5281/zenodo.23648908](https://doi.org/10.5281/zenodo.23648908) |
+| 1.0.0 | [10.5281/zenodo.23629067](https://doi.org/10.5281/zenodo.23629067) |
+
+The source is at https://github.com/Quigles1337/G-del.
 
 ## License
 
