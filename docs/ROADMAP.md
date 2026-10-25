@@ -165,7 +165,7 @@ into the validity regime, the gate holds forever (`regime_gate_holds`)
 Movement B one level up. Self-entrench it and it does hold
 (`selfentrenched_gate_holds`), by exactly Movement C's proof shape: its
 sound form is not a new kind of defence but an instance of the old one,
-inheriting C's externally-certified soundness and C's exposure to
+inheriting C's soundness, proved with `V` held fixed, and C's exposure to
 Movement D.
 
 The three questions this entry asked, answered. Does it defeat A alone?
