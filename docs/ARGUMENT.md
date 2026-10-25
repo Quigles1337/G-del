@@ -56,8 +56,8 @@ repeal of the tyranny — at 51, or with `loophole_decree`, at 0.
 
 The attack is on the immune system, not the organ. That is the shape
 worth naming, and it is why Weimar's Article 76 — amendment by two-thirds
-with no substantive limits, the exact regime `VA` — matters more to the
-history than any single substantive decree did.
+with no substantive limits, the regime `VA` is modelled on — is this
+movement's historical analogy (SOURCES §4).
 
 ## B — a guard that does not guard itself
 
@@ -75,17 +75,19 @@ guard is an ordinary provision and nothing guards it.
 
 This is not an invented weakness. Article V of the U.S. Constitution
 entrenches equal state suffrage in the Senate and **does not entrench
-itself**. The configuration in Movement B is the configuration in the
-document.
+itself**. On one reading, the configuration in Movement B is the
+configuration in the document; whether the two-step would be lawful is
+disputed (SOURCES §3).
 
 ## C — the defence that works
 
 Movement C is where honesty is expensive, and it is the reason to trust
 the rest.
 
-Grundgesetz Art. 79(3), written in 1949 by people who had just watched
-Article 76 be used as designed, protects the core provisions **and
-itself**. Regime `VC` adds `selfAttack` to the forbidden set: the clause
+Grundgesetz Art. 79(3), written in 1949 by people who had watched
+Article 76's procedure carry the Enabling Act, under intimidation,
+protects the core provisions **and**, as German doctrine reads it,
+**itself** (SOURCES §5). Regime `VC` adds `selfAttack` to the forbidden set: the clause
 covers its own repeal.
 
 `eternity_holds` proves, by invariant induction, that no trace of any

@@ -27,7 +27,7 @@ listed twice.
 ## Movement A — the loophole (`Godel/MovementA.lean`)
 
 Regime `VA`: anything a sufficiently strong coalition adopts is valid.
-Article V constrains *how*, never *what*, and does not entrench itself.
+The amendment rule constrains *how*, never *what*, and does not entrench itself.
 
 | Theorem | Says | Axioms |
 |---|---|---|

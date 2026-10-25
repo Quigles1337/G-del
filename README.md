@@ -9,11 +9,12 @@
 [![license](https://img.shields.io/badge/license-PolyForm%20Noncommercial%201.0.0-blue)](LICENSE)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23629067-blue)](https://doi.org/10.5281/zenodo.23629067)
 
-At his U.S. citizenship hearing on 5 December 1947, Kurt Gödel told
-Einstein and Oskar Morgenstern — on the drive to Trenton — that he had
-found an inconsistency in the Constitution allowing the United States to
-become a dictatorship by entirely legal means. He began to make the
-argument in front of the judge. He was talked down. He never wrote it up.
+Months before his U.S. citizenship hearing — on 5 December 1947, by
+Dawson's dating — Kurt Gödel told Oskar Morgenstern that he had found
+inner contradictions in the Constitution: a way for someone to become
+dictator by entirely legal means. Morgenstern told Einstein; both urged
+him not to raise it. Before the examiner in Trenton he began to anyway,
+and was cut off. No written version of his argument is known.
 
 This repository is a **toy constitutional state machine** that makes one
 reconstruction of that argument precise, in seven movements, entirely in
@@ -84,7 +85,9 @@ stops even a unanimous frontal assault. `entrenchment_bypassed`: two
 moves — repeal the guard, walk through the door — and both steps are
 valid under the rules in force when taken. This is not hypothetical.
 Article V of the U.S. Constitution entrenches equal state suffrage in
-the Senate and **does not entrench itself**; see [docs/SOURCES.md](docs/SOURCES.md).
+the Senate and **does not entrench itself** — though whether the
+two-step would be lawful is disputed, and Movement B formalizes one
+reading; see [docs/SOURCES.md](docs/SOURCES.md) §3.
 
 **C — the defence that works.** Honesty first: the self-entrenched
 eternity clause is **formally sound**, and we prove it before undermining

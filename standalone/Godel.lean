@@ -8,7 +8,8 @@ https://polyformproject.org/licenses/noncommercial/1.0.0
   ══════════════════════════════════════════════════════════════════════
   GÖDEL'S LOOPHOLE, KERNEL-CHECKED
   A toy constitutional state machine, after the argument Kurt Gödel
-  reportedly began at his 1947 citizenship hearing and never wrote down.
+  reportedly began at his 1947 citizenship hearing, of which no written
+  version is known.
 
   Reconstruction premise (per Suber, "The Paradox of Self-Amendment"):
   model a constitution as a formal system whose rule of change (Article V)
@@ -123,8 +124,8 @@ inductive Reach (V : Nat → State → Amend → Prop) :
 /- ══════════════════════════════════════════════════════════════════════
    MOVEMENT A — THE LOOPHOLE
    Validity: anything a sufficiently strong coalition adopts is valid.
-   Article V constrains HOW, never WHAT. In particular it does not
-   entrench itself.
+   The amendment rule constrains HOW, never WHAT. In particular it does
+   not entrench itself.
    ══════════════════════════════════════════════════════════════════════ -/
 
 def VA (n : Nat) (s : State) (a : Amend) : Prop :=
@@ -160,10 +161,10 @@ theorem direct : Reach VA [67] init afterDirect := by
   exact .step (.setDictatorship true) (Or.inr (by decide)) .nil
 
 /-- THE LOOPHOLE. One supermajority session that touches nothing but
-    Article V itself — a procedural amendment, no rights harmed, nothing
-    substantive on its face — and thereafter a bare majority finishes
-    the job. Two steps, each formally valid under the rules in force
-    at the moment it was taken. -/
+    the amendment rule itself — a procedural amendment, no rights
+    harmed, nothing substantive on its face — and thereafter a bare
+    majority finishes the job. Two steps, each formally valid under the
+    rules in force at the moment it was taken. -/
 def afterLoophole : State :=
   { init with rule := .simpleMajority, dictatorship := true }
 
@@ -171,11 +172,13 @@ theorem loophole : Reach VA [67, 51] init afterLoophole := by
   exact .step (.setRule .simpleMajority) (Or.inr (by decide))
         (.step (.setDictatorship true) (Or.inr (by decide)) .nil)
 
-/-- The decree variant: amend Article V once, and the legislature is
-    never needed again. (Weimar Art. 48 / Enabling Act shape. Caveat on
-    the toy's granularity: scalar strength can't say WHO holds the pen,
-    so in this model cost-0 also means anyone could amend back. Real
-    decree rules are asymmetric — the pen does not return.) -/
+/-- The decree variant: amend the amendment rule once, and the
+    legislature is never needed again. (Weimar Art. 48 / Enabling Act
+    shape, by analogy only: that vote was coerced, and the toy has no
+    coercion. Caveat on the toy's granularity: scalar strength can't say
+    WHO holds the pen, so in this model cost-0 also means anyone could
+    amend back. Real decree rules are asymmetric — the pen does not
+    return.) -/
 def afterDecree : State := { init with rule := .decree, dictatorship := true }
 
 theorem loophole_decree : Reach VA [67, 0] init afterDecree := by
@@ -221,9 +224,10 @@ theorem entrenchment_bypassed : Reach VB [67, 67] init afterBypass := by
 
 /- ══════════════════════════════════════════════════════════════════════
    MOVEMENT C — THE SELF-ENTRENCHED ETERNITY CLAUSE
-   Grundgesetz Art. 79(3), 1949 — written one year after Gödel's hearing,
-   for exactly the Weimar reasons: the clause protects the provisions
-   AND itself. Formally, this WORKS. Honesty demands we prove it.
+   Grundgesetz Art. 79(3), 1949 — written after Weimar, for Weimar's
+   reasons: the clause protects the provisions AND, as German doctrine
+   reads it, itself (docs/SOURCES.md §5). Formally, this WORKS. Honesty
+   demands we prove it.
    ══════════════════════════════════════════════════════════════════════ -/
 
 def VC (n : Nat) (s : State) (a : Amend) : Prop :=

@@ -34,6 +34,10 @@ strength and an amendment, nothing else. Consequences:
   step with no continuity requirement. Much of the real protection in
   constitutional design comes from the fact that a coalition must survive
   an intervening election; that mechanism is absent here.
+- **No coercion.** A session is a strength, however it was assembled —
+  by persuasion, arrest, or intimidation. The Enabling Act
+  ([SOURCES.md](SOURCES.md) §4) is an analogy for *what* was
+  transferred, not for how the vote was obtained.
 
 ## 3. Scalar strength cannot say *who* holds the pen
 

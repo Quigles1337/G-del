@@ -7,9 +7,9 @@ https://polyformproject.org/licenses/noncommercial/1.0.0
 /-
   MOVEMENT C — THE SELF-ENTRENCHED ETERNITY CLAUSE
 
-  Grundgesetz Art. 79(3), 1949 — written one year after Gödel's hearing,
-  for exactly the Weimar reasons: the clause protects the provisions
-  AND itself.
+  Grundgesetz Art. 79(3), 1949 — written after Weimar, for Weimar's
+  reasons: the clause protects the provisions AND, as German doctrine
+  reads it, itself (docs/SOURCES.md §5).
 
   Result: formally this WORKS. Honesty demands we prove the defence
   succeeds before showing what it does not reach.
