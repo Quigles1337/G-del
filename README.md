@@ -1,27 +1,33 @@
 # Gödel's Loophole, kernel-checked
 
+*A Lean 4 study of self-amendment, entrenchment, and recognition.*
+
 [![verify](https://github.com/Quigles1337/G-del/actions/workflows/verify.yml/badge.svg)](https://github.com/Quigles1337/G-del/actions/workflows/verify.yml)
 [![Lean](https://img.shields.io/badge/Lean-4.15.0-blue)](lean-toolchain)
 [![axioms](https://img.shields.io/badge/axioms-zero-brightgreen)](Godel/Receipts.lean)
 [![sorry](https://img.shields.io/badge/sorry-none-brightgreen)](scripts/verify.sh)
 [![license](https://img.shields.io/badge/license-PolyForm%20Noncommercial%201.0.0-blue)](LICENSE)
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23629067-blue)](https://doi.org/10.5281/zenodo.23629067)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23629066-blue)](https://doi.org/10.5281/zenodo.23629066)
 
-At his U.S. citizenship hearing on 5 December 1947, Kurt Gödel told
-Einstein and Oskar Morgenstern — on the drive to Trenton — that he had
-found an inconsistency in the Constitution allowing the United States to
-become a dictatorship by entirely legal means. He began to make the
-argument in front of the judge. He was talked down. He never wrote it up.
+Months before his U.S. citizenship hearing — on 5 December 1947, by
+Dawson's dating — Kurt Gödel told Oskar Morgenstern that he had found
+inner contradictions in the Constitution: a way for someone to become
+dictator by entirely legal means. Morgenstern told Einstein; both urged
+him not to raise it. Before the examiner in Trenton he began to anyway,
+and was cut off. No written version of his argument is known.
 
-This repository is a **toy constitutional state machine** that makes the
-shape of that argument precise, in seven movements, entirely in core
-Lean 4. No `mathlib`, no dependencies, no `sorry`, **zero axioms**.
+This repository is a **toy constitutional state machine** that makes one
+reconstruction of that argument precise, in seven movements, entirely in
+core Lean 4. No `mathlib`, no dependencies, no `sorry`, **zero axioms**.
+"Zero axioms" is about the proofs' logical dependencies, as
+`#print axioms` reports them; the model's assumptions live in its
+definitions.
 
 The premise is Peter Suber's (*The Paradox of Self-Amendment*, 1990):
 model a constitution as a formal system whose **rule of change is itself
 an object-level provision**. Once you do that, "can this constitution be
 turned into a dictatorship legally?" stops being a matter of opinion and
-becomes a reachability question — with a yes or no.
+becomes, inside the model, a reachability question — with a yes or no.
 
 ## Quickstart
 
@@ -51,7 +57,7 @@ one receipt per theorem):
 | **D** | C, but the *interpreter* is a state variable | **outlived — survives as ink** | `interpretation_attack` |
 | **E** | The gate may only rise, written as a clause | **falls in three** | `clause_ratchet_bypassed` |
 | **F** | Code is law; the amendment verb does not exist | **outlived — survives as a running program** | `canonical_history_invalid` |
-| **G** | Any machine whatsoever, one level up | **swapped wholesale, always** | `repoint_reaches_everything` |
+| **G** | Any machine, lifted by `ascend` (an unrestricted repoint at 51) | **swapped wholesale, always** | `repoint_reaches_everything` |
 
 **A — the loophole.** `majority_blocked` first proves the wall works as
 advertised: a 51-strength faction, given unlimited sessions, changes
@@ -79,7 +85,9 @@ stops even a unanimous frontal assault. `entrenchment_bypassed`: two
 moves — repeal the guard, walk through the door — and both steps are
 valid under the rules in force when taken. This is not hypothetical.
 Article V of the U.S. Constitution entrenches equal state suffrage in
-the Senate and **does not entrench itself**; see [docs/SOURCES.md](docs/SOURCES.md).
+the Senate and **does not entrench itself** — though whether the
+two-step would be lawful is disputed, and Movement B formalizes one
+reading; see [docs/SOURCES.md](docs/SOURCES.md) §3.
 
 **C — the defence that works.** Honesty first: the self-entrenched
 eternity clause is **formally sound**, and we prove it before undermining
@@ -117,9 +125,10 @@ the gap the whole development keeps finding: **the modeller can freeze
 a level; the system cannot.**
 
 **F — the fork.** The executable recognizer, given its full due first:
-on-chain, `contract_inexpressible` — no transaction so much as
-*mentions* the contract. Movement D's capture move is not blocked in
-this language; it does not exist in it, and `code_is_law` is a theorem.
+on-chain, `contract_inexpressible` — no transaction can change the
+contract; the language has no verb for it. Movement D's capture move
+is not blocked in this language; it does not exist in it, and
+`code_is_law` is a theorem.
 It is the whole story only until someone forks. The 2016 trace replays
 as `the_dao_fork`, `[0, 51]`: the drain is **valid** (strength zero —
 the code does not count votes), on-chain repair is **impossible**
@@ -155,21 +164,27 @@ theorem repoint_reaches_everything (M : Machine) (w : LWorld M) (s' : M.S) :
 Every machine, zero hypotheses, one constructor consulting no field of
 `M`. The triviality is load-bearing: it is "the guard was not
 consulted," formalized — a hard proof would have meant the guard put up
-a fight. The faithfulness pair (`interior_faithful`,
-`interior_governed`) certifies the ascent is conservative, so the floor
-above is no strawman; the guarded ascent (`ascendG`) shows
-fork-legitimacy criteria are real, can be **sound** by exactly C's
-argument (`guarded_holds`) — the trilemma is level-invariant — and are
-furniture one floor up (`guard_regress`, the schema applied to its own
-output). The closing pair is the development in two lines:
-`eternity_holds_upstairs` and `eternity_meta_defeated` — Movement C's
-certificate survives the ascent intact, and one repoint puts tyranny in
-force anyway. `eternity_holds` remains true forever. **It is a theorem
-about the orphan.** What the schema does not prove is that
-self-recognition is false; it proves it is **inexpressible**. The
-development is bounded at both ends by inexpressibility: at the bottom,
-the code cannot speak of its replacement; at the top, no law can speak
-of its own being in force.
+a fight. The scope is the `ascend` construction, which adds an
+unrestricted `repoint` at strength 51 that never consults `M`'s
+validity law. The theorem shows what follows once such a move exists —
+not that real institutions have one, or that every conceivable defence
+fails ([LIMITATIONS §12](docs/LIMITATIONS.md)). The faithfulness pair
+(`interior_faithful`, `interior_governed`) certifies the ascent is
+conservative, so the floor above is no strawman; the guarded ascent
+(`ascendG`) shows fork-legitimacy criteria are real, can be **sound** by
+exactly C's argument (`guarded_holds`) — the trilemma is
+level-invariant — and are bypassed, not swapped, one floor up
+(`guard_regress`, the schema applied to its own output). The closing
+pair is the development in two lines: `eternity_holds_upstairs` and
+`eternity_meta_defeated` — Movement C's certificate survives the ascent
+intact, and one repoint puts tyranny in force anyway. `eternity_holds`
+remains true forever. **It is a theorem about the orphan.** The schema
+does not prove self-recognition false — or inexpressible: no language
+of recognition statements is defined here. Recognition enters as an
+operation outside the move interface, and that is the model's
+**boundary** at both ends: at the bottom, the code has no verb for its
+replacement; at the top, no law in the model is consulted about its own
+being in force.
 
 ## The exploit is a program
 
@@ -273,16 +288,19 @@ choose, and it arrived by itself.
 
 ## What is proven, and what is not
 
-`eternity_holds` is a consistency certificate for system C, and it was
-proved **here, in Lean** — a strictly stronger metasystem — not inside C.
-The object system cannot even keep the certificate's hypotheses true;
-that is exactly what Movement D demonstrates. The constitutional rhyme of
-Gödel's second incompleteness theorem is precise: **consistency is
-certified one level up, or not at all.**
+`eternity_holds` is a machine-checked **safety guarantee**: no
+`VC`-legal history from `init`, of any length or strengths, reaches
+dictatorship. It is a theorem *about* system C, proved in Lean — C
+itself is a transition system, not a proof system. It holds `V` fixed,
+and Movement D shows the price: once capture can change the recognizer,
+dictatorship is reachable with the clause still in the text. The echo
+of Gödel's second incompleteness theorem is an **analogy, not a
+theorem** ([LIMITATIONS §7](docs/LIMITATIONS.md)).
 
 So the conjecture resolves sharper than "no dictator-proof clause
-exists." You *can* freeze any given level — C is a real result.
-Dictator-proofness would require freezing *all* levels, and the tower —
+exists." You *can* freeze any given level — C is a real result. On the
+model's reading, dictator-proofness would require freezing *all*
+levels, and the tower —
 text < amendment rule < recognition rule < social practice — does not
 bottom out inside the law. What ultimately holds the invariant is the
 thing this repository cannot formalize: the interpretive community's
@@ -337,6 +355,11 @@ recognizer-capture cases are all cited in
 [docs/SOURCES.md](docs/SOURCES.md), with the places we are *not* certain
 marked as such.
 
+An earlier machine-checked model of the same anecdote — Zahoransky and
+Benzmüller's Isabelle/HOL formalization of Guerra-Pujol's two-step
+Article V route (MIREL 2019) — is compared with this one in
+[docs/SOURCES.md](docs/SOURCES.md) §9.
+
 ## Provenance
 
 Alexander David Zalewski is the project's creator and architect. He
@@ -386,10 +409,19 @@ Cite the release, not the branch. [CITATION.cff](CITATION.cff) carries
 the metadata, and GitHub's "Cite this repository" button reads it:
 
 > Zalewski, A. D. (2026). *Gödel's Loophole, kernel-checked* (Version
-> 1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.23629067
+> 1.0.1) [Computer software]. https://doi.org/10.5281/zenodo.23648908
 
-The DOI, 10.5281/zenodo.23629067, identifies the 1.0.0 release as
-archived on Zenodo. The source is at https://github.com/Quigles1337/G-del.
+To cite the project as a whole, use the concept DOI,
+[10.5281/zenodo.23629066](https://doi.org/10.5281/zenodo.23629066): it
+covers all versions and resolves to the latest. To cite an exact
+version, use its version DOI, as archived on Zenodo:
+
+| Version | DOI |
+|---|---|
+| 1.0.1 | [10.5281/zenodo.23648908](https://doi.org/10.5281/zenodo.23648908) |
+| 1.0.0 | [10.5281/zenodo.23629067](https://doi.org/10.5281/zenodo.23629067) |
+
+The source is at https://github.com/Quigles1337/G-del.
 
 ## License
 

@@ -56,8 +56,8 @@ repeal of the tyranny — at 51, or with `loophole_decree`, at 0.
 
 The attack is on the immune system, not the organ. That is the shape
 worth naming, and it is why Weimar's Article 76 — amendment by two-thirds
-with no substantive limits, the exact regime `VA` — matters more to the
-history than any single substantive decree did.
+with no substantive limits, the regime `VA` is modelled on — is this
+movement's historical analogy (SOURCES §4).
 
 ## B — a guard that does not guard itself
 
@@ -75,17 +75,19 @@ guard is an ordinary provision and nothing guards it.
 
 This is not an invented weakness. Article V of the U.S. Constitution
 entrenches equal state suffrage in the Senate and **does not entrench
-itself**. The configuration in Movement B is the configuration in the
-document.
+itself**. On one reading, the configuration in Movement B is the
+configuration in the document; whether the two-step would be lawful is
+disputed (SOURCES §3).
 
 ## C — the defence that works
 
 Movement C is where honesty is expensive, and it is the reason to trust
 the rest.
 
-Grundgesetz Art. 79(3), written in 1949 by people who had just watched
-Article 76 be used as designed, protects the core provisions **and
-itself**. Regime `VC` adds `selfAttack` to the forbidden set: the clause
+Grundgesetz Art. 79(3), written in 1949 by people who had watched
+Article 76's procedure carry the Enabling Act, under intimidation,
+protects the core provisions **and**, as German doctrine reads it,
+**itself** (SOURCES §5). Regime `VC` adds `selfAttack` to the forbidden set: the clause
 covers its own repeal.
 
 `eternity_holds` proves, by invariant induction, that no trace of any
@@ -162,7 +164,7 @@ the state, waiting.
 
 So procedure-space contains no third thing. Unguarded procedural rules
 are Movement B; self-guarded ones are Movement C; all of them answer to
-Movement D. And the gap between the first act and the second — the rule
+Movement D, under its capture premise. And the gap between the first act and the second — the rule
 as regime versus the rule as clause — is the gap the whole development
 keeps finding: **the modeller can freeze a level; the system cannot.**
 
@@ -175,9 +177,9 @@ flip.
 
 Honesty first, because the steelman is stronger than its critics allow.
 On the chain, `Vcode` achieves what no regime in Movements A–E could:
-`contract_inexpressible` proves that no transaction so much as
-*mentions* the contract. Not guarded — **unguardable**, because
-immutability here is the absence of the verb. Movement D's capture move
+`contract_inexpressible` proves that no transaction changes the
+contract — the language has no verb for it. Not guarded —
+**unguardable**, because immutability here is the absence of the verb. Movement D's capture move
 is not blocked in this language; it does not exist in it. `code_is_law`
 is true along every valid history, and `promise_holds_without_fork`
 completes the picture: delete the fork and the promise holds at the
@@ -235,9 +237,9 @@ Movement G asks the question the six were instances of.
 
 `Machine` abstracts the entire development into one type: a state
 space, a move language, an application function, a validity law. Every
-system in Movements A–F is an inhabitant. So is every system anyone
-will propose in their place. `ascend M` builds the floor above any of
-them: the machine's whole configuration becomes one field, `inForce`;
+system in Movements A–F can be written as an inhabitant, and so can any
+proposed in their place that has this shape (LIMITATIONS §12).
+`ascend M` builds the floor above any of them: the machine's whole configuration becomes one field, `inForce`;
 interior moves obey `M`'s law verbatim; and a `repoint` swaps the field
 wholesale, at bare majority, reading nothing of `M`.
 
@@ -261,13 +263,17 @@ executable, anything — every configuration is one repoint from being
 the one in force. Read the proof term: one constructor, and it consults
 no field of `M`. The triviality is load-bearing. A hard proof would
 have meant the guard put up a fight; the one-liner is the formal
-content of "the guard was not consulted — and could not be, because the
-repoint is not a sentence of its language." The content lives in the
-quantifier: no hypothesis on `M` appears because none could help.
+content of "the guard was not consulted": `ascend`'s repoint is not a
+move of `M`, and its validity reads nothing of `M`. The content lives in
+the quantifier: no hypothesis on `M` appears because none could help.
+That is a fact about `ascend`, which adds the repoint; it does not show
+that real institutions have such a move, or that every conceivable
+defence fails (LIMITATIONS §12).
 
 Give the fork a legitimacy criterion, then. Every "lawful exit"
-proposal — thresholds, checkpoints, ratified fork rules — is a
-predicate `g` on the in-force configuration, and `ascendG` installs it.
+proposal — thresholds, checkpoints, ratified fork rules — can be
+modelled as a predicate `g` on the in-force configuration, and
+`ascendG` installs it.
 The guard is real: `guarded_repoint_blocked`. It can even be **sound**,
 by exactly Movement C's argument: `guarded_holds` proves that where the
 object law never manufactures legitimacy, the guarded world never
@@ -276,10 +282,10 @@ a fact about **levels**, and it holds on every floor.
 
 And then the regress, which is not a new theorem but an application:
 `ascend M` is a machine, so the schema applies to it — `the_regress`,
-one line. The guard that `guarded_holds` just certified is itself state
-one floor up, and `guard_regress` swaps it wholesale — guard, world,
-history, all of it — also one line. The certificate was correct. It was
-also furniture. No new idea exists at any height, or is needed.
+one line. The guard that `guarded_holds` just certified is not
+consulted one floor up: `guard_regress` replaces the guarded level's
+world at 51 without evaluating `g` — bypassed, not swapped — also one
+line. The certificate was correct. It was also never asked. No new idea exists at any height, or is needed.
 Turtles, mechanized.
 
 The instantiation closes the arc. `eternity_holds_upstairs`: Movement C
@@ -290,33 +296,37 @@ one repoint at 51 puts tyranny in force. There is no contradiction
 between the two, and that is the picture: `eternity_holds` remains true
 forever. **It is a theorem about the orphan.**
 
-What the schema does not prove is that self-recognition is false. It
-proves it is **inexpressible**: `repoint` takes an arbitrary
-configuration and is licensed by a constant, and there is nowhere in
-any `M` to put a sentence about it — the same way Movement F's contract
-could not mention its own repeal. The development is bounded at both
-ends by inexpressibility: at the bottom, the code cannot speak of its
-replacement; at the top, no law can speak of its own being in force.
+What the schema does not prove is that self-recognition is false — or
+that it is inexpressible; no language of recognition statements is
+defined here. It adds recognition as an operation outside the move
+interface: `repoint` takes an arbitrary configuration, is licensed by a
+constant, and is never put to `M`'s law — as no transaction in
+Movement F can change its contract. That is the model's boundary at
+both ends: at the bottom, the code has no verb for its replacement; at
+the top, no law in the model is consulted about its own being in force.
 Between the two, everything is provable and nothing is final.
 
-## The Gödel II rhyme, stated exactly
+## The Gödel II analogy, and its limits
 
-`eternity_holds` is a **consistency certificate for system C**, and it
-was proved *here*, in Lean — a strictly stronger metasystem — not inside
-C. System C cannot conduct that proof about itself. Worse: system C's own
-resources, which is what Movement D formalizes, cannot even keep the
-certificate's **hypotheses** true.
+`eternity_holds` is a **safety guarantee for system C**: no `VC`-legal
+history, of any length or strengths, reaches dictatorship. It was proved
+*here*, in Lean, about C — not inside C, which is a transition system,
+not a proof system. And it holds `V` fixed: Movement D shows that once
+capture can change the recognizer, dictatorship is reachable with the
+clause still in the text.
 
-A constitution can no more secure its own interpretation than a theory
-can prove its own consistency. Consistency is certified one level up, or
-not at all.
+Read as an analogy: Gödel's second incompleteness theorem says a
+consistent, effectively axiomatized theory containing enough arithmetic
+cannot prove its own consistency; Movement D models a text that cannot
+govern its own reading. In both, the assurance comes from outside.
 
-Two disciplines about that sentence. First, it is a **rhyme, not a
+Two disciplines about that sentence. First, it is an **analogy, not a
 reduction** — there is no diagonalization here, no arithmetic, no
 self-referential sentence, no incompleteness theorem. Nobody should cite
 this repository for the claim that Gödel's theorem applies to law
-(LIMITATIONS §7). Second, the structural parallel is nevertheless exact
-and mechanically checkable, which is more than the usual invocation of
+(LIMITATIONS §7). Second, what *is* mechanically checked is the part
+that can be: the safety guarantee, and the capture that defeats it once
+`V` is no longer fixed — which is more than the usual invocation of
 Gödel in a legal argument can say.
 
 ## What the conjecture becomes
@@ -324,8 +334,8 @@ Gödel in a legal argument can say.
 Not "no dictator-proof clause exists." That is false, and C proves it
 false.
 
-Instead: **you can freeze any given level, and freezing all of them is
-not something a text can do.** The tower runs
+Instead, on the model's reading: **you can freeze any given level, and
+freezing all of them is not something a text can do.** The tower runs
 
 > text < amendment rule < recognition rule < social practice
 
@@ -344,9 +354,8 @@ one, because it is not amenable to drafting.
 
 Movements E through G sharpen every clause of that. The freezing you
 can do (C) turns out to be available for procedure as well as content,
-and for nothing else (E). The most complete freeze ever attempted —
-executability, immutability by inexpressibility — is a genuine theorem
-exactly as far as its frame, and the frame is chosen from outside it
+and for nothing else (E). The executable freeze — immutability by
+inexpressibility — is a genuine theorem exactly as far as its frame, and the frame is chosen from outside it
 (F). And "the exploit moves up one" is not a metaphor but an operator:
 `ascend`, with one theorem that consumes every machine, its own outputs
 included (G).
@@ -357,6 +366,6 @@ machine — it comes from the reader agreeing that this is what
 recognition is like. The kernel certifies every theorem here; the
 community certifies the kernel; the community is not a machine in any
 file. The tower exits the mathematics through the reader. It always
-did — which is, as near as anyone can reconstruct, the thing Gödel saw
-on the drive to Trenton, and the thing a citizenship hearing was never
-going to have room for.
+did. Whether that is what Gödel saw, no one knows — his argument is
+unrecorded, and this is one reconstruction — but it is the kind of
+thing a citizenship hearing was never going to have room for.

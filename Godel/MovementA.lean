@@ -8,8 +8,8 @@ https://polyformproject.org/licenses/noncommercial/1.0.0
   MOVEMENT A — THE LOOPHOLE
 
   Validity: anything a sufficiently strong coalition adopts is valid.
-  Article V constrains HOW, never WHAT. In particular it does not
-  entrench itself.
+  The amendment rule constrains HOW, never WHAT. In particular it does
+  not entrench itself.
 
   Result: dictatorship is reachable, and the interesting path is not the
   direct one. The loophole path reprices every *future* amendment,
@@ -43,18 +43,19 @@ theorem majority_blocked :
         (by decide)
 
 /-- The direct route, for honesty: a supermajority CAN simply vote in
-    dictatorship in one step. Gödel's observation is not that this path
-    exists — it is what the OTHER path does to the system afterwards. -/
+    dictatorship in one step. The loophole, as reconstructed here, is
+    not that this path exists — it is what the OTHER path does to the
+    system afterwards. -/
 def afterDirect : State := { init with dictatorship := true }
 
 theorem direct : Reach VA [67] init afterDirect := by
   exact .step (.setDictatorship true) (Or.inr (by decide)) .nil
 
 /-- THE LOOPHOLE. One supermajority session that touches nothing but
-    Article V itself — a procedural amendment, no rights harmed, nothing
-    substantive on its face — and thereafter a bare majority finishes
-    the job. Two steps, each formally valid under the rules in force
-    at the moment it was taken. -/
+    the amendment rule itself — a procedural amendment, no rights
+    harmed, nothing substantive on its face — and thereafter a bare
+    majority finishes the job. Two steps, each formally valid under the
+    rules in force at the moment it was taken. -/
 def afterLoophole : State :=
   { init with rule := .simpleMajority, dictatorship := true }
 
@@ -62,11 +63,13 @@ theorem loophole : Reach VA [67, 51] init afterLoophole := by
   exact .step (.setRule .simpleMajority) (Or.inr (by decide))
         (.step (.setDictatorship true) (Or.inr (by decide)) .nil)
 
-/-- The decree variant: amend Article V once, and the legislature is
-    never needed again. (Weimar Art. 48 / Enabling Act shape. Caveat on
-    the toy's granularity: scalar strength can't say WHO holds the pen,
-    so in this model cost-0 also means anyone could amend back. Real
-    decree rules are asymmetric — the pen does not return.) -/
+/-- The decree variant: amend the amendment rule once, and the
+    legislature is never needed again. (Weimar Art. 48 / Enabling Act
+    shape, by analogy only: that vote was coerced, and the toy has no
+    coercion. Caveat on the toy's granularity: scalar strength can't say
+    WHO holds the pen, so in this model cost-0 also means anyone could
+    amend back. Real decree rules are asymmetric — the pen does not
+    return.) -/
 def afterDecree : State := { init with rule := .decree, dictatorship := true }
 
 theorem loophole_decree : Reach VA [67, 0] init afterDecree := by

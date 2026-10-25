@@ -1,17 +1,19 @@
 # Sources
 
-Citations for the history, the law, and the logic. Where this repository
-is repeating a well-attested fact it says so plainly; where it is
-repeating a *story*, or taking a side in a live doctrinal dispute, it
-says that too. Confidence markers are deliberate — a formalization that
+Citations for the history, the law, the logic, and related work. Where
+this repository is repeating a well-attested fact it says so plainly;
+where it is repeating a *story*, or taking a side in a live doctrinal
+dispute, it says that too. Confidence markers are deliberate — a formalization that
 launders uncertainty in its prose has cheated at exactly the point it
 claims rigour.
 
 ## 1. The hearing
 
 Gödel's naturalization hearing took place on **5 December 1947** — the
-date is Dawson's — in Trenton, New Jersey, before Judge Phillip Forman.
-Albert Einstein and
+date is Dawson's — in Trenton, New Jersey, before Judge Phillip Forman
+(named by Lipton and Regan, below, who spell it "Philip"; the spelling
+here is the Federal Judicial Center's,
+<https://www.fjc.gov/history/judges/forman-phillip>). Albert Einstein and
 Oskar Morgenstern accompanied him as witnesses. In preparing, Gödel
 became convinced he had found a way in which the United States could
 legally become a dictatorship, and he began to raise it at the hearing;
@@ -43,7 +45,8 @@ Forman steered the conversation away and the citizenship was granted.
 - **Richard J. Lipton and Kenneth W. Regan**, "Judging A Book By Its
   Coverage", *Gödel's Lost Letter and P=NP*, 6 December 2013,
   <https://rjlipton.com/2013/12/06/judging-a-book-by-its-coverage/> —
-  quotes the memorandum, and notes that the only year it gives is 1946.
+  quotes the memorandum, notes that the only year it gives is 1946, and
+  names the judge.
 
 *Dates:* the memorandum's only year, in the Institute's scan of it, is
 1946. The Institute's catalogue record ("1946 interview") and Lipton
@@ -52,8 +55,8 @@ finding aid give 1947 instead. The date 5 December 1947 is Dawson's,
 and Morgenstern's opening lines themselves leave the memorandum's dates
 to be checked later.
 
-**What is NOT attested:** the argument itself. Gödel never wrote it down,
-and Morgenstern did not record its content. Everything past "there was an
+**What is NOT attested:** the argument itself. No written version by
+Gödel is known, and Morgenstern did not record its content. Everything past "there was an
 argument" is reconstruction, including everything in this repository.
 
 ## 2. The reconstruction premise
@@ -83,12 +86,12 @@ its own terms. The other is live:
 > ...no State, without its Consent, shall be deprived of its equal
 > Suffrage in the Senate.
 
-This clause protects equal state suffrage. **It does not protect
-itself.** Article V is an ordinary article, amendable by the ordinary
-Article V process. That is precisely the configuration of **Movement B**:
-a guard that guards the provisions but not the guard. The two-step —
-amend Article V to delete the proviso, then amend the Senate — is exactly
-`entrenchment_bypassed`.
+This clause protects equal state suffrage. **It does not, in its text,
+protect itself.** On the reading **Movement B** formalizes, Article V is
+an ordinary article, amendable by the ordinary Article V process: a
+guard that guards the provisions but not the guard. The two-step —
+amend Article V to delete the proviso, then amend the Senate — has the
+shape of `entrenchment_bypassed`.
 
 Whether this two-step is *lawful* is contested among constitutional
 scholars; whether it is *formally derivable* in a system that models
@@ -100,24 +103,44 @@ and does not try to. See [LIMITATIONS.md](LIMITATIONS.md).
 
 - **Weimar Constitution (1919), Article 76** — permitted constitutional
   amendment by a two-thirds majority of the Reichstag, with **no
-  substantive limits whatever**. Movement A's regime `VA` is Article 76.
+  substantive limits whatever**. Movement A's regime `VA` is modelled on
+  Article 76.
 - **Article 48** — emergency decree powers of the Reichspräsident.
-- **Ermächtigungsgesetz ("Enabling Act"), 23 March 1933** — passed as a
-  constitutional amendment *under Article 76*, transferring legislative
-  power to the cabinet, including power to deviate from the constitution.
+- **Ermächtigungsgesetz ("Enabling Act"), 23 March 1933** — passed with
+  the two-thirds majority a constitutional amendment needed *under
+  Article 76*, transferring legislative power to the cabinet, including
+  power to deviate from the constitution. **The vote was coerced.** The
+  81 KPD mandates had been annulled under the Reichstag Fire Decree of
+  28 February; 26 SPD deputies were in "protective custody" or had fled;
+  the standing orders were changed at the start of the sitting so that
+  absent deputies could count as present; the SS cordoned the Kroll
+  Opera House and armed SA men stood inside. (By the Bundestag's
+  account the two-thirds would have been reached even without the
+  annulled mandates.) Sources: Deutscher Bundestag, "23. März 1933:
+  Reichstag billigt „Ermächtigungsgesetz“",
+  <https://www.bundestag.de/dokumente/textarchiv/1933-03-23-ermaechtigungsgesetz-938540>;
+  United States Holocaust Memorial Museum, "The Enabling Act of 1933",
+  Holocaust Encyclopedia,
+  <https://encyclopedia.ushmm.org/content/en/article/the-enabling-act>;
+  Anne Frank House, "The Enabling Act: even more power for Hitler",
+  <https://www.annefrank.org/en/timeline/48/the-enabling-act-even-more-power-for-hitler/>.
 
-This is the loophole shape as history rather than as toy: a procedurally
-valid amendment that changed not a substantive right but **who may
-change things**, and thereby repriced everything downstream. It is the
-reason `loophole_decree` is in the file.
+This is the loophole shape as historical analogy rather than as toy: an
+amendment that changed not a substantive right but **who may change
+things**, and thereby repriced everything downstream. The analogy is to
+that transfer of rule-making authority, and only to it. Coercion was
+part of the episode; the toy has no actors and no coercion, and models
+none of it ([LIMITATIONS.md](LIMITATIONS.md) §2). It is the reason
+`loophole_decree` is in the file.
 
-*Confidence:* high on Art. 76, Art. 48, and the Enabling Act's date and
-mechanism.
+*Confidence:* high on Art. 76, Art. 48, the Enabling Act's date and
+mechanism, and the coercion around the vote.
 
 ## 5. Grundgesetz Art. 79(3) — and a nuance the toy flattens
 
-The German Basic Law (1949) was written by people who had just watched
-Article 76 be used as designed. Art. 79(3), the *Ewigkeitsklausel*
+The German Basic Law (1949) was written by people who had watched
+Article 76's procedure carry the Enabling Act, under intimidation (§4).
+Art. 79(3), the *Ewigkeitsklausel*
 ("eternity clause"), declares inadmissible any amendment affecting the
 division of the Federation into Länder, the Länder's participation in
 legislation, or **the principles laid down in Articles 1 and 20** (human
@@ -198,10 +221,67 @@ three. Nothing in the Lean development depends on them.
 
 - **Kurt Gödel**, "Über formal unentscheidbare Sätze der Principia
   Mathematica und verwandter Systeme I" (1931). The second incompleteness
-  theorem is the rhyme the repository is claiming, and the claim is only
-  a rhyme: `eternity_holds` is a consistency certificate for system C
-  proved in a strictly stronger metasystem (Lean), and system C's own
-  resources — Movement D — cannot keep the certificate's hypotheses true.
+  theorem is an analogy the repository draws, and only an analogy:
+  `eternity_holds` is a safety theorem about system C, proved in Lean
+  with `V` held fixed, and Movement D shows it failing once capture can
+  change the recognizer.
   **No formal reduction of Gödel II to the constitutional case is claimed
   or attempted.** See [LIMITATIONS.md](LIMITATIONS.md) §"The rhyme is a
   rhyme".
+
+## 9. Related work
+
+- **Valeria Zahoransky and Christoph Benzmüller**, "Modelling the US
+  Constitution to Establish Constitutional Dictatorship", in *MIREL 2019:
+  Proceedings of the 4th International Workshop on MIning and REasoning
+  with Legal texts*, co-located with JURIX 2019, Madrid, 11 December
+  2019, CEUR Workshop Proceedings vol. 2632 (2020), pp. 1–13,
+  <https://ceur-ws.org/Vol-2632/MIREL-19_paper_1.pdf>. The authors are
+  as the PDF lists them; some catalogue records give only the first.
+- **Valeria Zahoransky**, *Modelling the US Constitution in HOL: On
+  establishing a dictatorship with Gödel*, bachelor's thesis, Freie
+  Universität Berlin, 23 August 2019,
+  <https://www.mi.fu-berlin.de/inf/groups/ag-ki/Theses/Completed-theses/Bachelor-theses/2019/Zahoransky/index.html>.
+  The paper grew out of it. Its Isabelle/HOL theory files are public in
+  the LogiKEy repository,
+  <https://github.com/cbenzmueller/LogiKEy/tree/master/2020-DataInBrief-Data/US-Constitution-Loophole>,
+  described in C. Benzmüller et al., "LogiKEy workbench: Deontic logics,
+  logic combinations and expressive ethical and legal reasoning
+  (Isabelle/HOL dataset)", *Data in Brief* 33 (2020) 106409,
+  <https://doi.org/10.1016/j.dib.2020.106409>.
+
+This is an earlier machine-checked model of the same anecdote.
+
+**What it formalizes.** Guerra-Pujol's reconstruction — which the paper
+says plainly is not Gödel's own argument: amend Article V to drop its
+protection of equal Senate suffrage, then pass an amendment giving the
+President legislative, executive, and judicial power. Dictatorship is
+one institution holding all three.
+
+**How.** A higher-order temporal logic with a single "next" operator,
+embedded in classical higher-order logic and checked in Isabelle/HOL.
+The constitution's state at each of three time instants is given by
+axioms; from them the authors prove that there is no dictatorship at
+the first two instants and that there is one at the third, and Nitpick
+finds a model of the axioms. The first amendment's effect is itself
+written into the axioms: in the paper's words, the amendment to Art. V
+"is implemented by simply not using ⌊X omsp⌋<sub>t1</sub> as axiom".
+
+**What it models that this repository does not.** Article V's two
+stages, proposal and ratification; its actual entrenched content, equal
+Senate suffrage; a separation of powers among three named institutions;
+explicit time; and amendments as formulas whose ratification makes them
+valid. The thesis adds a search of the documentary record for Gödel's
+own argument — his letters to his mother, Morgenstern's diaries — which
+found none, and a discussion of the frame problem and *lex posterior*.
+
+**What this repository adds.** A definitional model: no axiom
+declarations; every step, the repeal of a guard included, is an
+amendment checked by the validity predicate in force; and each proof's
+axiom dependencies are enforced by the build. Reachability over all
+histories of a transition system rather than one timeline, which lets
+it prove safety results (`majority_blocked`, `eternity_holds`) beside
+the attacks. And defences and their limits — self-entrenchment,
+recognizer capture, a ratchet, a fork, and the `ascend` schema
+(Movements C–G) — with an executable checker, proved sound, for
+Movements A–D.

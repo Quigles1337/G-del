@@ -34,6 +34,8 @@ https://polyformproject.org/licenses/noncommercial/1.0.0
   The distance between `regime_gate_holds` and `clause_ratchet_bypassed`
   is the distance between physics and law. "The ratchet is not a new
   kind of defence" is no longer a conjecture.
+  1.0.1 note: for "C's externally-certified soundness" above, read
+  "C's soundness, proved with `V` held fixed".
 -/
 import Godel.Core
 import Godel.MovementA
@@ -171,8 +173,8 @@ theorem clause_ratchet_bypassed :
    the gate AND its own repeal. This holds — by exactly the proof shape
    of Movement C. Which is the point: the ratchet's sound form is not a
    new defence. It is self-entrenchment with a procedural payload, and
-   it inherits everything C inherits: a safety certificate provable
-   only out here, and a recognizer (`base.strictInterp` — already in
+   it inherits everything C inherits: a safety theorem proved with `V`
+   held fixed, and a recognizer (`base.strictInterp` — already in
    the state, waiting) that Movement D's construction captures verbatim,
    one type over. We do not re-prove what lifts mechanically.
    ═══════════════════════════════════════════════════════════════════ -/
@@ -249,10 +251,11 @@ theorem selfentrenched_guards_no_content :
    a substantive one: every defence, honestly modelled, is a provision,
    and every provision faces the same trilemma —
      unguarded        → bypassed        (B, E2)
-     self-guarded     → sound, but certified only from outside (C, E3)
-     and always       → recognizer-captured                    (D).
-   Freezing a level is a thing modellers can do and constitutions
-   cannot. That gap is the loophole. It was never about Article V.
+     self-guarded     → sound, while `V` is held fixed         (C, E3)
+     and always       → recognizer-captured, under D's capture premise (D).
+   Freezing a level is a thing modellers can do and, in the model,
+   constitutions cannot. That gap is the loophole. It was never about
+   Article V.
    ═══════════════════════════════════════════════════════════════════ -/
 
 end Godel

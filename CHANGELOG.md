@@ -4,6 +4,111 @@ All notable changes to "Gödel's Loophole, kernel-checked". Versions
 follow [Semantic Versioning](https://semver.org/); the theorem
 statements are the public interface.
 
+## 1.0.1 — 2026-10-25
+
+Documentation only, after an external review found prose that claimed
+more than the theorems prove, one historical episode mischaracterized,
+and an earlier formalization of the same anecdote uncited.
+No theorem statement, proof, or definition changed.
+The ledger is still 56 theorems, zero axioms, zero `sorry`, and with
+comments stripped every `.lean` file is identical to 1.0.0.
+
+### Corrections (factual)
+
+- The README's opening had Gödel telling Einstein and Morgenstern of
+  the flaw on the drive to Trenton. Per Morgenstern's memorandum he told
+  Morgenstern, months before the hearing; Morgenstern told Einstein, and
+  both urged him not to raise it; in Trenton the examiner cut him off.
+  "He never wrote it up" — and "never wrote it down" in SOURCES, the
+  standalone header and `CITATION.cff` — is now "no written version is
+  known". Movement G's closing no longer says Einstein and Morgenstern
+  stopped him.
+- Basic Law timing. Movement C's header said Art. 79(3) was "written one
+  year after Gödel's hearing"; the hearing is dated December 1947 (1946
+  in the memorandum) and the Basic Law is 1949. That header and
+  ARGUMENT also said the clause protects itself; that is German
+  doctrine, not the text (SOURCES §5), and they now say so.
+- The Enabling Act was called "a procedurally valid amendment", and the
+  Basic Law's authors were said to have watched Article 76 "be used as
+  designed". SOURCES §4 now records the coercion around the vote of
+  23 March 1933 — the 81 KPD mandates annulled, 26 SPD deputies in
+  custody or fled, the standing orders changed so that absentees counted
+  as present, the SS and armed SA at the Kroll Opera House — citing the
+  Bundestag, the USHMM and the Anne Frank House, and keeps the episode
+  only as an analogy for a transfer of rule-making authority.
+- "Article V constrains HOW, never WHAT" (Movement A, THEOREMS) is false
+  of Article V, whose equal-suffrage proviso is Movement B's subject. It
+  now reads "the amendment rule", and Movement A no longer calls the
+  model's amendment rule "Article V".
+
+### Clarifications
+
+- Gödel II. `eternity_holds` is a safety guarantee over `VC`-legal
+  histories, proved in Lean about system C with `V` held fixed. It was
+  called a "consistency certificate" proved in "a strictly stronger
+  metasystem", and the README called the Gödel II rhyme "precise",
+  against LIMITATIONS §7. The parallel is now an analogy everywhere,
+  with no ordering of proof-theoretic strength. ARGUMENT's section is
+  "The Gödel II analogy, and its limits", and states the theorem with
+  its standard conditions.
+- Inexpressibility. Nothing defines a language of recognition
+  statements or proves non-expressibility; Movement G adds recognition
+  as an operation outside the move interface. The README, ARGUMENT,
+  `MovementG.lean`, `Receipts.lean` and the ROADMAP now call that the
+  model's boundary, and no longer say the guard "could not have been"
+  consulted. `contract_inexpressible` is unchanged; its gloss says what
+  it states — no transaction changes the contract — not that none
+  "mentions" it.
+- The guard. In `guard_regress`, `g` is a parameter of `ascendG`, not
+  world state, and the outer repoint replaces the guarded level's world
+  without consulting it. The guard is bypassed, not "swapped wholesale —
+  guard, world, history, all of it".
+- Movement G's scope. The schema is about the `ascend` construction,
+  which adds an unrestricted repoint at 51 that never consults the
+  machine's law; it does not show that real institutions have such a
+  move, or that every conceivable defence fails (LIMITATIONS §12). The
+  README's G row and prose, ARGUMENT, THEOREMS, the ROADMAP and the
+  `CITATION.cff` abstract say so. "Every system anyone will ever
+  propose" is now "any with this shape", and lawful-exit proposals "can
+  be modelled as" a predicate `g`.
+- Zero axioms. The README says the count is about the proofs' logical
+  dependencies; the model's assumptions live in its definitions.
+- Model-relative wording. The README makes "one reconstruction" of
+  Gödel's argument precise, and no text says what Gödel saw. Legal
+  reachability is decided "inside the model"; the `CITATION.cff`
+  abstract no longer says reachability of dictatorship "is a theorem",
+  which Movement C contradicts. Article V's double amendment carries its
+  qualification beside the claim: its lawfulness is disputed, and
+  Movement B formalizes one reading. Freezing every level is "the
+  model's reading"; recognizer capture holds "under D's capture
+  premise"; what constitutions cannot freeze is "in the model"; Movement
+  F's fork clause is a modelling choice, not "the finding".
+- Prediction blocks stay as recorded. Where one uses wording this
+  release corrects, the verdict of Movement E, F or G carries a
+  "1.0.1 note". The ROADMAP's Movement G resolution is aligned; the
+  preregistered target above it is unchanged.
+
+### Added
+
+- Related work: Zahoransky and Benzmüller, "Modelling the US
+  Constitution to Establish Constitutional Dictatorship" (MIREL 2019,
+  CEUR-WS vol. 2632), an earlier machine-checked model of the same
+  anecdote in Isabelle/HOL, with Zahoransky's 2019 thesis and the public
+  LogiKEy theory files. SOURCES §9 compares the two; the README's
+  Sources paragraph points there.
+- LIMITATIONS §2: a "No coercion" bullet.
+- The README subtitle "A Lean 4 study of self-amendment, entrenchment,
+  and recognition", and sources for Judge Forman's name (Lipton and
+  Regan) and its spelling (the Federal Judicial Center).
+- DOIs. This release is
+  [10.5281/zenodo.23648908](https://doi.org/10.5281/zenodo.23648908);
+  the concept DOI,
+  [10.5281/zenodo.23629066](https://doi.org/10.5281/zenodo.23629066),
+  covers all versions and resolves to the latest. `CITATION.cff` gives
+  the version DOI as `doi` and the concept DOI under `identifiers`; the
+  README's badge points at the concept DOI, and "How to cite" lists the
+  version DOIs of 1.0.0 and 1.0.1.
+
 ## 1.0.0 — 2026-10-24
 
 The first citable release. No theorem statement or proof changed; the

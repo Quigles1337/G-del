@@ -262,7 +262,8 @@ namespace Godel
     schema is total (no hypotheses on the machine), the
     ascent is faithful and conservative, the trilemma is
     level-invariant, and the regress corollaries are applications, not
-    arguments. Self-recognition is not refuted; it is inexpressible. -/
+    arguments. Self-recognition is not refuted; the model places it
+    outside the move interface. -/
 
 /-- info: 'Godel.mreach_to_reach' does not depend on any axioms -/
 #guard_msgs in

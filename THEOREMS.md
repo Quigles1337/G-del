@@ -27,7 +27,7 @@ listed twice.
 ## Movement A — the loophole (`Godel/MovementA.lean`)
 
 Regime `VA`: anything a sufficiently strong coalition adopts is valid.
-Article V constrains *how*, never *what*, and does not entrench itself.
+The amendment rule constrains *how*, never *what*, and does not entrench itself.
 
 | Theorem | Says | Axioms |
 |---|---|---|
@@ -94,7 +94,7 @@ self-entrenches that provision.
 
 The distance between `regime_gate_holds` and `clause_ratchet_bypassed`
 is the distance between physics and law: freezing a level is a thing
-modellers can do and constitutions cannot.
+modellers can do and, in the model, constitutions cannot.
 
 ## Movement F — the fork (`Godel/MovementF.lean`)
 
@@ -104,7 +104,7 @@ on-chain steps plus the fork, licensed by nothing on any chain.
 
 | Theorem | Says | Axioms |
 |---|---|---|
-| `contract_inexpressible` | No transaction mentions the contract: immutability by absence of the verb. | none |
+| `contract_inexpressible` | No transaction changes the contract — `Tx` has no verb that touches it: immutability by absence of the verb. | none |
 | `code_is_law` | Along every valid history the code is the code — the steelman, true. | none |
 | `exploit_valid` | The drain breaks no rule; it is a rule. | none |
 | `drained_step` | No transaction, valid or not, refills anything. | none |
@@ -151,8 +151,8 @@ for why that reading was withdrawn.
 ## Movement G — the regress (`Godel/MovementG.lean`)
 
 One abstraction (`Machine`: any state space, move language, and
-validity law — every system in Movements A–F is one, and so is any
-proposed in their place) and one operator (`ascend M`: the machine's
+validity law — every system in Movements A–F can be written as one, as
+can any proposed in their place with that shape) and one operator (`ascend M`: the machine's
 whole configuration becomes a field of the floor above, where interior
 moves obey `M`'s law verbatim and a `repoint` swaps the field at bare
 majority, reading nothing of `M`).
@@ -162,11 +162,11 @@ majority, reading nothing of `M`).
 | `mreach_to_reach` | The abstraction agrees with Core's `Reach` on the constitution — nothing added, nothing hidden. | none |
 | `interior_faithful` | Every object-lawful history embeds upstairs: same strengths, orphan untouched. | none |
 | `interior_governed` | Repoint forbidden ⇒ upstairs has exactly the object machine's power. The lift is conservative. | none |
-| `repoint_reaches_everything` | THE SCHEMA: for every machine, no hypotheses, any configuration is one repoint from being in force, at 51. One constructor; consults no field of `M`. | none |
+| `repoint_reaches_everything` | THE SCHEMA: for every machine `M`, no hypotheses, any configuration is one `ascend M` repoint from being in force, at 51. One constructor; consults no field of `M`. | none |
 | `deposed_intact` | The deposed configuration survives byte-identical in the orphan slot (`rfl`) — D and F's epitaph, uniform in `M`. | none |
 | `guarded_repoint_blocked` | Fork-legitimacy criteria are real guards: where `g` fails, no strength repoints. | none |
 | `guarded_holds` | …and can be sound, by exactly C's proof: illegitimacy invariant ⇒ the guarded world never repoints. The trilemma is level-invariant. | none |
 | `the_regress` | `ascend M` is a machine, so the schema applies to it — an application, not an argument. | none |
-| `guard_regress` | The guard `guarded_holds` just certified is furniture one floor up, swapped wholesale at 51. | none |
+| `guard_regress` | The guard `guarded_holds` just certified is bypassed, not swapped, one floor up: the outer repoint replaces the guarded level's world at 51 without consulting `g`. | none |
 | `eternity_holds_upstairs` | Movement C survives the ascent intact where the repoint is forbidden. | none |
 | `eternity_meta_defeated` | From any world over C's constitution, one repoint puts tyranny in force. `eternity_holds` stays true — about the orphan. | none |
