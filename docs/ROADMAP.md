@@ -124,21 +124,28 @@ and would identify exactly where the tower bottoms out.
 
 **Resolution (`Godel/MovementG.lean`).** Stated and proved, as a schema
 over a first-class type of machines: `repoint_reaches_everything` — for
-*every* machine, with zero hypotheses about it, every configuration is
-one repoint from being in force at bare majority, by a one-constructor
-proof that consults no field of the machine. The triviality of that
-step is the finding, not a failure: it is the formal content of "the
-guard is not consulted." The suspicion above is now two theorems: a
-fork-guard in the world-level regime is the modeller's fiat (the
-`ascend` operator itself), and a fork-guard in world state (`ascendG`)
-is real, can be *sound* by exactly Movement C's argument
-(`guarded_holds`) — and is furniture one floor up (`guard_regress`,
-which is the schema applied to its own output). The "more interesting
-negative" also landed, in refined form: an expressible class of guards
-that binds *does* exist, and it binds only its own floor. The tower
-bottoms out nowhere inside the mathematics — bounded below and above by
-inexpressibility (F's contract cannot mention its repeal; no level's
-law can mention its own being-in-force). Faithfulness pair
+*every* machine `M`, with zero hypotheses about it, every configuration
+is one `ascend M` repoint from being in force at bare majority, by a
+one-constructor proof that consults no field of the machine. The scope
+is the `ascend` construction, which adds an unrestricted repoint at 51
+that never consults `M`'s validity law: the schema shows what follows
+once such a move exists, not that real institutions have one or that
+every conceivable defence fails (LIMITATIONS §12). The triviality of
+that step is the finding, not a failure: it is the formal content of
+"the guard is not consulted." The suspicion above is now two theorems:
+a fork-guard in the world-level regime is the modeller's fiat (the
+`ascend` operator itself), and a fork-guard as a criterion on world
+state (`ascendG`) is real, can be *sound* by exactly Movement C's
+argument (`guarded_holds`) — and is bypassed, not swapped, one floor
+up: the outer repoint replaces the guarded level's world without
+consulting it (`guard_regress`, which is the schema applied to its own
+output). The "more interesting negative" also landed, in refined form:
+an expressible class of guards that binds *does* exist, and it binds
+only its own floor. The tower bottoms out nowhere inside the
+mathematics; at both ends it meets the model's boundary, where
+recognition enters as an operation outside the move interface (F's
+contract has no verb for its repeal; no level's law is consulted about
+its own being-in-force). Faithfulness pair
 (`interior_faithful`, `interior_governed`) certifies the ascent is
 conservative: not a strawman. The development closes.
 

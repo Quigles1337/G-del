@@ -51,8 +51,11 @@ https://polyformproject.org/licenses/noncommercial/1.0.0
   recognizer. It is a TOTAL DELEGATION to the recognizer, with the
   interpretive shock-absorbers removed. Deleting the interpreter from
   the language does not remove interpretation; it moves all of it,
-  undiluted, to the one question no object language contains:
+  undiluted, to the one question this object language does not contain:
   which system is the one in force?
+  1.0.1 note: in clause 3, "an illegal state" means code-invalid in the
+  model — unreachable from genesis by valid transactions
+  (`canonical_history_invalid`) — not unlawful.
 -/
 import Godel.Core
 
@@ -111,9 +114,9 @@ inductive ReachC : Chain → Chain → Prop where
    ═══════════════════════════════════════════════════════════════════ -/
 
 /-- Stronger than any guard in Movements A–E: no transaction — valid,
-    invalid, anyone's — so much as MENTIONS the contract. C needed an
-    invariant; this needs `rfl` twice. Movement D's capture move does
-    not exist in this language. -/
+    invalid, anyone's — CHANGES the contract, because `Tx` has no verb
+    that touches it. C needed an invariant; this needs `rfl` twice.
+    Movement D's capture move does not exist in this language. -/
 theorem contract_inexpressible :
     ∀ (tx : Tx) (c : Chain), (tx.apply c).contract = c.contract := by
   intro tx c
@@ -191,9 +194,9 @@ def initW : World := { canonical := genesis, orphan := genesis }
 /-- World validity. On-chain moves must satisfy the canonical chain's
     code — that much really is law, and strength is irrelevant to it.
     The fork asks only for a social majority, and is licensed by
-    NOTHING in any contract's language — not as a modelling choice but
-    as the finding: like Movement D's capture move, it is
-    always-available precisely because no object text refers to it. -/
+    NOTHING in any contract's language — a modelling choice, on the
+    premise behind Movement D's capture move: it is always available
+    because no object text refers to it (docs/LIMITATIONS.md §6, §12). -/
 def VW (n : Nat) (w : World) (m : Move) : Prop :=
   (∃ tx, m = .onchain tx ∧ Vcode w.canonical tx) ∨
   (∃ c, m = .fork c ∧ n ≥ 51)
@@ -290,8 +293,8 @@ theorem canonical_history_invalid : ¬ ReachC genesis bailout := by
    genuinely deletes Movement D's interior attack (`code_is_law`,
    `promise_holds_without_fork`). What remains is the exterior form of
    D, undiluted: not "how shall the clause be read?" but "which system
-   is the one in force?" — a question no object language contains, and
-   so no object language can answer, guard, or price
+   is the one in force?" — a question this object language does not
+   contain, and so cannot answer, guard, or price
    (`fork_always_open`). The DAO built C's dream and discovered D had
    been living outside the building all along.
 

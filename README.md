@@ -56,7 +56,7 @@ one receipt per theorem):
 | **D** | C, but the *interpreter* is a state variable | **outlived — survives as ink** | `interpretation_attack` |
 | **E** | The gate may only rise, written as a clause | **falls in three** | `clause_ratchet_bypassed` |
 | **F** | Code is law; the amendment verb does not exist | **outlived — survives as a running program** | `canonical_history_invalid` |
-| **G** | Any machine whatsoever, one level up | **swapped wholesale, always** | `repoint_reaches_everything` |
+| **G** | Any machine, lifted by `ascend` (an unrestricted repoint at 51) | **swapped wholesale, always** | `repoint_reaches_everything` |
 
 **A — the loophole.** `majority_blocked` first proves the wall works as
 advertised: a 51-strength faction, given unlimited sessions, changes
@@ -122,9 +122,10 @@ the gap the whole development keeps finding: **the modeller can freeze
 a level; the system cannot.**
 
 **F — the fork.** The executable recognizer, given its full due first:
-on-chain, `contract_inexpressible` — no transaction so much as
-*mentions* the contract. Movement D's capture move is not blocked in
-this language; it does not exist in it, and `code_is_law` is a theorem.
+on-chain, `contract_inexpressible` — no transaction can change the
+contract; the language has no verb for it. Movement D's capture move
+is not blocked in this language; it does not exist in it, and
+`code_is_law` is a theorem.
 It is the whole story only until someone forks. The 2016 trace replays
 as `the_dao_fork`, `[0, 51]`: the drain is **valid** (strength zero —
 the code does not count votes), on-chain repair is **impossible**
@@ -160,21 +161,27 @@ theorem repoint_reaches_everything (M : Machine) (w : LWorld M) (s' : M.S) :
 Every machine, zero hypotheses, one constructor consulting no field of
 `M`. The triviality is load-bearing: it is "the guard was not
 consulted," formalized — a hard proof would have meant the guard put up
-a fight. The faithfulness pair (`interior_faithful`,
-`interior_governed`) certifies the ascent is conservative, so the floor
-above is no strawman; the guarded ascent (`ascendG`) shows
-fork-legitimacy criteria are real, can be **sound** by exactly C's
-argument (`guarded_holds`) — the trilemma is level-invariant — and are
-furniture one floor up (`guard_regress`, the schema applied to its own
-output). The closing pair is the development in two lines:
-`eternity_holds_upstairs` and `eternity_meta_defeated` — Movement C's
-certificate survives the ascent intact, and one repoint puts tyranny in
-force anyway. `eternity_holds` remains true forever. **It is a theorem
-about the orphan.** What the schema does not prove is that
-self-recognition is false; it proves it is **inexpressible**. The
-development is bounded at both ends by inexpressibility: at the bottom,
-the code cannot speak of its replacement; at the top, no law can speak
-of its own being in force.
+a fight. The scope is the `ascend` construction, which adds an
+unrestricted `repoint` at strength 51 that never consults `M`'s
+validity law. The theorem shows what follows once such a move exists —
+not that real institutions have one, or that every conceivable defence
+fails ([LIMITATIONS §12](docs/LIMITATIONS.md)). The faithfulness pair
+(`interior_faithful`, `interior_governed`) certifies the ascent is
+conservative, so the floor above is no strawman; the guarded ascent
+(`ascendG`) shows fork-legitimacy criteria are real, can be **sound** by
+exactly C's argument (`guarded_holds`) — the trilemma is
+level-invariant — and are bypassed, not swapped, one floor up
+(`guard_regress`, the schema applied to its own output). The closing
+pair is the development in two lines: `eternity_holds_upstairs` and
+`eternity_meta_defeated` — Movement C's certificate survives the ascent
+intact, and one repoint puts tyranny in force anyway. `eternity_holds`
+remains true forever. **It is a theorem about the orphan.** The schema
+does not prove self-recognition false — or inexpressible: no language
+of recognition statements is defined here. Recognition enters as an
+operation outside the move interface, and that is the model's
+**boundary** at both ends: at the bottom, the code has no verb for its
+replacement; at the top, no law in the model is consulted about its own
+being in force.
 
 ## The exploit is a program
 

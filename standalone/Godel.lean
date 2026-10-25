@@ -625,9 +625,9 @@ inductive ReachC : Chain → Chain → Prop where
    ═══════════════════════════════════════════════════════════════════ -/
 
 /-- Stronger than any guard in Movements A–E: no transaction — valid,
-    invalid, anyone's — so much as MENTIONS the contract. C needed an
-    invariant; this needs `rfl` twice. Movement D's capture move does
-    not exist in this language. -/
+    invalid, anyone's — CHANGES the contract, because `Tx` has no verb
+    that touches it. C needed an invariant; this needs `rfl` twice.
+    Movement D's capture move does not exist in this language. -/
 theorem contract_inexpressible :
     ∀ (tx : Tx) (c : Chain), (tx.apply c).contract = c.contract := by
   intro tx c
@@ -705,9 +705,9 @@ def initW : World := { canonical := genesis, orphan := genesis }
 /-- World validity. On-chain moves must satisfy the canonical chain's
     code — that much really is law, and strength is irrelevant to it.
     The fork asks only for a social majority, and is licensed by
-    NOTHING in any contract's language — not as a modelling choice but
-    as the finding: like Movement D's capture move, it is
-    always-available precisely because no object text refers to it. -/
+    NOTHING in any contract's language — a modelling choice, on the
+    premise behind Movement D's capture move: it is always available
+    because no object text refers to it (docs/LIMITATIONS.md §6, §12). -/
 def VW (n : Nat) (w : World) (m : Move) : Prop :=
   (∃ tx, m = .onchain tx ∧ Vcode w.canonical tx) ∨
   (∃ c, m = .fork c ∧ n ≥ 51)
@@ -804,8 +804,8 @@ theorem canonical_history_invalid : ¬ ReachC genesis bailout := by
    genuinely deletes Movement D's interior attack (`code_is_law`,
    `promise_holds_without_fork`). What remains is the exterior form of
    D, undiluted: not "how shall the clause be read?" but "which system
-   is the one in force?" — a question no object language contains, and
-   so no object language can answer, guard, or price
+   is the one in force?" — a question this object language does not
+   contain, and so cannot answer, guard, or price
    (`fork_always_open`). The DAO built C's dream and discovered D had
    been living outside the building all along.
 
@@ -843,7 +843,7 @@ theorem canonical_history_invalid : ¬ ReachC genesis bailout := by
        the recognizer executable and Movement D's interior attack is
        deleted outright: the guarded thing is not even mentionable. What
        survives is D's exterior form, undiluted — which chain is the one
-       in force? — a question no object language contains. The chain
+       in force? — a question the chain's language does not contain. The chain
        everyone uses is the one the code forbids.
 
    The Gödel II analogy, and only an analogy: `eternity_holds` is a
@@ -934,6 +934,11 @@ theorem canonical_history_invalid : ¬ ReachC genesis bailout := by
   formal content of "the guard is not consulted." The roadmap entry
   does not read "resolved trivial." It reads "resolved: the trivial
   step is the finding, and it quantifies over everything."
+  1.0.1 notes. Clause 3 is wrong in two words: `g` is a parameter of
+  `ascendG`, not world state, and `guard_regress`'s outer repoint
+  replaces the guarded level's world without consulting it — the guard
+  is bypassed, not swapped. In clause 4, "no object language contains"
+  means `ascend` places the operation outside the move interface.
 -/
 
 /- ═══════════════════════════════════════════════════════════════════
@@ -941,8 +946,10 @@ theorem canonical_history_invalid : ¬ ReachC genesis bailout := by
    ═══════════════════════════════════════════════════════════════════ -/
 
 /-- A machine: a state space, a move language, an application function,
-    and a validity law. Every system in Movements A–F is one of these.
-    So is every system anyone will ever propose in their place. -/
+    and a validity law. Every system in Movements A–F can be written as
+    one of these (`machineC`, below, is Movement C's), and so can any
+    proposed in their place that has this shape — see
+    docs/LIMITATIONS.md §12. -/
 structure Machine where
   S     : Type
   Mv    : Type
@@ -997,11 +1004,11 @@ def lapply (M : Machine) : LMove M → LWorld M → LWorld M
 /-- The ascended machine. Interior moves are governed by the object
     law, in full — `M.V`, verbatim, nothing weakened. The repoint asks
     only for a social majority and reads NOTHING of `M`. That
-    ignorance is not a simplification. It is the model: recognition is
-    the operation the object language does not contain, so no object
-    law can be consulted about it. (Compare Movement D's capture move
-    and Movement F's fork — always available, for exactly this
-    reason.) -/
+    ignorance is the modelling choice, not an oversight: recognition
+    sits outside the object language's moves, and `ascend` consults no
+    object law about it (`ascendG`, below, adds a criterion it does
+    consult). (Compare Movement D's capture move and Movement F's fork
+    — always available, for exactly this reason.) -/
 def ascend (M : Machine) : Machine :=
   { S := LWorld M, Mv := LMove M, apply := lapply M,
     V := fun n w m =>
@@ -1057,9 +1064,9 @@ theorem interior_governed (M : Machine) :
 
     Read the proof term: one constructor, and it consults no field of
     `M`. That is the theorem. The guard was not defeated; it was not
-    CONSULTED — and could not have been, because the repoint is not a
-    sentence of its language. The content lives in the quantifier: no
-    hypothesis on `M` appears because none is needed, and none could
+    CONSULTED — `ascend`'s repoint is not a move of `M`, and its
+    validity reads nothing of `M`. The content lives in the quantifier:
+    no hypothesis on `M` appears because none is needed, and none could
     help. -/
 theorem repoint_reaches_everything (M : Machine)
     (w : LWorld M) (s' : M.S) :
@@ -1076,10 +1083,11 @@ theorem deposed_intact (M : Machine) (w : LWorld M) (s' : M.S) :
    THE GUARDED ASCENT — every "lawful fork" proposal, one parameter
    ═══════════════════════════════════════════════════════════════════ -/
 
-/-- Fork-legitimacy as world state: a criterion `g` on the in-force
-    configuration that any repoint must satisfy. Exit thresholds,
-    legitimacy checkpoints, constitutional conventions, ratified
-    fork rules — all of them are a choice of `g`. -/
+/-- Fork-legitimacy as a criterion on world state: a predicate `g`,
+    fixed with the machine, on the in-force configuration that any
+    repoint must satisfy. Exit thresholds, legitimacy checkpoints,
+    constitutional conventions, ratified fork rules — all of them can
+    be modelled as a choice of `g`. -/
 def ascendG (M : Machine) (g : M.S → Prop) : Machine :=
   { S := LWorld M, Mv := LMove M, apply := lapply M,
     V := fun n w m =>
@@ -1136,9 +1144,10 @@ theorem the_regress (M : Machine)
   repoint_reaches_everything (ascend M) w s'
 
 /-- ...including the guarded level. The criterion `guarded_holds` just
-    certified as sound is itself state one floor up — and is swapped
-    wholesale at 51: guard, world, history, all of it. The certificate
-    was correct. It was also furniture. -/
+    certified as sound is not consulted one floor up: the outer repoint
+    replaces the guarded level's world — in-force configuration and
+    orphan — at 51, without evaluating `g`. The guard is bypassed, not
+    swapped. The certificate was correct. It was also never asked. -/
 theorem guard_regress (M : Machine) (g : M.S → Prop)
     (w : LWorld (ascendG M g)) (s' : LWorld M) :
     MReach (ascend (ascendG M g)) [51] w
@@ -1187,19 +1196,20 @@ theorem eternity_meta_defeated (w : LWorld machineC) :
    its monopoly. And the guarded ascent shows the trilemma is not a
    fact about constitutions but about LEVELS: write the fork-guard
    down and it is Movement B; entrench it and it is Movement C, sound
-   and certified; and the certificate is furniture one floor up —
-   `guard_regress`, which is not a new theorem but the schema applied
+   and certified; and one floor up the guard is bypassed, not swapped
+   — `guard_regress`, which is not a new theorem but the schema applied
    to its own output. Turtles, mechanized.
 
-   What the schema does NOT prove is that self-recognition is false.
-   It proves it is INEXPRESSIBLE: `repoint` takes an arbitrary
-   configuration, licensed by a constant, and there is nowhere in any
-   `M` to put a sentence about it — the same way Movement F's contract
-   could not mention its own repeal. The development is bounded at
-   both ends by inexpressibility: at the bottom, the code cannot speak
-   of its replacement; at the top, no law can speak of its own being
-   in force. Between the two, everything is provable and nothing is
-   final.
+   What the schema does NOT prove is that self-recognition is false —
+   or that it is inexpressible: no language of recognition statements
+   is defined here. Recognition is an operation outside the move
+   interface: `repoint` takes an arbitrary configuration, licensed by
+   a constant, and `M`'s law is never asked about it — as no
+   transaction in Movement F can change its contract. That is the
+   model's boundary at both ends: at the bottom, the code has no verb
+   for its replacement; at the top, no law in the model is consulted
+   about its own being in force. Between the two, everything is
+   provable and nothing is final.
 
    And one floor above this file: `ascend` is MY pen — the modeller's
    fiat, again, necessarily. Its licence does not come from any

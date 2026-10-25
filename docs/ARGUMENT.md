@@ -175,9 +175,9 @@ flip.
 
 Honesty first, because the steelman is stronger than its critics allow.
 On the chain, `Vcode` achieves what no regime in Movements A–E could:
-`contract_inexpressible` proves that no transaction so much as
-*mentions* the contract. Not guarded — **unguardable**, because
-immutability here is the absence of the verb. Movement D's capture move
+`contract_inexpressible` proves that no transaction changes the
+contract — the language has no verb for it. Not guarded —
+**unguardable**, because immutability here is the absence of the verb. Movement D's capture move
 is not blocked in this language; it does not exist in it. `code_is_law`
 is true along every valid history, and `promise_holds_without_fork`
 completes the picture: delete the fork and the promise holds at the
@@ -235,9 +235,9 @@ Movement G asks the question the six were instances of.
 
 `Machine` abstracts the entire development into one type: a state
 space, a move language, an application function, a validity law. Every
-system in Movements A–F is an inhabitant. So is every system anyone
-will propose in their place. `ascend M` builds the floor above any of
-them: the machine's whole configuration becomes one field, `inForce`;
+system in Movements A–F can be written as an inhabitant, and so can any
+proposed in their place that has this shape (LIMITATIONS §12).
+`ascend M` builds the floor above any of them: the machine's whole configuration becomes one field, `inForce`;
 interior moves obey `M`'s law verbatim; and a `repoint` swaps the field
 wholesale, at bare majority, reading nothing of `M`.
 
@@ -261,13 +261,17 @@ executable, anything — every configuration is one repoint from being
 the one in force. Read the proof term: one constructor, and it consults
 no field of `M`. The triviality is load-bearing. A hard proof would
 have meant the guard put up a fight; the one-liner is the formal
-content of "the guard was not consulted — and could not be, because the
-repoint is not a sentence of its language." The content lives in the
-quantifier: no hypothesis on `M` appears because none could help.
+content of "the guard was not consulted": `ascend`'s repoint is not a
+move of `M`, and its validity reads nothing of `M`. The content lives in
+the quantifier: no hypothesis on `M` appears because none could help.
+That is a fact about `ascend`, which adds the repoint; it does not show
+that real institutions have such a move, or that every conceivable
+defence fails (LIMITATIONS §12).
 
 Give the fork a legitimacy criterion, then. Every "lawful exit"
-proposal — thresholds, checkpoints, ratified fork rules — is a
-predicate `g` on the in-force configuration, and `ascendG` installs it.
+proposal — thresholds, checkpoints, ratified fork rules — can be
+modelled as a predicate `g` on the in-force configuration, and
+`ascendG` installs it.
 The guard is real: `guarded_repoint_blocked`. It can even be **sound**,
 by exactly Movement C's argument: `guarded_holds` proves that where the
 object law never manufactures legitimacy, the guarded world never
@@ -276,10 +280,10 @@ a fact about **levels**, and it holds on every floor.
 
 And then the regress, which is not a new theorem but an application:
 `ascend M` is a machine, so the schema applies to it — `the_regress`,
-one line. The guard that `guarded_holds` just certified is itself state
-one floor up, and `guard_regress` swaps it wholesale — guard, world,
-history, all of it — also one line. The certificate was correct. It was
-also furniture. No new idea exists at any height, or is needed.
+one line. The guard that `guarded_holds` just certified is not
+consulted one floor up: `guard_regress` replaces the guarded level's
+world at 51 without evaluating `g` — bypassed, not swapped — also one
+line. The certificate was correct. It was also never asked. No new idea exists at any height, or is needed.
 Turtles, mechanized.
 
 The instantiation closes the arc. `eternity_holds_upstairs`: Movement C
@@ -290,13 +294,14 @@ one repoint at 51 puts tyranny in force. There is no contradiction
 between the two, and that is the picture: `eternity_holds` remains true
 forever. **It is a theorem about the orphan.**
 
-What the schema does not prove is that self-recognition is false. It
-proves it is **inexpressible**: `repoint` takes an arbitrary
-configuration and is licensed by a constant, and there is nowhere in
-any `M` to put a sentence about it — the same way Movement F's contract
-could not mention its own repeal. The development is bounded at both
-ends by inexpressibility: at the bottom, the code cannot speak of its
-replacement; at the top, no law can speak of its own being in force.
+What the schema does not prove is that self-recognition is false — or
+that it is inexpressible; no language of recognition statements is
+defined here. It adds recognition as an operation outside the move
+interface: `repoint` takes an arbitrary configuration, is licensed by a
+constant, and is never put to `M`'s law — as no transaction in
+Movement F can change its contract. That is the model's boundary at
+both ends: at the bottom, the code has no verb for its replacement; at
+the top, no law in the model is consulted about its own being in force.
 Between the two, everything is provable and nothing is final.
 
 ## The Gödel II analogy, and its limits

@@ -18,7 +18,8 @@ abstract: >-
   kind of defence (E); on-chain, code-is-law is a
   theorem, yet the fork goes through at bare majority and the canonical
   post-fork history is code-invalid (F); and, as a schema over every
-  machine, any configuration is one repoint from being in force (G).
+  machine lifted by an unrestricted repoint, any configuration is one
+  repoint from being in force (G).
   56 theorems, no mathlib, no sorry, zero axioms on the pinned
   toolchain. No formal reduction of Gödel's second incompleteness
   theorem to the constitutional case is claimed.
