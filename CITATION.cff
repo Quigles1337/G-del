@@ -6,8 +6,8 @@ abstract: >-
   A toy constitutional state machine in core Lean 4, after the argument
   Kurt Gödel reportedly began at his 1947 U.S. citizenship hearing and
   never wrote down. Models a constitution as a formal system whose rule
-  of change is itself an object-level provision, and proves in seven
-  movements that legal reachability of dictatorship is a theorem: the
+  of change is itself an object-level provision, and proves, in seven
+  movements, what is and is not legally reachable inside the model: the
   amendment rule does not entrench itself (A); an entrenchment clause
   that does not protect itself is a two-step no-op (B); a self-entrenched
   eternity clause is formally sound (C); endogenizing the validity

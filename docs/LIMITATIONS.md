@@ -86,10 +86,10 @@ disjuncts, which is a one-line edit.
 
 ## 7. The rhyme is a rhyme
 
-`eternity_holds` is proved in Lean, a metasystem strictly stronger than
-the object system it certifies, and the object system cannot keep the
-certificate's hypotheses true. That is a genuine structural parallel to
-Gödel's second incompleteness theorem, and it is **only** a parallel.
+`eternity_holds` is a safety theorem about system C, proved in Lean
+with `V` held fixed, and Movement D shows it failing once capture can
+change the recognizer. That resembles Gödel's second incompleteness
+theorem, and it is **only** a resemblance.
 **No formal reduction of Gödel II to the constitutional case is claimed,
 attempted, or implied.** There is no diagonalization here, no arithmetic,
 no self-referential sentence, and no incompleteness result. Do not cite

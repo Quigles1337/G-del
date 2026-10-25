@@ -162,7 +162,7 @@ the state, waiting.
 
 So procedure-space contains no third thing. Unguarded procedural rules
 are Movement B; self-guarded ones are Movement C; all of them answer to
-Movement D. And the gap between the first act and the second — the rule
+Movement D, under its capture premise. And the gap between the first act and the second — the rule
 as regime versus the rule as clause — is the gap the whole development
 keeps finding: **the modeller can freeze a level; the system cannot.**
 
@@ -299,24 +299,27 @@ ends by inexpressibility: at the bottom, the code cannot speak of its
 replacement; at the top, no law can speak of its own being in force.
 Between the two, everything is provable and nothing is final.
 
-## The Gödel II rhyme, stated exactly
+## The Gödel II analogy, and its limits
 
-`eternity_holds` is a **consistency certificate for system C**, and it
-was proved *here*, in Lean — a strictly stronger metasystem — not inside
-C. System C cannot conduct that proof about itself. Worse: system C's own
-resources, which is what Movement D formalizes, cannot even keep the
-certificate's **hypotheses** true.
+`eternity_holds` is a **safety guarantee for system C**: no `VC`-legal
+history, of any length or strengths, reaches dictatorship. It was proved
+*here*, in Lean, about C — not inside C, which is a transition system,
+not a proof system. And it holds `V` fixed: Movement D shows that once
+capture can change the recognizer, dictatorship is reachable with the
+clause still in the text.
 
-A constitution can no more secure its own interpretation than a theory
-can prove its own consistency. Consistency is certified one level up, or
-not at all.
+Read as an analogy: Gödel's second incompleteness theorem says a
+consistent, effectively axiomatized theory containing enough arithmetic
+cannot prove its own consistency; Movement D models a text that cannot
+govern its own reading. In both, the assurance comes from outside.
 
-Two disciplines about that sentence. First, it is a **rhyme, not a
+Two disciplines about that sentence. First, it is an **analogy, not a
 reduction** — there is no diagonalization here, no arithmetic, no
 self-referential sentence, no incompleteness theorem. Nobody should cite
 this repository for the claim that Gödel's theorem applies to law
-(LIMITATIONS §7). Second, the structural parallel is nevertheless exact
-and mechanically checkable, which is more than the usual invocation of
+(LIMITATIONS §7). Second, what *is* mechanically checked is the part
+that can be: the safety guarantee, and the capture that defeats it once
+`V` is no longer fixed — which is more than the usual invocation of
 Gödel in a legal argument can say.
 
 ## What the conjecture becomes
@@ -324,8 +327,8 @@ Gödel in a legal argument can say.
 Not "no dictator-proof clause exists." That is false, and C proves it
 false.
 
-Instead: **you can freeze any given level, and freezing all of them is
-not something a text can do.** The tower runs
+Instead, on the model's reading: **you can freeze any given level, and
+freezing all of them is not something a text can do.** The tower runs
 
 > text < amendment rule < recognition rule < social practice
 
@@ -344,9 +347,8 @@ one, because it is not amenable to drafting.
 
 Movements E through G sharpen every clause of that. The freezing you
 can do (C) turns out to be available for procedure as well as content,
-and for nothing else (E). The most complete freeze ever attempted —
-executability, immutability by inexpressibility — is a genuine theorem
-exactly as far as its frame, and the frame is chosen from outside it
+and for nothing else (E). The executable freeze — immutability by
+inexpressibility — is a genuine theorem exactly as far as its frame, and the frame is chosen from outside it
 (F). And "the exploit moves up one" is not a metaphor but an operator:
 `ascend`, with one theorem that consumes every machine, its own outputs
 included (G).
@@ -357,6 +359,6 @@ machine — it comes from the reader agreeing that this is what
 recognition is like. The kernel certifies every theorem here; the
 community certifies the kernel; the community is not a machine in any
 file. The tower exits the mathematics through the reader. It always
-did — which is, as near as anyone can reconstruct, the thing Gödel saw
-on the drive to Trenton, and the thing a citizenship hearing was never
-going to have room for.
+did. Whether that is what Gödel saw, no one knows — his argument is
+unrecorded, and this is one reconstruction — but it is the kind of
+thing a citizenship hearing was never going to have room for.

@@ -198,10 +198,10 @@ three. Nothing in the Lean development depends on them.
 
 - **Kurt Gödel**, "Über formal unentscheidbare Sätze der Principia
   Mathematica und verwandter Systeme I" (1931). The second incompleteness
-  theorem is the rhyme the repository is claiming, and the claim is only
-  a rhyme: `eternity_holds` is a consistency certificate for system C
-  proved in a strictly stronger metasystem (Lean), and system C's own
-  resources — Movement D — cannot keep the certificate's hypotheses true.
+  theorem is an analogy the repository draws, and only an analogy:
+  `eternity_holds` is a safety theorem about system C, proved in Lean
+  with `V` held fixed, and Movement D shows it failing once capture can
+  change the recognizer.
   **No formal reduction of Gödel II to the constitutional case is claimed
   or attempted.** See [LIMITATIONS.md](LIMITATIONS.md) §"The rhyme is a
   rhyme".

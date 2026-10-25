@@ -1,5 +1,7 @@
 # Gödel's Loophole, kernel-checked
 
+*A Lean 4 study of self-amendment, entrenchment, and recognition.*
+
 [![verify](https://github.com/Quigles1337/G-del/actions/workflows/verify.yml/badge.svg)](https://github.com/Quigles1337/G-del/actions/workflows/verify.yml)
 [![Lean](https://img.shields.io/badge/Lean-4.15.0-blue)](lean-toolchain)
 [![axioms](https://img.shields.io/badge/axioms-zero-brightgreen)](Godel/Receipts.lean)
@@ -13,15 +15,18 @@ found an inconsistency in the Constitution allowing the United States to
 become a dictatorship by entirely legal means. He began to make the
 argument in front of the judge. He was talked down. He never wrote it up.
 
-This repository is a **toy constitutional state machine** that makes the
-shape of that argument precise, in seven movements, entirely in core
-Lean 4. No `mathlib`, no dependencies, no `sorry`, **zero axioms**.
+This repository is a **toy constitutional state machine** that makes one
+reconstruction of that argument precise, in seven movements, entirely in
+core Lean 4. No `mathlib`, no dependencies, no `sorry`, **zero axioms**.
+"Zero axioms" is about the proofs' logical dependencies, as
+`#print axioms` reports them; the model's assumptions live in its
+definitions.
 
 The premise is Peter Suber's (*The Paradox of Self-Amendment*, 1990):
 model a constitution as a formal system whose **rule of change is itself
 an object-level provision**. Once you do that, "can this constitution be
 turned into a dictatorship legally?" stops being a matter of opinion and
-becomes a reachability question — with a yes or no.
+becomes, inside the model, a reachability question — with a yes or no.
 
 ## Quickstart
 
@@ -273,16 +278,19 @@ choose, and it arrived by itself.
 
 ## What is proven, and what is not
 
-`eternity_holds` is a consistency certificate for system C, and it was
-proved **here, in Lean** — a strictly stronger metasystem — not inside C.
-The object system cannot even keep the certificate's hypotheses true;
-that is exactly what Movement D demonstrates. The constitutional rhyme of
-Gödel's second incompleteness theorem is precise: **consistency is
-certified one level up, or not at all.**
+`eternity_holds` is a machine-checked **safety guarantee**: no
+`VC`-legal history from `init`, of any length or strengths, reaches
+dictatorship. It is a theorem *about* system C, proved in Lean — C
+itself is a transition system, not a proof system. It holds `V` fixed,
+and Movement D shows the price: once capture can change the recognizer,
+dictatorship is reachable with the clause still in the text. The echo
+of Gödel's second incompleteness theorem is an **analogy, not a
+theorem** ([LIMITATIONS §7](docs/LIMITATIONS.md)).
 
 So the conjecture resolves sharper than "no dictator-proof clause
-exists." You *can* freeze any given level — C is a real result.
-Dictator-proofness would require freezing *all* levels, and the tower —
+exists." You *can* freeze any given level — C is a real result. On the
+model's reading, dictator-proofness would require freezing *all*
+levels, and the tower —
 text < amendment rule < recognition rule < social practice — does not
 bottom out inside the law. What ultimately holds the invariant is the
 thing this repository cannot formalize: the interpretive community's

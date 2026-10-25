@@ -94,7 +94,7 @@ self-entrenches that provision.
 
 The distance between `regime_gate_holds` and `clause_ratchet_bypassed`
 is the distance between physics and law: freezing a level is a thing
-modellers can do and constitutions cannot.
+modellers can do and, in the model, constitutions cannot.
 
 ## Movement F — the fork (`Godel/MovementF.lean`)
 

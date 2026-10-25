@@ -43,8 +43,9 @@ theorem majority_blocked :
         (by decide)
 
 /-- The direct route, for honesty: a supermajority CAN simply vote in
-    dictatorship in one step. Gödel's observation is not that this path
-    exists — it is what the OTHER path does to the system afterwards. -/
+    dictatorship in one step. The loophole, as reconstructed here, is
+    not that this path exists — it is what the OTHER path does to the
+    system afterwards. -/
 def afterDirect : State := { init with dictatorship := true }
 
 theorem direct : Reach VA [67] init afterDirect := by

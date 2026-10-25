@@ -345,9 +345,9 @@ theorem eternity_meta_defeated (w : LWorld machineC) :
    recognition is like. The kernel certifies every theorem here; the
    kernel is certified by the community that trusts it; that community
    is not a machine in this file. The tower exits the mathematics
-   through the reader. It always did — that is what Gödel saw in 1947,
-   and what Einstein and Morgenstern, correctly, did not let him
-   finish saying.
+   through the reader. It always did. That is this repository's
+   reconstruction, not a record of what Gödel saw: his argument is
+   unknown, and in Trenton it was the examiner who cut him off.
    ═══════════════════════════════════════════════════════════════════ -/
 
 end Godel

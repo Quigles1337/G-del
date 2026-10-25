@@ -12,8 +12,8 @@ https://polyformproject.org/licenses/noncommercial/1.0.0
 
   Reconstruction premise (per Suber, "The Paradox of Self-Amendment"):
   model a constitution as a formal system whose rule of change (Article V)
-  is itself an object-level provision. Then legal reachability of
-  dictatorship is a THEOREM, not an opinion.
+  is itself an object-level provision. Then whether dictatorship is
+  legally reachable IN THE MODEL is settled by a THEOREM, not an opinion.
 
   Seven movements:
     A. The loophole: the amendment rule is amendable, so one supermajority
@@ -37,11 +37,11 @@ https://polyformproject.org/licenses/noncommercial/1.0.0
        every configuration is one repoint from being in force at bare
        majority — for every machine, with no hypotheses.    (Reachable.)
 
-  Punchline, made precise at the bottom of the file: C's safety proof is
-  conducted HERE, in Lean — i.e., outside the object system. The object
-  system cannot hold its own validity predicate fixed (that is D). This
-  is the constitutional rhyme of Gödel II: consistency is certified one
-  level up, or not at all.
+  Punchline, at the bottom of the file: C's safety proof is a theorem
+  ABOUT the object system, proved in Lean with its validity predicate
+  held fixed. Movement D lets capture change that predicate, and the
+  guarantee fails. The resemblance to Gödel II is an analogy, not a
+  theorem.
 
   Everything below is core Lean 4 (no mathlib). Check with: lean Godel.lean
   ══════════════════════════════════════════════════════════════════════
@@ -151,8 +151,9 @@ theorem majority_blocked :
         (by decide)
 
 /-- The direct route, for honesty: a supermajority CAN simply vote in
-    dictatorship in one step. Gödel's observation is not that this path
-    exists — it is what the OTHER path does to the system afterwards. -/
+    dictatorship in one step. The loophole, as reconstructed here, is
+    not that this path exists — it is what the OTHER path does to the
+    system afterwards. -/
 def afterDirect : State := { init with dictatorship := true }
 
 theorem direct : Reach VA [67] init afterDirect := by
@@ -465,8 +466,8 @@ theorem clause_ratchet_bypassed :
    the gate AND its own repeal. This holds — by exactly the proof shape
    of Movement C. Which is the point: the ratchet's sound form is not a
    new defence. It is self-entrenchment with a procedural payload, and
-   it inherits everything C inherits: a safety certificate provable
-   only out here, and a recognizer (`base.strictInterp` — already in
+   it inherits everything C inherits: a safety theorem proved with `V`
+   held fixed, and a recognizer (`base.strictInterp` — already in
    the state, waiting) that Movement D's construction captures verbatim,
    one type over. We do not re-prove what lifts mechanically.
    ═══════════════════════════════════════════════════════════════════ -/
@@ -543,10 +544,11 @@ theorem selfentrenched_guards_no_content :
    a substantive one: every defence, honestly modelled, is a provision,
    and every provision faces the same trilemma —
      unguarded        → bypassed        (B, E2)
-     self-guarded     → sound, but certified only from outside (C, E3)
-     and always       → recognizer-captured                    (D).
-   Freezing a level is a thing modellers can do and constitutions
-   cannot. That gap is the loophole. It was never about Article V.
+     self-guarded     → sound, while `V` is held fixed         (C, E3)
+     and always       → recognizer-captured, under D's capture premise (D).
+   Freezing a level is a thing modellers can do and, in the model,
+   constitutions cannot. That gap is the loophole. It was never about
+   Article V.
    ═══════════════════════════════════════════════════════════════════ -/
 
 /- ══════════════════════════════════════════════════════════════════════
@@ -828,9 +830,10 @@ theorem canonical_history_invalid : ¬ ReachC genesis bailout := by
                            a real result and Germany is not naive.
    D:  interpretation_attack + clause_still_there — C's soundness was
        relative to a fixed validity predicate; the predicate is applied
-       by actors the text cannot bind. Freeze any level, and the exploit
-       moves one level up: text < amendment rule < recognition rule <
-       social practice. The tower does not bottom out inside the law.
+       by actors the text cannot bind. On the model's reading, freeze
+       any level and the exploit moves one level up: text < amendment
+       rule < recognition rule < social practice. The tower does not
+       bottom out inside the law.
    E:  regime_gate_holds + clause_ratchet_bypassed — the same lesson on a
        PROCEDURAL defence. Inside `V` the ratchet is physics and holds
        forever; enacted as a provision it is bypassed in three steps.
@@ -843,14 +846,12 @@ theorem canonical_history_invalid : ¬ ReachC genesis bailout := by
        in force? — a question no object language contains. The chain
        everyone uses is the one the code forbids.
 
-   The Gödel II rhyme, stated exactly: `eternity_holds` is a consistency
-   certificate for system C, and it was proved in Lean — a strictly
-   stronger metasystem — not inside C. The object system's own resources
-   (movement D) cannot even keep the certificate's hypotheses true.
-   A constitution can no more secure its own interpretation than a
-   theory can prove its own consistency. What ultimately holds the
-   invariant is the thing this file cannot formalize: the community's
-   disposition to keep reading the clause as binding.
+   The Gödel II analogy, and only an analogy: `eternity_holds` is a
+   safety theorem about system C, proved in Lean with `V` held fixed,
+   and Movement D shows it failing once capture can change the
+   recognizer. What ultimately holds the invariant is the thing this
+   file cannot formalize: the community's disposition to keep reading
+   the clause as binding.
    ══════════════════════════════════════════════════════════════════════ -/
 
 #print axioms majority_blocked
@@ -1206,9 +1207,9 @@ theorem eternity_meta_defeated (w : LWorld machineC) :
    recognition is like. The kernel certifies every theorem here; the
    kernel is certified by the community that trusts it; that community
    is not a machine in this file. The tower exits the mathematics
-   through the reader. It always did — that is what Gödel saw in 1947,
-   and what Einstein and Morgenstern, correctly, did not let him
-   finish saying.
+   through the reader. It always did. That is this repository's
+   reconstruction, not a record of what Gödel saw: his argument is
+   unknown, and in Trenton it was the examiner who cut him off.
    ═══════════════════════════════════════════════════════════════════ -/
 
 
