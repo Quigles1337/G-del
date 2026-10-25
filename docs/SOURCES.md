@@ -1,9 +1,9 @@
 # Sources
 
-Citations for the history, the law, and the logic. Where this repository
-is repeating a well-attested fact it says so plainly; where it is
-repeating a *story*, or taking a side in a live doctrinal dispute, it
-says that too. Confidence markers are deliberate — a formalization that
+Citations for the history, the law, the logic, and related work. Where
+this repository is repeating a well-attested fact it says so plainly;
+where it is repeating a *story*, or taking a side in a live doctrinal
+dispute, it says that too. Confidence markers are deliberate — a formalization that
 launders uncertainty in its prose has cheated at exactly the point it
 claims rigour.
 
@@ -228,3 +228,60 @@ three. Nothing in the Lean development depends on them.
   **No formal reduction of Gödel II to the constitutional case is claimed
   or attempted.** See [LIMITATIONS.md](LIMITATIONS.md) §"The rhyme is a
   rhyme".
+
+## 9. Related work
+
+- **Valeria Zahoransky and Christoph Benzmüller**, "Modelling the US
+  Constitution to Establish Constitutional Dictatorship", in *MIREL 2019:
+  Proceedings of the 4th International Workshop on MIning and REasoning
+  with Legal texts*, co-located with JURIX 2019, Madrid, 11 December
+  2019, CEUR Workshop Proceedings vol. 2632 (2020), pp. 1–13,
+  <https://ceur-ws.org/Vol-2632/MIREL-19_paper_1.pdf>. The authors are
+  as the PDF lists them; some catalogue records give only the first.
+- **Valeria Zahoransky**, *Modelling the US Constitution in HOL: On
+  establishing a dictatorship with Gödel*, bachelor's thesis, Freie
+  Universität Berlin, 23 August 2019,
+  <https://www.mi.fu-berlin.de/inf/groups/ag-ki/Theses/Completed-theses/Bachelor-theses/2019/Zahoransky/index.html>.
+  The paper grew out of it. Its Isabelle/HOL theory files are public in
+  the LogiKEy repository,
+  <https://github.com/cbenzmueller/LogiKEy/tree/master/2020-DataInBrief-Data/US-Constitution-Loophole>,
+  described in C. Benzmüller et al., "LogiKEy workbench: Deontic logics,
+  logic combinations and expressive ethical and legal reasoning
+  (Isabelle/HOL dataset)", *Data in Brief* 33 (2020) 106409,
+  <https://doi.org/10.1016/j.dib.2020.106409>.
+
+This is an earlier machine-checked model of the same anecdote.
+
+**What it formalizes.** Guerra-Pujol's reconstruction — which the paper
+says plainly is not Gödel's own argument: amend Article V to drop its
+protection of equal Senate suffrage, then pass an amendment giving the
+President legislative, executive, and judicial power. Dictatorship is
+one institution holding all three.
+
+**How.** A higher-order temporal logic with a single "next" operator,
+embedded in classical higher-order logic and checked in Isabelle/HOL.
+The constitution's state at each of three time instants is given by
+axioms; from them the authors prove that there is no dictatorship at
+the first two instants and that there is one at the third, and Nitpick
+finds a model of the axioms. The first amendment's effect is itself
+written into the axioms: in the paper's words, the amendment to Art. V
+"is implemented by simply not using ⌊X omsp⌋<sub>t1</sub> as axiom".
+
+**What it models that this repository does not.** Article V's two
+stages, proposal and ratification; its actual entrenched content, equal
+Senate suffrage; a separation of powers among three named institutions;
+explicit time; and amendments as formulas whose ratification makes them
+valid. The thesis adds a search of the documentary record for Gödel's
+own argument — his letters to his mother, Morgenstern's diaries — which
+found none, and a discussion of the frame problem and *lex posterior*.
+
+**What this repository adds.** A definitional model: no axiom
+declarations; every step, the repeal of a guard included, is an
+amendment checked by the validity predicate in force; and each proof's
+axiom dependencies are enforced by the build. Reachability over all
+histories of a transition system rather than one timeline, which lets
+it prove safety results (`majority_blocked`, `eternity_holds`) beside
+the attacks. And defences and their limits — self-entrenchment,
+recognizer capture, a ratchet, a fork, and the `ascend` schema
+(Movements C–G) — with an executable checker, proved sound, for
+Movements A–D.

@@ -355,6 +355,11 @@ recognizer-capture cases are all cited in
 [docs/SOURCES.md](docs/SOURCES.md), with the places we are *not* certain
 marked as such.
 
+An earlier machine-checked model of the same anecdote — Zahoransky and
+Benzmüller's Isabelle/HOL formalization of Guerra-Pujol's two-step
+Article V route (MIREL 2019) — is compared with this one in
+[docs/SOURCES.md](docs/SOURCES.md) §9.
+
 ## Provenance
 
 Alexander David Zalewski is the project's creator and architect. He
